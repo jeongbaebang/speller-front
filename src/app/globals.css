@@ -69,4 +69,13 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  html {
+    font-size: 16px;
+  }
+  @screen tab {
+    html {
+      font-size: 19.2px;
+    }
+  }
 }
