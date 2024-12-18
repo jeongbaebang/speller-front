@@ -3,53 +3,98 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>
-            Save and see your changes instantly.<Button>click</Button>
-          </li>
-        </ol>
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 tab:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-8 row-start-2 items-center tab:items-start">
+        <h2 className="text-xl font-bold">Button</h2>
+        <div className="flex gap-4 items-center flex-col tab:flex-row">
+          <Button>click</Button>
+          <Button disabled>click</Button>
+        </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <h2 className="text-xl font-bold">Colors</h2>
+        <div className="grid pc:grid-cols-2 tab:grid-cols-1">
+          <div className="grid grid-cols-10 bg-white p-2 gap-5">
+            <h3 className="text-lg font-medium">Brand</h3>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-primary rounded-md"></div>
+              <span className="text-sm font-bold">primary</span>
+              <span className="text-xs">#7143F0</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-10 bg-white p-2 gap-5">
+            <h3 className="text-lg font-medium">Slate</h3>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-slate-200 rounded-md"></div>
+              <span className="text-sm font-bold">200</span>
+              <span className="text-xs">#F3F4F9</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-slate-300 rounded-md"></div>
+              <span className="text-sm font-bold">300</span>
+              <span className="text-xs">#E9EAF2</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-slate-800 rounded-md"></div>
+              <span className="text-sm font-bold">800</span>
+              <span className="text-xs">#363857</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-slate-900 rounded-md"></div>
+              <span className="text-sm font-bold">900</span>
+              <span className="text-xs">#292933</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-10 bg-white p-2 gap-5">
+            <h3 className="text-lg font-medium">Gray</h3>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-gray-500 rounded-md"></div>
+              <span className="text-sm font-bold">500</span>
+              <span className="text-xs">#9B9B9B</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-gray-600 rounded-md"></div>
+              <span className="text-sm font-bold">600</span>
+              <span className="text-xs">#767676</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-gray-650 rounded-md"></div>
+              <span className="text-sm font-bold">650</span>
+              <span className="text-xs">#6A6A6A</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-gray-700 rounded-md"></div>
+              <span className="text-sm font-bold">700</span>
+              <span className="text-xs">#535353</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-gray-800 rounded-md"></div>
+              <span className="text-sm font-bold">800</span>
+              <span className="text-xs">#474747</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-gray-900 rounded-md"></div>
+              <span className="text-sm font-bold">900</span>
+              <span className="text-xs">#242424</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-10 bg-white p-2">
+            <h3 className="text-lg font-medium">etc</h3>
+            <div>
+              <div className="w-10 h-10 bg-muted rounded-md"></div>
+              <span className="text-xs">
+                muted
+                <br />
+                (disabled)
+              </span>
+            </div>
+            <div>
+              <div className="w-10 h-10 bg-background rounded-md"></div>
+              <span className="text-xs">background</span>
+            </div>
+          </div>
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
