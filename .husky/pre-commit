@@ -4,4 +4,5 @@
 changed_files=$(git diff --cached --name-only)
 
   echo "Running frontend Lint..."
+  npm run format || exit 1
   npm run lint || exit 1
