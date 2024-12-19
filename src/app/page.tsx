@@ -17,5 +17,5 @@ export default function Home() {
         <div className='h-[37.5rem] min-w-full bg-[black]'>2</div>
       </aside>
     </div>
-  );
+  )
 }
