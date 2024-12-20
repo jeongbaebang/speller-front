@@ -5,6 +5,14 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 tab:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center tab:items-start">
+        <h2 className="text-xl font-bold">Typography</h2>
+        <div className="flex gap-4 items-center flex-col tab:flex-row">
+          <h1 className="text-slate-600 font-bold text-2xl">
+            한국어 맞춤법 검사기
+          </h1>
+          <span className="text-xs">Pretendard</span>
+        </div>
+
         <h2 className="text-xl font-bold">Button</h2>
         <div className="flex gap-4 items-center flex-col tab:flex-row">
           <Button>click</Button>
