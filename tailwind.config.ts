@@ -81,6 +81,9 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      backgroundImage: {
+        "icon-menu": "url('/images/icon-menu.svg')",
+      },
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
