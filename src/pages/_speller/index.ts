@@ -1,1 +1,1 @@
-export { SpellerPage } from "./ui";
+export { SpellerPage } from "./ui/speller-page";
