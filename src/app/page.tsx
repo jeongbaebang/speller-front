@@ -5,6 +5,14 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 tab:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center tab:items-start">
+        <h2 className="text-xl font-bold">Typography</h2>
+        <div className="flex gap-4 items-center flex-col tab:flex-row">
+          <h1 className="text-slate-600 font-bold text-2xl">
+            한국어 맞춤법 검사기
+          </h1>
+          <span className="text-xs">Pretendard</span>
+        </div>
+
         <h2 className="text-xl font-bold">Button</h2>
         <div className="flex gap-4 items-center flex-col tab:flex-row">
           <Button>click</Button>
@@ -14,69 +22,65 @@ export default function Home() {
         <h2 className="text-xl font-bold">Colors</h2>
         <div className="grid pc:grid-cols-2 tab:grid-cols-1">
           <div className="grid grid-cols-10 bg-white p-2 gap-5">
-            <h3 className="text-lg font-medium">Brand</h3>
+            <h3 className="text-lg font-medium">Blue</h3>
             <div className="flex flex-col">
-              <div className="w-10 h-10 bg-primary rounded-md"></div>
-              <span className="text-sm font-bold">primary</span>
-              <span className="text-xs">#7143F0</span>
+              <div className="w-10 h-10 bg-blue-100 rounded-md"></div>
+              <span className="text-sm font-bold">100</span>
+              <span className="text-xs">#C3CAFF</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-blue-200 rounded-md"></div>
+              <span className="text-sm font-bold">200</span>
+              <span className="text-xs">#A4AEFF</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-blue-300 rounded-md"></div>
+              <span className="text-sm font-bold">300</span>
+              <span className="text-xs">#6A7DFF</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-blue-400 rounded-md"></div>
+              <span className="text-sm font-bold">400</span>
+              <span className="text-xs">#495EFF</span>
+            </div>
+            <div className="flex flex-col">
+              <div className="w-10 h-10 bg-blue-500 rounded-md"></div>
+              <span className="text-sm font-bold">500</span>
+              <span className="text-xs">#3046EC (primary)</span>
             </div>
           </div>
 
           <div className="grid grid-cols-10 bg-white p-2 gap-5">
             <h3 className="text-lg font-medium">Slate</h3>
             <div className="flex flex-col">
+              <div className="w-10 h-10 bg-slate-100 rounded-md"></div>
+              <span className="text-sm font-bold">100</span>
+              <span className="text-xs">#F3F4F9</span>
+            </div>
+            <div className="flex flex-col">
               <div className="w-10 h-10 bg-slate-200 rounded-md"></div>
               <span className="text-sm font-bold">200</span>
-              <span className="text-xs">#F3F4F9</span>
+              <span className="text-xs">#E9EAF2</span>
             </div>
             <div className="flex flex-col">
               <div className="w-10 h-10 bg-slate-300 rounded-md"></div>
               <span className="text-sm font-bold">300</span>
-              <span className="text-xs">#E9EAF2</span>
+              <span className="text-xs">#B8B8BE</span>
             </div>
             <div className="flex flex-col">
-              <div className="w-10 h-10 bg-slate-800 rounded-md"></div>
-              <span className="text-sm font-bold">800</span>
-              <span className="text-xs">#363857</span>
+              <div className="w-10 h-10 bg-slate-400 rounded-md"></div>
+              <span className="text-sm font-bold">400</span>
+              <span className="text-xs">#8C8B94</span>
             </div>
             <div className="flex flex-col">
-              <div className="w-10 h-10 bg-slate-900 rounded-md"></div>
-              <span className="text-sm font-bold">900</span>
-              <span className="text-xs">#292933</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-10 bg-white p-2 gap-5">
-            <h3 className="text-lg font-medium">Gray</h3>
-            <div className="flex flex-col">
-              <div className="w-10 h-10 bg-gray-500 rounded-md"></div>
+              <div className="w-10 h-10 bg-slate-500 rounded-md"></div>
               <span className="text-sm font-bold">500</span>
-              <span className="text-xs">#9B9B9B</span>
+              <span className="text-xs">#646468</span>
             </div>
             <div className="flex flex-col">
-              <div className="w-10 h-10 bg-gray-600 rounded-md"></div>
+              <div className="w-10 h-10 bg-slate-600 rounded-md"></div>
               <span className="text-sm font-bold">600</span>
-              <span className="text-xs">#767676</span>
-            </div>
-            <div className="flex flex-col">
-              <div className="w-10 h-10 bg-gray-650 rounded-md"></div>
-              <span className="text-sm font-bold">650</span>
-              <span className="text-xs">#6A6A6A</span>
-            </div>
-            <div className="flex flex-col">
-              <div className="w-10 h-10 bg-gray-700 rounded-md"></div>
-              <span className="text-sm font-bold">700</span>
-              <span className="text-xs">#535353</span>
-            </div>
-            <div className="flex flex-col">
-              <div className="w-10 h-10 bg-gray-800 rounded-md"></div>
-              <span className="text-sm font-bold">800</span>
-              <span className="text-xs">#474747</span>
-            </div>
-            <div className="flex flex-col">
-              <div className="w-10 h-10 bg-gray-900 rounded-md"></div>
-              <span className="text-sm font-bold">900</span>
-              <span className="text-xs">#242424</span>
+              <span className="text-xs">#292933</span>
             </div>
           </div>
 
