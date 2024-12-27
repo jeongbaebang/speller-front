@@ -1,6 +1,6 @@
 import { FC, memo, useCallback } from 'react'
 
-import ClearButton from '@/shared/ui/button/clear-button'
+import ClearButton from '@/pages/speller/ui/clear-button'
 import { Textarea } from '@/shared/ui/textarea/textarea'
 import TextCounter from '@/shared/ui/label/text-counter'
 import { Button } from '@/shared/ui/button/button'
