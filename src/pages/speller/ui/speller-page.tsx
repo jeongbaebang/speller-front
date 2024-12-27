@@ -4,8 +4,7 @@ import useSpeller from '../model/useSpeller'
 import SpellerHeader from './speller-header'
 import SpellerContent from './speller-content'
 import SpellerFooter from './speller-footer'
-import MainAd from '@/shared/ui/ads/main-ad'
-import SpellerLayout from '@/shared/ui/layout/speller-layout'
+import SpellerContentLayout from './speller-content-layout'
 
 /**
  * 맞춤법 검사 페이지의 레이아웃을 구성하는 컴포넌트
@@ -19,14 +18,14 @@ const SpellerPage = () => {
   const { setIsStrongCheck, isStrongCheck, ...rest } = useSpeller()
 
   return (
-    <SpellerLayout AdComponent={MainAd}>
+    <SpellerContentLayout>
       <SpellerHeader
         isStrongCheck={isStrongCheck}
         onCheckChange={setIsStrongCheck}
       />
       <SpellerContent {...rest} />
       <SpellerFooter />
-    </SpellerLayout>
+    </SpellerContentLayout>
   )
 }
 
