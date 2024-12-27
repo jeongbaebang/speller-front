@@ -1,5 +1,5 @@
-import Footer from '@/shared/ui/footer/Footer'
-import Header from '@/shared/ui/header/Header'
+import Footer from '@/shared/ui/footer/footer'
+import Header from '@/shared/ui/header/header'
 
 const SpellerLayout = ({ children }: { children: React.ReactNode }) => {
   return (

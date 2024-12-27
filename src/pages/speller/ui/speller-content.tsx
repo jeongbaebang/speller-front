@@ -1,9 +1,9 @@
 import { FC, memo, useCallback } from 'react'
 
-import ClearButton from '@/shared/ui/button/ClearButton'
-import { Textarea } from '@/shared/ui/textarea/Textarea'
-import TextCounter from '@/shared/ui/label/TextCounter'
-import { Button } from '@/shared/ui/button/Button'
+import ClearButton from '@/shared/ui/button/clear-button'
+import { Textarea } from '@/shared/ui/textarea/textarea'
+import TextCounter from '@/shared/ui/label/text-counter'
+import { Button } from '@/shared/ui/button/button'
 
 interface SpellerContentProps {
   text: string

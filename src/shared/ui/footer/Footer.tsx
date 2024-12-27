@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import FooterAd from '../ads/FooterAd'
+import FooterAd from '../ads/footer-ad'
 
 const Footer = () => {
   return (

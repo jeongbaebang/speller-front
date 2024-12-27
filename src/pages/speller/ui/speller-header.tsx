@@ -1,7 +1,7 @@
 import { FC, memo } from 'react'
 
-import { Label } from '@/shared/ui/label/Label'
-import { Switch } from '@/shared/ui/switch/Switch'
+import { Label } from '@/shared/ui/label/label'
+import { Switch } from '@/shared/ui/switch/switch'
 
 interface SpellerHeaderProps {
   isStrongCheck: boolean

@@ -1,11 +1,11 @@
 'use client'
 
 import useSpeller from '../model/useSpeller'
-import SpellerHeader from './SpellerHeader'
-import SpellerContent from './SpellerContent'
-import SpellerFooter from './SpellerFooter'
-import MainAd from '@/shared/ui/ads/MainAd'
-import SpellerLayout from '@/shared/ui/layout/SpellerLayout'
+import SpellerHeader from './speller-header'
+import SpellerContent from './speller-content'
+import SpellerFooter from './speller-footer'
+import MainAd from '@/shared/ui/ads/main-ad'
+import SpellerLayout from '@/shared/ui/layout/speller-layout'
 
 /**
  * 맞춤법 검사 페이지의 레이아웃을 구성하는 컴포넌트
