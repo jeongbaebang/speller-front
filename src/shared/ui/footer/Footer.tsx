@@ -11,7 +11,7 @@ const Footer = () => {
             {/* 고객센터 섹션 */}
             <div className='flex gap-2 text-slate-600'>
               <span className='text-xs font-semibold'>구매문의</span>
-              <a href='tel:' className='flex items-center gap-1'>
+              <a href='tel:051-516-9268' className='flex items-center gap-1'>
                 <div className='relative size-[0.83038rem]'>
                   <Image
                     className='object-cover'
@@ -22,7 +22,10 @@ const Footer = () => {
                 </div>
                 <span className='text-[0.6875rem]'>(주)나라인포테크</span>
               </a>
-              <a href='mailto:' className='flex items-center gap-1'>
+              <a
+                href='mailto:urimal@pusan.ac.kr'
+                className='flex items-center gap-1'
+              >
                 <div className='relative size-[0.83038rem]'>
                   <Image
                     className='object-cover'
