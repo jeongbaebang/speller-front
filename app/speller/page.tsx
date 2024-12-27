@@ -1,4 +1,4 @@
-import SpellerPage from '@/pages/speller/ui/speller-page'
+import SpellerPage from '@/pages/speller'
 
 const Page = () => {
   return <SpellerPage />

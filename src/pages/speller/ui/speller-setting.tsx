@@ -1,16 +1,16 @@
-import { FC, memo } from 'react'
+import React, { FC, memo } from 'react'
 
 import { Label } from '@/shared/ui/label/label'
 import { Switch } from '@/shared/ui/switch/switch'
 
-interface SpellerHeaderProps {
-  isStrongCheck: boolean
-  onCheckChange: (checked: boolean) => void
+interface SpellerSettingProps {
+  checked: boolean
+  onCheckedChange: (checked: boolean) => void
 }
 
-const SpellerHeader: FC<SpellerHeaderProps> = ({
-  isStrongCheck,
-  onCheckChange,
+const SpellerSetting: FC<SpellerSettingProps> = ({
+  checked,
+  onCheckedChange,
 }) => {
   return (
     <div className='mb-2 mt-[1.13rem] flex items-center justify-end gap-2 tab:mb-[1.38rem] tab:mt-[1.75rem]'>
@@ -22,13 +22,13 @@ const SpellerHeader: FC<SpellerHeaderProps> = ({
       </Label>
       <Switch
         id='airplane-mode'
-        checked={isStrongCheck}
-        onCheckedChange={onCheckChange}
+        checked={checked}
+        onCheckedChange={onCheckedChange}
       />
     </div>
   )
 }
 
-export default memo(SpellerHeader, (prev, next) => {
-  return prev.isStrongCheck === next.isStrongCheck
+export default memo(SpellerSetting, (prev, next) => {
+  return prev.checked === next.checked
 })

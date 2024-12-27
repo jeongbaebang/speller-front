@@ -1,0 +1,19 @@
+import React, { FC } from 'react'
+
+import { Button } from '@/shared/ui/button/button'
+import TextCounter from '@/shared/ui/label/text-counter'
+
+interface SpellerControlProps {
+  count: number
+}
+
+const SpellerControl: FC<SpellerControlProps> = ({ count }) => {
+  return (
+    <div className='mt-5 flex flex-shrink-0 justify-between'>
+      <TextCounter count={count} />
+      <Button>검사하기</Button>
+    </div>
+  )
+}
+
+export default SpellerControl
