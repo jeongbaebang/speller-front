@@ -9,7 +9,7 @@ interface SpellerControlProps {
 
 const SpellerControl: FC<SpellerControlProps> = ({ count }) => {
   return (
-    <div className='mt-5 flex flex-shrink-0 justify-between'>
+    <div className='mt-2 flex flex-shrink-0 justify-between'>
       <TextCounter count={count} />
       <Button>검사하기</Button>
     </div>

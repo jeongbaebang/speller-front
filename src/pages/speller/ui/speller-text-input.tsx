@@ -25,9 +25,11 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
       <div className='flex-1'>
         <Textarea
           value={text}
+          onChange={onTextChange}
           placeholder='내용을 입력해 주세요.'
-          onChange={e => onTextChange(e.target.value)}
         />
+        {/* 스크롤 시 그라디언트 블러 도형 표시 */}
+        <div className='pointer-events-none relative bottom-5 left-0 right-0 h-5 w-full bg-gradient-to-b from-transparent to-white/100' />
       </div>
     </>
   )

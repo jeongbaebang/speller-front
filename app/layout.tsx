@@ -1,3 +1,4 @@
+import 'overlayscrollbars/overlayscrollbars.css'
 import '../src/app/styles/globals.css'
 
 import type { Metadata } from 'next'
