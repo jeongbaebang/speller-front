@@ -2,6 +2,11 @@
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { useOverlayScrollbars } from 'overlayscrollbars-react'
+import { initCaretPositionPolyfill } from '@/shared/lib/caretPosition.polyfill'
+
+if (typeof window !== 'undefined') {
+  initCaretPositionPolyfill()
+}
 
 interface TextareaProps {
   value: string
@@ -113,6 +118,7 @@ const Textarea: FC<TextareaProps> = ({
   // 공백 클릭 시 마지막 텍스트 포커스 처리되게 하는 로직
   const handleClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     const element = contentEditableRef.current
+
     // 클릭된 위치의 정확한 노드 확인
     const range = document.caretPositionFromPoint?.(
       event.clientX,
