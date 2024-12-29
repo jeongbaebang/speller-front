@@ -2,7 +2,7 @@
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { useOverlayScrollbars } from 'overlayscrollbars-react'
-import { initCaretPositionPolyfill } from '@/shared/lib/caretPosition.polyfill'
+import { initCaretPositionPolyfill } from '@/shared/lib/caret-position.polyfill'
 
 if (typeof window !== 'undefined') {
   initCaretPositionPolyfill()

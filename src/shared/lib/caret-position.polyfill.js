@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// caretPosition.polyfill.js
 
 export function initCaretPositionPolyfill() {
   // 이미 구현되어 있다면 폴리필 불필요
