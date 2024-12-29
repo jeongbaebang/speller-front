@@ -37,7 +37,6 @@ const Textarea: FC<TextareaProps> = ({
         visibility: isFocused ? 'visible' : 'hidden',
         dragScroll: true,
       },
-
       overflow: {
         x: 'hidden',
         y: 'scroll',
@@ -151,7 +150,6 @@ const Textarea: FC<TextareaProps> = ({
   // 공백 클릭 시 드래그 가능하게 처리하는 로직
   const handleMouseMove = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      console.log(event.buttons)
       if (!(event.buttons === 1)) return
 
       const element = contentEditableRef.current
