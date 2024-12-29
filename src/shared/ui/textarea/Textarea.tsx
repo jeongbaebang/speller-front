@@ -3,6 +3,7 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { useOverlayScrollbars } from 'overlayscrollbars-react'
 import { initCaretPositionPolyfill } from '@/shared/lib/caret-position.polyfill'
+import useOptimizedScrollDetection from '@/shared/lib/use-optimized-scroll-detection'
 
 if (typeof window !== 'undefined') {
   initCaretPositionPolyfill()
@@ -21,16 +22,19 @@ const Textarea: FC<TextareaProps> = ({
   placeholder,
   onScroll,
 }) => {
-  const [isFocused, setIsFocused] = useState(false)
   const [isClient, setIsClient] = useState(false)
+  const [isScrollVisible, setIsScrollVisible] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+  const handleScroll = useOptimizedScrollDetection(status => {
+    onScroll?.(status)
+    setIsScrollVisible(status)
+  }, 500)
   // 스크롤바를 적용할 최상위 div 요소 참조
   const divRef = useRef<HTMLDivElement>(null)
   // 실제 편집 가능한 텍스트 영역 요소 참조
   const contentEditableRef = useRef<HTMLDivElement>(null)
   // 마지막으로 업데이트된 값을 저장 (불필요한 리렌더링 방지)
   const lastValueRef = useRef(value)
-  // 스크롤 이벤트 디바운싱을 위한 타이머 참조
-  const scrollTimeoutRef = useRef<NodeJS.Timeout>()
 
   const [initialize] = useOverlayScrollbars({
     options: {
@@ -39,7 +43,7 @@ const Textarea: FC<TextareaProps> = ({
         theme: 'os-theme-custom',
         autoHide: 'never',
         // 포커스 상태에 따라 스크롤바 표시/숨김
-        visibility: isFocused ? 'visible' : 'hidden',
+        visibility: isScrollVisible || isFocused ? 'visible' : 'hidden',
         dragScroll: true,
       },
       overflow: {
@@ -48,14 +52,7 @@ const Textarea: FC<TextareaProps> = ({
       },
     },
     events: {
-      // 스크롤 이벤트 핸들링 (디바운싱 적용)
-      scroll: () => {
-        onScroll?.(true)
-        clearTimeout(scrollTimeoutRef.current)
-        scrollTimeoutRef.current = setTimeout(() => {
-          onScroll?.(false)
-        }, 500)
-      },
+      scroll: handleScroll,
     },
     defer: true,
   })
