@@ -27,7 +27,7 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
         <ClearButton onClear={handleOnClear} />
       </div>
       {/* 텍스트 입력 */}
-      <div className='flex-1'>
+      <div className='min-w-0 flex-1'>
         <Textarea
           value={text}
           onChange={onTextChange}
