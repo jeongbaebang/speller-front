@@ -25,6 +25,9 @@ const Textarea: FC<TextareaProps> = ({
   const [isClient, setIsClient] = useState(false)
   const [isScrollVisible, setIsScrollVisible] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
+  const [visibility, setVisibility] = useState<'visible' | 'hidden'>('visible')
+  const visibilityTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
   const handleScroll = useOptimizedScrollDetection(status => {
     onScroll?.(status)
     setIsScrollVisible(status)
@@ -43,8 +46,9 @@ const Textarea: FC<TextareaProps> = ({
         theme: 'os-theme-custom',
         autoHide: 'never',
         // 포커스 상태에 따라 스크롤바 표시/숨김
-        visibility: isScrollVisible || isFocused ? 'visible' : 'hidden',
+        visibility: visibility,
         dragScroll: true,
+        clickScroll: 'instant',
       },
       overflow: {
         x: 'hidden',
@@ -60,6 +64,24 @@ const Textarea: FC<TextareaProps> = ({
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  useEffect(() => {
+    // 우선 visible 상태로 설정
+    setVisibility('visible')
+
+    // 일정 시간 후에 조건 검사
+    visibilityTimeoutRef.current = setTimeout(() => {
+      if (!isScrollVisible && !isFocused) {
+        setVisibility('hidden')
+      }
+    }, 500)
+
+    return () => {
+      if (visibilityTimeoutRef.current) {
+        clearTimeout(visibilityTimeoutRef.current)
+      }
+    }
+  }, [isScrollVisible, isFocused])
 
   useEffect(() => {
     if (!isClient) return
