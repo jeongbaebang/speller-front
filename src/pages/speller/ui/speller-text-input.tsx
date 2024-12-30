@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState } from 'react'
 
-import { Textarea } from '@/shared/ui/textarea/textarea'
 import ClearTextButton from './clear-text-button'
+import { Textarea } from '@/shared/ui/textarea'
 
 interface SpellerTextInputProps {
   text: string

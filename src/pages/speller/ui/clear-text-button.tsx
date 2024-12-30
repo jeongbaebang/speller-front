@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { FC, memo } from 'react'
 
-import { Button } from '@/shared/ui/button/button'
+import { Button } from '@/shared/ui/button'
 
 interface ClearTextButtonProps {
   onClear: () => void

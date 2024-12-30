@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
-import { Button } from '@/shared/ui/button/button'
-import TextCounter from '@/shared/ui/label/text-counter'
+import { Button } from '@/shared/ui/button'
+import TextCounter from '@/shared/ui/text-counter'
 
 interface SpellerControlProps {
   count: number
