@@ -1,5 +1,3 @@
-// types/document.d.ts
-
 interface CaretPosition {
   offsetNode: Node
   offset: number
