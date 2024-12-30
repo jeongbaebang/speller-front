@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState } from 'react'
 
 import { Textarea } from '@/shared/ui/textarea/textarea'
-import ClearButton from './clear-button'
+import ClearTextButton from './clear-text-button'
 
 interface SpellerTextInputProps {
   text: string
@@ -24,7 +24,7 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
     <>
       <div className='mb-[0.56rem] flex justify-between tab:mb-[0.62rem]'>
         <h1 className='text-lg font-semibold tracking-[-0.0225rem]'>원문</h1>
-        <ClearButton onClear={handleOnClear} />
+        <ClearTextButton onClear={handleOnClear} />
       </div>
       {/* 텍스트 입력 */}
       <div className='min-w-0 flex-1'>
