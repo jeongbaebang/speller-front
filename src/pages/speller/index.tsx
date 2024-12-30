@@ -1,10 +1,12 @@
 'use client'
 
 import useSpeller from './model/use-speller'
-import SpellerContentLayout from './ui/speller-content-layout'
-import SpellerControl from './ui/speller-control'
-import SpellerSetting from './ui/speller-setting'
-import SpellerTextInput from './ui/speller-text-input'
+import {
+  SpellerContentLayout,
+  SpellerControl,
+  SpellerSetting,
+  SpellerTextInput,
+} from './ui'
 
 const SpellerPage = () => {
   const {
