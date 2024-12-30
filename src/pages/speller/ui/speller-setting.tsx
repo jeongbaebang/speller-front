@@ -21,6 +21,9 @@ const SpellerSetting: FC<SpellerSettingProps> = ({
         강한 검사
       </Label>
       <Switch
+        role='switch'
+        aria-checked={checked}
+        aria-label='강한 검사 모드 켜기/끄기'
         id='airplane-mode'
         checked={checked}
         onCheckedChange={onCheckedChange}
