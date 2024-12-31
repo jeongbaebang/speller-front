@@ -5,7 +5,7 @@ import FooterAd from './footer-ad'
 const Footer = () => {
   return (
     <footer className='bg-slate-200 pt-6 pc:py-[1.875rem]'>
-      <div className='pc:container pc:mx-auto pc:px-[3.75rem]'>
+      <div className='pc:container pc:mx-auto pc:px-[3.81rem]'>
         <div className='flex flex-col items-center justify-center pc:flex-row pc:justify-between'>
           <div className='flex flex-col items-center gap-1 pb-4 text-[0.625rem] tab:pb-[15.52rem] pc:items-start pc:pb-0'>
             {/* 고객센터 섹션 */}
