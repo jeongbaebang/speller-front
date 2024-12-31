@@ -63,6 +63,30 @@ body {
 }
 
 @layer base {
+  .os-theme-custom {
+    /* 크기 설정 */
+    --os-size: 1.25rem;
+    --os-padding-perpendicular: 0.44rem;
+
+    /* 핸들(thumb) 관련 필수 속성 */
+    --os-handle-bg: theme('colors.slate.300');
+    --os-handle-bg-hover: theme('colors.slate.400');
+    --os-handle-bg-active: theme('colors.slate.500');
+    --os-handle-border-radius: 3.125rem;
+    --os-handle-perpendicular-size: 100%;
+    --os-handle-perpendicular-size-hover: 100%;
+    --os-handle-perpendicular-size-active: 100%;
+
+    /* 트랙 관련 속성 */
+    --os-track-bg: transparent;
+    --os-track-border-radius: 4px;
+  }
+
+  [contenteditable='true']:empty:before {
+    content: attr(data-placeholder);
+    pointer-events: none;
+  }
+
   * {
     @apply border-border;
   }
