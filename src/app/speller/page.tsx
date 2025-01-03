@@ -1,5 +1,5 @@
-import { SpellerPage } from "@/pages/_speller";
+import { SpellerPage } from '@/pages/_speller'
 
 export default function Speller() {
-  return <SpellerPage />;
+  return <SpellerPage />
 }

@@ -81,7 +81,7 @@ export default {
         sm: 'calc(var(--radius) - 4px)',
       },
       backgroundImage: {
-        "icon-menu": "url('/images/icon-menu.svg')",
+        'icon-menu': "url('/images/icon-menu.svg')",
       },
       fontFamily: {
         pretendard: ['var(--font-pretendard)'],

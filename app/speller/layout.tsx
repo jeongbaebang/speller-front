@@ -1,6 +1,6 @@
 import MainAd from '@/shared/ui/main-ad'
 import Footer from '@/shared/ui/footer'
-import Header from '@/shared/ui/header'
+import { Header } from '@/shared/ui/header'
 
 const SpellerLayout = ({ children }: { children: React.ReactNode }) => {
   return (
