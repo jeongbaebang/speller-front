@@ -7,15 +7,15 @@ const Header = () => {
     <header className='flex items-center justify-between bg-white p-[1.125rem_1.5625rem] pc:p-[2rem_3.75rem]'>
       <div className='flex items-center gap-[1.25rem]'>
         <h1 className='text-[1.125rem] font-[700]'>한국어 맞춤법 검사기</h1>
-        <Link href='/' className='hidden p-[0.625rem_0.75rem] tab:inline-flex'>
+        <Link href='/' className={`hidden ${classes.linkButton}`}>
           이전 버전 사용하기
         </Link>
       </div>
       <div className='hidden items-center gap-[1rem] pc:flex'>
-        <Link href='/' className='p-[0.625rem_0.75rem] tab:inline-flex'>
+        <Link href='/' className={classes.linkButton}>
           사용법
         </Link>
-        <Link href='/' className='p-[0.625rem_0.75rem] tab:inline-flex'>
+        <Link href='/' className={classes.linkButton}>
           문의하기
         </Link>
       </div>
@@ -27,28 +27,19 @@ const Header = () => {
         </PopoverTrigger>
         <PopoverContent className='w-auto rounded-lg p-0'>
           <ul>
-            <li className='tab:hidden'>
-              <Link
-                href='/'
-                className='block p-[0.75rem] text-[0.875rem] leading-none'
-              >
-                이전 버전 사용하기
-              </Link>
-            </li>
             <li>
-              <Link
-                href='/'
-                className='block p-[0.75rem] text-[0.875rem] leading-none'
-              >
+              <Link href='/' className={classes.popoverButton}>
                 사용법
               </Link>
             </li>
             <li>
-              <Link
-                href='/'
-                className='block p-[0.75rem] text-[0.875rem] leading-none'
-              >
+              <Link href='/' className={classes.popoverButton}>
                 문의하기
+              </Link>
+            </li>
+            <li className='tab:hidden'>
+              <Link href='/' className={classes.popoverButton}>
+                이전 버전 사용하기
               </Link>
             </li>
           </ul>
@@ -56,6 +47,11 @@ const Header = () => {
       </Popover>
     </header>
   )
+}
+
+const classes = {
+  linkButton: 'p-[0.625rem_0.75rem] tab:inline-flex',
+  popoverButton: 'block p-[0.75rem] text-[0.875rem] leading-none',
 }
 
 export { Header }
