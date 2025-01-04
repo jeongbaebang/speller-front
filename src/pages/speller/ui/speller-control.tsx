@@ -16,4 +16,4 @@ const SpellerControl: FC<SpellerControlProps> = ({ count }) => {
   )
 }
 
-export default SpellerControl
+export { SpellerControl }

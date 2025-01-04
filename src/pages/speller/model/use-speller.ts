@@ -52,4 +52,4 @@ const useSpeller = () => {
   }
 }
 
-export default useSpeller
+export { useSpeller }
