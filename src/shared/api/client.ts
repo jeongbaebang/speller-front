@@ -14,6 +14,7 @@ const defaultAxiosInstance = axios.create(defaultConfig)
 
 export class Client {
   readonly #axiosInstance: AxiosInstance
+  static #instance: Client
 
   constructor(config?: AxiosRequestConfig) {
     if (config) {
@@ -25,8 +26,11 @@ export class Client {
     }
   }
 
-  getInstance() {
-    return this.#axiosInstance
+  static get Instance() {
+    if (!this.#instance) {
+      this.#instance = new Client()
+    }
+    return this.#instance
   }
 
   async get<T = unknown, R = unknown>(
