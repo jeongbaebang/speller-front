@@ -12,4 +12,4 @@ const TextCounter: FC<TextCounterProps> = ({ count }) => {
   )
 }
 
-export default TextCounter
+export { TextCounter }
