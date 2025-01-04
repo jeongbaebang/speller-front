@@ -4,17 +4,9 @@ import { ENDPOINT } from '@/shared/model/constants'
 
 class CheckApiService implements CheckService {
   readonly #client: Client
-  static #instance: CheckApiService
 
   constructor() {
     this.#client = Client.Instance
-  }
-
-  static get Instance() {
-    if (!this.#instance) {
-      this.#instance = new CheckApiService()
-    }
-    return this.#instance
   }
 
   async check(payload: CheckPayload): Promise<CheckResponse> {
@@ -22,4 +14,6 @@ class CheckApiService implements CheckService {
   }
 }
 
-export default CheckApiService.Instance
+const checkApiServiceInstance = new CheckApiService()
+
+export default checkApiServiceInstance
