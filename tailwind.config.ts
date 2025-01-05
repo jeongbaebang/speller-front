@@ -31,6 +31,9 @@ export default {
         400: '#495EFF',
         500: '#3046EC',
       },
+      green: {
+        100: '#009666',
+      },
     },
     extend: {
       colors: {
@@ -82,6 +85,9 @@ export default {
       },
       backgroundImage: {
         'icon-menu': "url('/images/icon-menu.svg')",
+        'icon-pencil': "url('/images/icon-pencil.svg')",
+        'chevron-down': "url('/images/chevron-down.svg')",
+        close: "url('/close.svg')",
       },
       fontFamily: {
         pretendard: ['var(--font-pretendard)'],
