@@ -87,6 +87,7 @@ export default {
         'icon-menu': "url('/images/icon-menu.svg')",
         'icon-pencil': "url('/images/icon-pencil.svg')",
         'chevron-down': "url('/images/chevron-down.svg')",
+        'icon-send': "url('/images/icon-send.svg')",
         close: "url('/close.svg')",
       },
       fontFamily: {
