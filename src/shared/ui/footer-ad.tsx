@@ -6,4 +6,4 @@ const FooterAd = () => {
   )
 }
 
-export default FooterAd
+export { FooterAd }

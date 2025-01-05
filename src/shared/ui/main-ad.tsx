@@ -10,4 +10,4 @@ const MainAd = () => {
   )
 }
 
-export default MainAd
+export { MainAd }

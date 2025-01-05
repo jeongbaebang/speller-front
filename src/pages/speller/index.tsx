@@ -1,6 +1,6 @@
 'use client'
 
-import useSpeller from './model/use-speller'
+import { useSpeller } from './model/use-speller'
 import {
   SpellerContentLayout,
   SpellerControl,
@@ -35,4 +35,4 @@ const SpellerPage = () => {
   )
 }
 
-export default SpellerPage
+export { SpellerPage }

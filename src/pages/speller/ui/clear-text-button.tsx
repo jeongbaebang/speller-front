@@ -7,7 +7,7 @@ interface ClearTextButtonProps {
   onClear: () => void
 }
 
-const ClearTextButton: FC<ClearTextButtonProps> = ({ onClear }) => {
+const ClearTextButton: FC<ClearTextButtonProps> = memo(({ onClear }) => {
   return (
     <Button
       variant='ghost'
@@ -31,6 +31,8 @@ const ClearTextButton: FC<ClearTextButtonProps> = ({ onClear }) => {
       />
     </Button>
   )
-}
+})
 
-export default memo(ClearTextButton)
+ClearTextButton.displayName = 'ClearTextButton'
+
+export { ClearTextButton }

@@ -1,8 +1,8 @@
-import MainAd from '@/shared/ui/main-ad'
-import Footer from '@/shared/ui/footer'
-import { Header } from '@/shared/ui/header'
+import { Header } from './header'
+import { MainAd } from './main-ad'
+import { Footer } from './footer'
 
-const SpellerLayout = ({ children }: { children: React.ReactNode }) => {
+const BaseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='grid min-h-screen grid-rows-[auto_1fr_auto] bg-background'>
       <Header />
@@ -16,4 +16,4 @@ const SpellerLayout = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default SpellerLayout
+export { BaseLayout }
