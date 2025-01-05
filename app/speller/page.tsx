@@ -1,7 +1,3 @@
-import SpellerPage from '@/pages/speller'
+import { SpellerPage } from '@/pages/speller'
 
-const Page = () => {
-  return <SpellerPage />
-}
-
-export default Page
+export default SpellerPage

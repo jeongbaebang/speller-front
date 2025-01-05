@@ -17,4 +17,4 @@ const SpellerContentLayout: FC<PropsWithChildren> = ({ children }) => {
   )
 }
 
-export default SpellerContentLayout
+export { SpellerContentLayout }
