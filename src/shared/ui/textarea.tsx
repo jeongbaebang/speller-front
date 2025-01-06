@@ -1,9 +1,10 @@
 'use client'
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
-import { useOverlayScrollbars } from 'overlayscrollbars-react'
+
 import { initCaretPositionPolyfill } from '@/shared/lib/caret-position.polyfill'
-import useOptimizedScrollDetection from '@/shared/lib/use-optimized-scroll-detection'
+import { ScrollContainer } from './scroll-container'
+import { useIsClient } from '../lib/use-is-client'
 
 if (typeof window !== 'undefined') {
   initCaretPositionPolyfill()
@@ -22,91 +23,22 @@ const Textarea: FC<TextareaProps> = ({
   placeholder,
   onScroll,
 }) => {
-  const [isClient, setIsClient] = useState(false)
-  const [isScrollVisible, setIsScrollVisible] = useState(false)
+  const isClient = useIsClient()
   const [isFocused, setIsFocused] = useState(false)
-  const [visibility, setVisibility] = useState<'visible' | 'hidden'>('visible')
-  const visibilityTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-  const handleScroll = useOptimizedScrollDetection(status => {
-    onScroll?.(status)
-    setIsScrollVisible(status)
-  }, 500)
-  // 스크롤바를 적용할 최상위 div 요소 참조
-  const divRef = useRef<HTMLDivElement>(null)
   // 실제 편집 가능한 텍스트 영역 요소 참조
   const contentEditableRef = useRef<HTMLDivElement>(null)
   // 마지막으로 업데이트된 값을 저장 (불필요한 리렌더링 방지)
   const lastValueRef = useRef(value)
 
-  const [initialize] = useOverlayScrollbars({
-    options: {
-      paddingAbsolute: true,
-      scrollbars: {
-        theme: 'os-theme-custom',
-        autoHide: 'never',
-        // 포커스 상태에 따라 스크롤바 표시/숨김
-        visibility: visibility,
-        dragScroll: true,
-        clickScroll: 'instant',
-      },
-      overflow: {
-        x: 'hidden',
-        y: 'scroll',
-      },
-    },
-    events: {
-      scroll: handleScroll,
-    },
-    defer: true,
-  })
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  useEffect(() => {
-    // 우선 visible 상태로 설정
-    setVisibility('visible')
-
-    // 일정 시간 후에 조건 검사
-    visibilityTimeoutRef.current = setTimeout(() => {
-      if (!isScrollVisible && !isFocused) {
-        setVisibility('hidden')
-      }
-    }, 500)
-
-    return () => {
-      if (visibilityTimeoutRef.current) {
-        clearTimeout(visibilityTimeoutRef.current)
-      }
-    }
-  }, [isScrollVisible, isFocused])
-
-  useEffect(() => {
-    if (!isClient) return
-
-    if (divRef.current) {
-      initialize(divRef.current)
-    }
-
-    if (contentEditableRef.current) {
-      contentEditableRef.current.innerHTML = value
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isClient])
-
   // value prop이 외부에서 변경될 때 동기화
   useEffect(() => {
-    if (
-      contentEditableRef.current &&
-      value !== lastValueRef.current &&
-      isClient
-    ) {
+    if (!isClient || !contentEditableRef.current) return
+
+    if (value !== lastValueRef.current) {
       contentEditableRef.current.innerHTML = value
       lastValueRef.current = value
     }
-  }, [value, isClient])
+  }, [isClient, value])
 
   const handleInput = (event: React.FormEvent<HTMLDivElement>) => {
     const text = event.currentTarget.textContent || ''
@@ -203,14 +135,15 @@ const Textarea: FC<TextareaProps> = ({
   )
 
   return (
-    <div
-      data-overlayscrollbars-initialize
+    <ScrollContainer
       suppressHydrationWarning
       suppressContentEditableWarning
-      className='mr-[-1.25rem] h-full min-h-40 flex-1 resize-none overflow-y-auto pr-[1.25rem] outline-none'
-      ref={divRef}
+      isClient={isClient}
       onClick={handleClick}
       onMouseMove={handleMouseMove}
+      isFocused={isFocused}
+      onScrollStatusChange={onScroll}
+      className='h-full min-h-40 flex-1'
     >
       <div
         ref={contentEditableRef}
@@ -223,7 +156,7 @@ const Textarea: FC<TextareaProps> = ({
         onInput={handleInput}
         onBlur={handleBlur}
       />
-    </div>
+    </ScrollContainer>
   )
 }
 Textarea.displayName = 'Textarea'
