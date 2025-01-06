@@ -28,7 +28,7 @@ export const CustomTextEditorContent = ({
       </div>
       <Input
         placeholder='직접 수정해 보세요!'
-        className='w-full placeholder:text-slate-300 pc:h-[1.66667rem] pc:text-[0.72917rem] pc:leading-[170%] pc:placeholder:text-[0.72917rem]'
+        className='w-full placeholder:text-slate-300 pc:h-[1.66667rem] pc:rounded-[0.20833rem] pc:px-[0.31rem] pc:py-[0.21rem] pc:text-[0.72917rem] pc:leading-[170%] pc:placeholder:text-[0.72917rem]'
         value={value}
         onChange={handleChange}
       />
