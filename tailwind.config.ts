@@ -16,6 +16,7 @@ export default {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#ffffff',
+      black: '#000000',
       slate: {
         100: '#F3F4F9',
         200: '#E9EAF2',
