@@ -35,7 +35,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
               <ReportFormTitle />
               <Button
                 variant='ghost'
-                className='bg-close h-[1.0625rem] w-[1.0625rem] bg-contain bg-no-repeat p-0'
+                className='bg-close h-[1.0625rem] w-[1.0625rem] bg-contain bg-no-repeat p-0 hover:bg-transparent'
                 onClick={() => setOpen(false)}
               ></Button>
             </div>
