@@ -1,12 +1,8 @@
 'use client'
 
+import { ContentLayout } from '@/shared/ui/content-layout'
 import { useSpeller } from './model/use-speller'
-import {
-  SpellerContentLayout,
-  SpellerControl,
-  SpellerSetting,
-  SpellerTextInput,
-} from './ui'
+import { SpellerControl, SpellerSetting, SpellerTextInput } from './ui'
 
 const SpellerPage = () => {
   const {
@@ -18,7 +14,7 @@ const SpellerPage = () => {
   } = useSpeller()
 
   return (
-    <SpellerContentLayout>
+    <ContentLayout>
       {/* 강한 검사 */}
       <SpellerSetting
         checked={isStrongCheck}
@@ -31,7 +27,7 @@ const SpellerPage = () => {
       </div>
       {/* 레이아웃을 위한 하단 간격 */}
       <div className='min-h-8 tab:min-h-[3.12rem]' />
-    </SpellerContentLayout>
+    </ContentLayout>
   )
 }
 

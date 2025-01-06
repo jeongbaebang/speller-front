@@ -1,5 +1,4 @@
 export { ClearTextButton } from './clear-text-button'
-export { SpellerContentLayout } from './speller-content-layout'
 export { SpellerControl } from './speller-control'
 export { SpellerSetting } from './speller-setting'
 export { SpellerTextInput } from './speller-text-input'

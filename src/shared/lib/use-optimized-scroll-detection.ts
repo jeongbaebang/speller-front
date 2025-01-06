@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useRef } from 'react'
 
 const useOptimizedScrollDetection = (
@@ -40,4 +42,4 @@ const useOptimizedScrollDetection = (
   return handleScroll
 }
 
-export default useOptimizedScrollDetection
+export { useOptimizedScrollDetection }

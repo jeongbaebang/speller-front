@@ -2,6 +2,7 @@ import React, { FC, useCallback, useState } from 'react'
 
 import { Textarea } from '@/shared/ui/textarea'
 import { ClearTextButton } from './clear-text-button'
+import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
 
 interface SpellerTextInputProps {
   text: string
@@ -35,9 +36,7 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
           placeholder='내용을 입력해 주세요.'
         />
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}
-        <div
-          className={`pointer-events-none relative bottom-5 left-0 right-0 h-5 w-full bg-gradient-to-b from-transparent to-white/100 transition-all duration-500 ease-in-out ${showGradient ? 'opacity-100' : 'opacity-0'} `}
-        />
+        <ScrollGradientFade showGradient={showGradient} />
       </div>
     </>
   )

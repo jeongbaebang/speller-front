@@ -31,6 +31,15 @@ export default {
         400: '#495EFF',
         500: '#3046EC',
       },
+      red: {
+        100: '#EE335C',
+      },
+      purple: {
+        100: '#A02BEE',
+      },
+      green: {
+        100: '#009666',
+      },
     },
     extend: {
       colors: {
