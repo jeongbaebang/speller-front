@@ -16,6 +16,7 @@ export default {
       transparent: 'transparent',
       current: 'currentColor',
       white: '#ffffff',
+      black: '#000000',
       slate: {
         100: '#F3F4F9',
         200: '#E9EAF2',
@@ -30,6 +31,9 @@ export default {
         300: '#6A7DFF',
         400: '#495EFF',
         500: '#3046EC',
+      },
+      green: {
+        100: '#009666',
       },
     },
     extend: {
@@ -82,6 +86,10 @@ export default {
       },
       backgroundImage: {
         'icon-menu': "url('/images/icon-menu.svg')",
+        'icon-pencil': "url('/images/icon-pencil.svg')",
+        'chevron-down': "url('/images/chevron-down.svg')",
+        'icon-send': "url('/images/icon-send.svg')",
+        close: "url('/close.svg')",
       },
       fontFamily: {
         pretendard: ['var(--font-pretendard)'],
