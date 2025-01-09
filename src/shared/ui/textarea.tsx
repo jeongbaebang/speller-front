@@ -5,6 +5,7 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { initCaretPositionPolyfill } from '@/shared/lib/caret-position.polyfill'
 import { ScrollContainer } from './scroll-container'
 import { useIsClient } from '../lib/use-is-client'
+import { cn } from '../lib/utils'
 
 if (typeof window !== 'undefined') {
   initCaretPositionPolyfill()
@@ -15,6 +16,7 @@ interface TextareaProps {
   placeholder: string
   onChange: (value: string) => void
   onScroll?: (isScrolling: boolean) => void
+  className?: string
 }
 
 const Textarea: FC<TextareaProps> = ({
@@ -22,6 +24,7 @@ const Textarea: FC<TextareaProps> = ({
   value,
   placeholder,
   onScroll,
+  className,
 }) => {
   const isClient = useIsClient()
   const [isFocused, setIsFocused] = useState(false)
@@ -148,7 +151,10 @@ const Textarea: FC<TextareaProps> = ({
       <div
         ref={contentEditableRef}
         data-placeholder={placeholder}
-        className='h-0 min-h-full w-full whitespace-pre-wrap break-all text-justify text-[1.125rem] font-normal leading-[1.6875rem] tracking-[-0.0225rem] text-slate-600 outline-none empty:before:text-slate-300 empty:before:content-[attr(data-placeholder)] tab:leading-[1.9125rem]'
+        className={cn(
+          'h-0 min-h-full w-full whitespace-pre-wrap break-all text-justify text-[1.125rem] font-normal leading-[1.6875rem] tracking-[-0.0225rem] text-slate-600 outline-none empty:before:text-slate-300 empty:before:content-[attr(data-placeholder)] tab:leading-[1.9125rem]',
+          className,
+        )}
         contentEditable
         suppressContentEditableWarning
         suppressHydrationWarning
