@@ -4,8 +4,6 @@ import './styles/globals.css'
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 
-import { BaseLayout } from '@/shared/ui/base-layout'
-
 const pretendard = localFont({
   src: './font/pretendard-variable.woff2',
   display: 'swap',
@@ -26,9 +24,7 @@ const App = ({
 }>) => {
   return (
     <html lang='kr' className={`${pretendard.variable}`}>
-      <body className={`${pretendard.className} antialiased`}>
-        <BaseLayout>{children}</BaseLayout>
-      </body>
+      <body className={`${pretendard.className} antialiased`}>{children}</body>
     </html>
   )
 }

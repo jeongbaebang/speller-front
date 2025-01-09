@@ -1,8 +1,16 @@
 import { Header } from './header'
 import { MainAd } from './main-ad'
 import { Footer } from './footer'
+import { FC, PropsWithChildren } from 'react'
 
-const BaseLayout = ({ children }: { children: React.ReactNode }) => {
+interface BaseLayoutProps {
+  footerLayout: 'condensed' | 'default'
+}
+
+const BaseLayout: FC<PropsWithChildren<BaseLayoutProps>> = ({
+  footerLayout,
+  children,
+}) => {
   return (
     <div className='grid min-h-screen grid-rows-[auto_1fr_auto] bg-background'>
       <Header />
@@ -11,7 +19,7 @@ const BaseLayout = ({ children }: { children: React.ReactNode }) => {
         {/* 광고 영역 */}
         <MainAd />
       </div>
-      <Footer />
+      <Footer footerLayout={footerLayout} />
     </div>
   )
 }
