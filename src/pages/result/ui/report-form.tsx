@@ -35,7 +35,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
               <ReportFormTitle />
               <Button
                 variant='ghost'
-                className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
+                className='bg-close h-[1.0625rem] w-[1.0625rem] bg-contain bg-no-repeat p-0 hover:bg-transparent'
                 onClick={() => setOpen(false)}
               ></Button>
             </div>
@@ -65,7 +65,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
 const ReportFormTitle = () => {
   return (
     <h4 className='flex items-center gap-3 text-[1.75rem] font-bold text-slate-600 pc:gap-[0.62rem] pc:text-[1.04167rem]'>
-      <span className='h-7 w-7 bg-icon-send bg-contain bg-no-repeat pc:h-[1.14583rem] pc:w-[1.14583rem]'></span>
+      <span className='bg-icon-send h-7 w-7 bg-contain bg-no-repeat pc:h-[1.14583rem] pc:w-[1.14583rem]'></span>
       제보 작성하기
     </h4>
   )

@@ -39,7 +39,7 @@ export const CustomTextEditor = ({
               <CustomTextEditorTitle />
               <Button
                 variant='ghost'
-                className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
+                className='bg-close h-[1.0625rem] w-[1.0625rem] bg-contain bg-no-repeat p-0 hover:bg-transparent'
                 onClick={() => setOpen(false)}
               ></Button>
             </div>
@@ -69,7 +69,7 @@ export const CustomTextEditor = ({
 const CustomTextEditorTitle = () => {
   return (
     <h4 className='flex items-center gap-3 text-[1.75rem] font-bold text-slate-600 pc:gap-[0.62rem] pc:text-[1.04167rem]'>
-      <span className='h-7 w-7 bg-icon-pencil bg-contain bg-no-repeat pc:h-[1.14583rem] pc:w-[1.14583rem]'></span>
+      <span className='bg-icon-pencil h-7 w-7 bg-contain bg-no-repeat pc:h-[1.14583rem] pc:w-[1.14583rem]'></span>
       대치어 직접 수정하기
     </h4>
   )
