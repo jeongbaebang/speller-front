@@ -1,5 +1,10 @@
 import { ContentLayout } from '@/shared/ui/content-layout'
-import { CorrectionContent, ResultsControl, StrongCheckMessage } from './ui'
+import {
+  CorrectionContent,
+  ErrorTrackingSection,
+  ResultsControl,
+  StrongCheckMessage,
+} from './ui'
 
 const ResultsPage = () => {
   return (
@@ -14,7 +19,9 @@ const ResultsPage = () => {
           <ResultsControl count={167} />
         </div>
         {/* 맞춤법/문법 오류 */}
-        <div className='flex h-full min-h-[30.5rem] w-full min-w-0 flex-1 flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 pc:rounded-bl-none pc:rounded-tl-none'></div>
+        <div className='flex h-full min-h-[30.5rem] w-full min-w-0 flex-1 flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 pc:rounded-bl-none pc:rounded-tl-none'>
+          <ErrorTrackingSection />
+        </div>
       </div>
       {/* 레이아웃을 위한 하단 간격 */}
       <div className='min-h-[2rem] tab:min-h-[3.13rem]' />
