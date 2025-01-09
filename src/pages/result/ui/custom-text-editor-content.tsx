@@ -20,11 +20,11 @@ export const CustomTextEditorContent = ({
   return (
     <>
       <div className='flex flex-col items-center justify-center gap-[0.38rem] pc:gap-[0.36rem]'>
-        <p className='text-green-100 flex items-center justify-center gap-[0.44rem] text-lg pc:gap-[0.42rem] pc:text-[0.72917rem] pc:leading-normal'>
-          <span className='bg-green-100 inline-block h-[11px] w-[11px] rounded-full'></span>
+        <p className='flex items-center justify-center gap-[0.44rem] text-lg text-green-100 pc:gap-[0.42rem] pc:text-[0.72917rem] pc:leading-normal'>
+          <span className='inline-block h-[11px] w-[11px] rounded-full bg-green-100'></span>
           {wrongWord}
         </p>
-        <div className='bg-chevron-down h-[1.125rem] w-[1.125rem] bg-contain bg-center bg-no-repeat focus-visible:ring-0' />
+        <div className='h-[1.125rem] w-[1.125rem] bg-chevron-down bg-contain bg-center bg-no-repeat focus-visible:ring-0' />
       </div>
       <Input
         placeholder='직접 수정해 보세요!'
