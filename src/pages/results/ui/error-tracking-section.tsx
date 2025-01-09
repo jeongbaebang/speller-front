@@ -3,11 +3,13 @@ import { BulletBadge } from '@/shared/ui/bullet-badge'
 
 const ErrorTrackingSection = () => {
   return (
-    <div className='rounded-lg border border-blue-500 bg-white p-[1.125rem_1.25rem]'>
-      <h2 className='flex items-center gap-1 text-[1.125rem] font-[600]'>
+    <div className='rounded-lg border border-blue-500 bg-white p-[1.125rem_1.25rem] tab:p-[2.5rem]'>
+      <h2 className='flex items-center gap-1 text-[1.125rem] font-[600] tab:text-[1.25rem]'>
         맞춤법/문법 오류
         <span className='text-red-100'>3개</span>
       </h2>
+      <ErrorInfoSection />
+      <hr className='border-slate-200' />
       <ErrorInfoSection />
       <div>
         <div className='grid w-1/2 grid-cols-2 gap-1'>

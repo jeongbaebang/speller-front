@@ -10,20 +10,24 @@ const ErrorInfoSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   return (
     <div className='my-[1.125rem]'>
-      <dl className='grid grid-cols-[3.5rem_1fr] gap-3'>
-        <dt className='py-0.5 text-[0.875rem] font-[600]'>입력 내용</dt>
+      <dl className='grid grid-cols-[3.5rem_1fr] gap-3 tab:grid-cols-[4.75rem_1fr]'>
+        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1rem]'>
+          입력 내용
+        </dt>
         <dd>
           <p className='flex items-center gap-3 text-[1rem] font-[600]'>
             <BulletBadge className='h-3 w-3 bg-green-100' />
             이들 요소들을
           </p>
         </dd>
-        <dt className='py-0.5 text-[0.875rem] font-[600]'>대치어</dt>
+        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1rem]'>
+          대치어
+        </dt>
         <dd>
-          <div>
+          <div className='flex items-center justify-between'>
             <Button
               variant='ghost'
-              className='h-auto p-0 text-[0.875rem] text-slate-500'
+              className='h-auto p-0 text-[0.875rem] text-slate-500 tab:text-[1rem]'
             >
               <Image
                 src='/images/icon-edit.svg'
@@ -37,32 +41,34 @@ const ErrorInfoSection = () => {
               <span className='sr-only'>오류 제보</span>
             </Button>
           </div>
-          <div className='flex max-h-[5.5rem] flex-col overflow-y-auto rounded-lg border border-slate-200 bg-slate-100 p-2'>
+          <div className='mt-2 flex max-h-[5.5rem] flex-col overflow-y-auto rounded-lg border border-slate-200 bg-slate-100 p-2 tab:mt-4 tab:max-h-[6rem]'>
             <Button
               variant={null}
-              className='h-auto justify-start p-0 text-[0.875rem] font-[500]'
+              className='h-auto justify-start p-0 text-[0.875rem] font-[500] tab:text-[1rem]'
             >
               이들 요소를
             </Button>
             <Button
               variant={null}
-              className='h-auto justify-start p-0 text-[0.875rem] font-[500]'
+              className='h-auto justify-start p-0 text-[0.875rem] font-[500] tab:text-[1rem]'
             >
               이들 요소를
             </Button>
             <Button
               variant={null}
-              className='h-auto justify-start p-0 text-[0.875rem] font-[500]'
+              className='h-auto justify-start p-0 text-[0.875rem] font-[500] tab:text-[1rem]'
             >
               이들 요소를
             </Button>
           </div>
         </dd>
-        <dt className='py-0.5 text-[0.875rem] font-[600]'>도움말</dt>
+        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1rem]'>
+          도움말
+        </dt>
         <dd>
           <div
             className={cn(
-              'transition-max-height relative max-h-[4rem] overflow-hidden duration-300',
+              'relative max-h-[4rem] overflow-hidden transition-[max-height,padding-bottom] duration-300',
               isExpanded && 'max-h-full pb-[1.25rem]',
             )}
           >
