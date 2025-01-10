@@ -4,8 +4,8 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react'
 
 import { initCaretPositionPolyfill } from '@/shared/lib/caret-position.polyfill'
 import { ScrollContainer } from './scroll-container'
-import { useIsClient } from '../lib/use-is-client'
-import { cn } from '../lib/utils'
+import { useClient } from '../lib/use-client'
+import { cn } from '../lib/tailwind-merge'
 
 if (typeof window !== 'undefined') {
   initCaretPositionPolyfill()
@@ -26,7 +26,7 @@ const Textarea: FC<TextareaProps> = ({
   onScroll,
   className,
 }) => {
-  const isClient = useIsClient()
+  const isClient = useClient()
   const [isFocused, setIsFocused] = useState(false)
   // 실제 편집 가능한 텍스트 영역 요소 참조
   const contentEditableRef = useRef<HTMLDivElement>(null)
@@ -141,7 +141,6 @@ const Textarea: FC<TextareaProps> = ({
     <ScrollContainer
       suppressHydrationWarning
       suppressContentEditableWarning
-      isClient={isClient}
       onClick={handleClick}
       onMouseMove={handleMouseMove}
       isFocused={isFocused}

@@ -10,22 +10,23 @@ import React, {
 import { useOverlayScrollbars } from 'overlayscrollbars-react'
 
 import { cn } from '../lib/tailwind-merge'
+import { useClient } from '../lib/use-client'
 import { useOptimizedScrollDetection } from '../lib/use-optimized-scroll-detection'
 
 interface ScrollContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   onScrollStatusChange?: (isScrolling: boolean) => void
-  isFocused: boolean
-  isClient: boolean
+  isFocused?: boolean
 }
 
 const ScrollContainer: FC<PropsWithChildren<ScrollContainerProps>> = ({
   children,
-  isFocused,
-  isClient,
   className,
   onScrollStatusChange,
+  isFocused,
   ...props
 }) => {
+  const isClient = useClient()
+
   const [isScrollVisible, setIsScrollVisible] = useState(false)
   const [visibility, setVisibility] = useState<'visible' | 'hidden'>('visible')
   // 스크롤바를 적용할 최상위 div 요소 참조
@@ -71,11 +72,8 @@ const ScrollContainer: FC<PropsWithChildren<ScrollContainerProps>> = ({
   }, [isScrollVisible, isFocused])
 
   useEffect(() => {
-    if (!isClient) return
-
-    if (divRef.current) {
-      initialize(divRef.current)
-    }
+    if (!isClient || !divRef?.current) return
+    initialize(divRef.current)
   }, [isClient, initialize])
 
   return (

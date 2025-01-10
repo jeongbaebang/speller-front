@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-const useIsClient = () => {
+const useClient = () => {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -12,4 +12,4 @@ const useIsClient = () => {
   return isClient
 }
 
-export { useIsClient }
+export { useClient }
