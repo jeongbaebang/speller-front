@@ -19,7 +19,7 @@ const ResultsPage = () => {
           <ResultsControl count={167} />
         </div>
         {/* 맞춤법/문법 오류 */}
-        <div className='flex h-full min-h-[30.5rem] w-full min-w-0 flex-1 flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 pc:rounded-bl-none pc:rounded-tl-none'>
+        <div className='flex h-full min-h-[30.5rem] w-full min-w-0 flex-1 flex-col rounded-lg border border-blue-500 bg-white p-5 tab:rounded-[1rem] tab:p-10 pc:rounded-bl-none pc:rounded-tl-none'>
           <ErrorTrackingSection />
         </div>
       </div>

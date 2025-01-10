@@ -1,37 +1,47 @@
-import { ErrorInfoSection } from './error-info-section'
+'use client'
+
+import { useCallback, useState } from 'react'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
+import { ScrollContainer } from '@/shared/ui/scroll-container'
+import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
+import { ErrorInfoSection } from './error-info-section'
 
 const ErrorTrackingSection = () => {
+  const [showGradient, setShowGradient] = useState(false)
+
+  const handleScroll = useCallback((isScrolling: boolean) => {
+    setShowGradient(isScrolling)
+  }, [])
+
   return (
-    <div className='rounded-lg border border-blue-500 bg-white p-[1.125rem_1.25rem] tab:p-[2.5rem]'>
+    <>
       <h2 className='flex items-center gap-1 text-[1.125rem] font-[600] tab:text-[1.25rem]'>
         맞춤법/문법 오류
         <span className='text-red-100'>3개</span>
       </h2>
-      <ErrorInfoSection />
-      <hr className='border-slate-200' />
-      <ErrorInfoSection />
+      <ScrollContainer onScrollStatusChange={handleScroll}>
+        <ErrorInfoSection />
+        <hr className='border-slate-200' />
+        <ErrorInfoSection />
+      </ScrollContainer>
       <div>
-        <div className='grid w-1/2 grid-cols-2 gap-1'>
-          <span className='flex items-center gap-2 text-[0.875rem] font-[500]'>
-            <BulletBadge className='bg-red-100' />
-            맞춤법
-          </span>
-          <span className='flex items-center gap-2 text-[0.875rem] font-[500]'>
-            <BulletBadge className='bg-purple-100' />
-            표준어 의심
-          </span>
-          <span className='flex items-center gap-2 text-[0.875rem] font-[500]'>
+        <ScrollGradientFade showGradient={showGradient} />
+        <div className='flex items-center gap-4 text-[0.875rem] font-[500]'>
+          <span className='flex items-center gap-2'>
             <BulletBadge className='bg-green-100' />
-            띄어쓰기
+            띄어쓰기 오류
           </span>
-          <span className='flex items-center gap-2 text-[0.875rem] font-[500]'>
-            <BulletBadge className='bg-blue-500' />
-            통계적 교정
+          <span className='flex items-center gap-2'>
+            <BulletBadge className='bg-red-100' />
+            오탈자 오류
+          </span>
+          <span className='flex items-center gap-2'>
+            <BulletBadge className='bg-purple-100' />
+            문맥상 오류
           </span>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

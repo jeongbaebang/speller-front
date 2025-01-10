@@ -1,9 +1,11 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from '@/shared/ui/button'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
+import EditIcon from '@/shared/ui/icon/icon-edit.svg'
+import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
+import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
 import { cn } from '@/shared/lib/tailwind-merge'
 
 const ErrorInfoSection = () => {
@@ -11,68 +13,67 @@ const ErrorInfoSection = () => {
   return (
     <div className='my-[1.125rem]'>
       <dl className='grid grid-cols-[3.5rem_1fr] gap-3 tab:grid-cols-[4.75rem_1fr]'>
-        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1rem]'>
+        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1.125rem]'>
           입력 내용
         </dt>
-        <dd>
-          <p className='flex items-center gap-3 text-[1rem] font-[600]'>
-            <BulletBadge className='h-3 w-3 bg-green-100' />
+        <dd className='flex items-center justify-between'>
+          <p className='flex items-center gap-2 text-[1rem] font-[600] tab:gap-3.5 tab:text-[1.25rem]'>
+            <BulletBadge className='mx-1.5 h-3 w-3 bg-green-100 tab:mx-2.5' />
             이들 요소들을
           </p>
+          <Button variant='ghost' className='h-auto p-0'>
+            <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
+            <span className='sr-only font-medium text-slate-500 tab:not-sr-only'>
+              오류 제보
+            </span>
+          </Button>
         </dd>
-        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1rem]'>
+        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1.125rem]'>
           대치어
         </dt>
         <dd>
           <div className='flex items-center justify-between'>
             <Button
               variant='ghost'
-              className='h-auto p-0 text-[0.875rem] text-slate-500 tab:text-[1rem]'
+              className='h-auto p-0 text-[1rem] font-medium text-slate-500 hover:bg-transparent tab:gap-4 tab:text-[1.125rem]'
             >
-              <Image
-                src='/images/icon-edit.svg'
-                alt='edit icon'
-                width={22}
-                height={22}
-              />
+              <EditIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
               대치어 직접 수정하기
             </Button>
-            <Button variant='ghost' className='h-auto p-0'>
-              <span className='sr-only'>오류 제보</span>
-            </Button>
           </div>
-          <div className='mt-2 flex max-h-[5.5rem] flex-col overflow-y-auto rounded-lg border border-slate-200 bg-slate-100 p-2 tab:mt-4 tab:max-h-[6rem]'>
+          <div className='mt-2 flex max-h-[5.625rem] flex-col overflow-y-auto rounded-lg border border-slate-200 bg-slate-100 p-2 tab:mt-4 tab:max-h-[6rem]'>
             <Button
               variant={null}
-              className='h-auto justify-start p-0 text-[0.875rem] font-[500] tab:text-[1rem]'
+              className='h-auto justify-start p-0 text-[1rem] font-[500] tab:text-[1rem]'
             >
               이들 요소를
             </Button>
             <Button
               variant={null}
-              className='h-auto justify-start p-0 text-[0.875rem] font-[500] tab:text-[1rem]'
+              className='h-auto justify-start p-0 text-[1rem] font-[500] tab:text-[1rem]'
             >
               이들 요소를
             </Button>
             <Button
               variant={null}
-              className='h-auto justify-start p-0 text-[0.875rem] font-[500] tab:text-[1rem]'
+              className='h-auto justify-start p-0 text-[1rem] font-[500] tab:text-[1rem]'
             >
               이들 요소를
             </Button>
           </div>
         </dd>
-        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1rem]'>
+        <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1.125rem]'>
           도움말
         </dt>
         <dd>
           <div
             className={cn(
-              'relative max-h-[4rem] overflow-hidden transition-[max-height,padding-bottom] duration-300',
-              isExpanded && 'max-h-full pb-[1.25rem]',
+              'relative max-h-[4.5rem] overflow-hidden transition-[max-height,padding-bottom] duration-300 tab:max-h-[3.5rem]',
+              isExpanded &&
+                'max-h-full pb-[1.5rem] tab:max-h-full tab:pb-[1.75rem]',
             )}
           >
-            <p className='text-[0.875rem]'>
+            <p className='text-[1rem] tab:text-[1.125rem]'>
               최근 우리말에 접미사 &apos;들&apos;을 원칙이 없이 사용하는 예가
               매우 흔합니다. 이는 영어의 영향이 크므로 가려서 쓰는 것이
               바람직합니다. 특히, 우리말에는 &apos;들&apos;이 붙으면 복수의
@@ -84,16 +85,12 @@ const ErrorInfoSection = () => {
             </p>
             <Button
               variant={null}
-              className='absolute bottom-0 right-0 h-auto gap-1 bg-white p-0 text-[0.875rem] font-[400] text-slate-600 underline before:absolute before:bottom-0 before:right-[100%] before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:to-white before:content-[""]'
+              className='absolute bottom-0 right-0 h-6 gap-1 rounded-none bg-white p-0 text-[0.875rem] font-[400] text-slate-600 underline before:absolute before:bottom-0 before:right-[100%] before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:to-white before:content-[""] tab:h-7 tab:text-[1rem]'
               onClick={() => setIsExpanded(!isExpanded)}
             >
               {isExpanded ? '접기' : '자세히 보기'}
-              <Image
-                src='/images/arrow-bottom.svg'
-                alt='bottom arrow'
-                width={17}
-                height={17}
-                className={isExpanded ? 'rotate-180' : ''}
+              <ArrowBottomIcon
+                className={cn('!h-4 !w-4', isExpanded ? 'rotate-180' : '')}
               />
             </Button>
           </div>
