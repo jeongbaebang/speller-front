@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const DEFAULT_TIMEOUT = 10000
 
@@ -33,7 +33,7 @@ export class Client {
     return this.#instance
   }
 
-  async get<T = unknown, R = unknown>(
+  async get<T = unknown, R = AxiosResponse<T>>(
     url: string,
     config?: AxiosRequestConfig,
   ): Promise<R> {
@@ -41,7 +41,7 @@ export class Client {
     return response
   }
 
-  async post<T = unknown, R = unknown, D = unknown>(
+  async post<T = unknown, R = AxiosResponse<T>, D = unknown>(
     url: string,
     data?: D,
     config?: AxiosRequestConfig<D>,
