@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios'
+
 export interface CheckPayload {
   text: string // 검사할 텍스트 내용
   isStrictCheck?: boolean // 강한 검사 여부
@@ -20,5 +22,5 @@ export interface CheckResponse {
 }
 
 export interface CheckService {
-  check: (payload: CheckPayload) => Promise<CheckResponse>
+  check: (payload: CheckPayload) => Promise<AxiosResponse<CheckResponse>>
 }
