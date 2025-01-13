@@ -7,6 +7,8 @@ import EditIcon from '@/shared/ui/icon/icon-edit.svg'
 import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
 import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
 import { cn } from '@/shared/lib/tailwind-merge'
+import { CustomTextEditor } from './custom-text-editor'
+import { ReportForm } from './report-form'
 
 const ErrorInfoSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -21,29 +23,33 @@ const ErrorInfoSection = () => {
             <BulletBadge className='mx-1.5 h-3 w-3 bg-green-100 tab:mx-2.5' />
             이들 요소들을
           </p>
-          <Button
-            variant='ghost'
-            className='h-auto p-0 hover:bg-transparent pc:gap-[8px]'
-          >
-            <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
-            <span className='sr-only font-medium text-slate-500 tab:not-sr-only pc:text-[18px]'>
-              오류 제보
-            </span>
-          </Button>
+          <ReportForm>
+            <Button
+              variant='ghost'
+              className='h-auto p-0 hover:bg-transparent pc:gap-[8px]'
+            >
+              <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
+              <span className='sr-only font-medium text-slate-500 tab:not-sr-only pc:text-[18px]'>
+                오류 제보
+              </span>
+            </Button>
+          </ReportForm>
         </dd>
         <dt className='py-0.5 text-[0.875rem] font-[600] tab:text-[1.125rem] pc:text-[18px]'>
           대치어
         </dt>
         <dd>
-          <div className='flex items-center justify-between'>
-            <Button
-              variant='ghost'
-              className='h-auto p-0 text-[1rem] font-medium text-slate-500 hover:bg-transparent tab:gap-4 tab:text-[1.125rem] pc:gap-[16px] pc:text-[18px]'
-            >
-              <EditIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
-              대치어 직접 수정하기
-            </Button>
-          </div>
+          <CustomTextEditor wrongWord='이들 요소들을'>
+            <div className='flex items-center justify-between'>
+              <Button
+                variant='ghost'
+                className='h-auto p-0 text-[1rem] font-medium text-slate-500 hover:bg-transparent tab:gap-4 tab:text-[1.125rem] pc:gap-[16px] pc:text-[18px]'
+              >
+                <EditIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
+                대치어 직접 수정하기
+              </Button>
+            </div>
+          </CustomTextEditor>
           <div className='mt-2 flex max-h-[5.625rem] flex-col overflow-y-auto rounded-lg border border-slate-200 bg-slate-100 p-2 tab:mt-4 tab:max-h-[6rem] pc:mt-[12px]'>
             <Button
               variant={null}
