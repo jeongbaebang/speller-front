@@ -1,8 +1,11 @@
+import { useSendReport } from '@/pages/results/api/use-send-report'
 import { BasicTextarea } from '@/shared/ui/basic-textarea'
 import { Button } from '@/shared/ui/button'
 import { ChangeEvent, useState } from 'react'
 
 export const ReportFormContent = () => {
+  const { handleSend } = useSendReport()
+
   const [value, setValue] = useState('')
 
   const handleChange = ({
@@ -25,6 +28,7 @@ export const ReportFormContent = () => {
       <Button
         disabled={!value}
         className='py-[0.88rem] pc:h-[2.08333rem] pc:rounded-[0.31rem] pc:py-[0.57rem] pc:text-[0.83333rem]'
+        onClick={() => handleSend(value)}
       >
         제출하기
       </Button>
