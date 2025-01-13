@@ -39,7 +39,7 @@ const ErrorInfoSection = () => {
           대치어
         </dt>
         <dd>
-          <CustomTextEditor wrongWord='이들 요소들을'>
+          <CustomTextEditor errorWord='이들 요소들을'>
             <div className='flex items-center justify-between'>
               <Button
                 variant='ghost'

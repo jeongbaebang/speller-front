@@ -1,14 +1,21 @@
+import { useUserReplace } from '@/pages/results/api/use-user-replace'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { ChangeEvent, useState } from 'react'
 
 interface CustomTextEditorContent {
-  wrongWord: string
+  errorWord: string
+  sentence: string
+  handleClose: () => void
 }
 
 export const CustomTextEditorContent = ({
-  wrongWord,
+  errorWord,
+  sentence,
+  handleClose,
 }: CustomTextEditorContent) => {
+  const { handleSubmit } = useUserReplace()
+
   const [value, setValue] = useState('')
 
   const handleChange = ({
@@ -17,12 +24,22 @@ export const CustomTextEditorContent = ({
     setValue(value)
   }
 
+  const handleEdit = async () => {
+    try {
+      await handleSubmit({ errorWord, replaceWord: value, sentence })
+      handleClose()
+    } catch (err) {
+      alert('문제가 발생했습니다. 잠시 후 다시 시도하세요.')
+      console.error(err)
+    }
+  }
+
   return (
     <>
       <div className='flex flex-col items-center justify-center gap-[0.38rem] pc:gap-[0.36rem]'>
         <p className='flex items-center justify-center gap-[0.44rem] text-lg text-green-100 pc:gap-[0.42rem] pc:text-[0.72917rem] pc:leading-normal'>
           <span className='inline-block h-[11px] w-[11px] rounded-full bg-green-100'></span>
-          {wrongWord}
+          {errorWord}
         </p>
         <div className='h-[1.125rem] w-[1.125rem] bg-chevron-down bg-contain bg-center bg-no-repeat focus-visible:ring-0' />
       </div>
@@ -35,6 +52,7 @@ export const CustomTextEditorContent = ({
       <Button
         disabled={!value}
         className='py-[0.88rem] pc:h-[2.08333rem] pc:rounded-[0.31rem] pc:py-[0.57rem] pc:text-[0.83333rem]'
+        onClick={handleEdit}
       >
         수정하기
       </Button>

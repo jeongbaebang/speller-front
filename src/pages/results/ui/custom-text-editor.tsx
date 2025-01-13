@@ -15,18 +15,31 @@ import { CustomTextEditorContent } from './custom-text-editor-content'
 
 interface CustomTextEditorProps {
   children: ReactNode
-  wrongWord: string
+  errorWord: string
 }
 
 export const CustomTextEditor = ({
   children,
-  wrongWord,
+  errorWord,
 }: CustomTextEditorProps) => {
-  const [open, setOpen] = useState(false)
+  const [isPopoverOpen, setPopoverOpen] = useState(false)
+  const [isDialogOpen, setDialogOpen] = useState(false)
+
+  const handlePopoverClose = () => setPopoverOpen(false)
+  const handleDialogClose = () => setDialogOpen(false)
+
+  const editorContent = (handleClose: () => void) => (
+    <CustomTextEditorContent
+      errorWord={errorWord}
+      sentence=''
+      handleClose={handleClose}
+    />
+  )
+
   return (
     <>
       {/* pc */}
-      <Popover open={open} onOpenChange={() => setOpen(true)}>
+      <Popover open={isPopoverOpen} onOpenChange={setPopoverOpen}>
         <PopoverTrigger asChild className='hidden pc:block'>
           {children}
         </PopoverTrigger>
@@ -40,15 +53,15 @@ export const CustomTextEditor = ({
               <Button
                 variant='ghost'
                 className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
-                onClick={() => setOpen(false)}
+                onClick={handlePopoverClose}
               ></Button>
             </div>
-            <CustomTextEditorContent wrongWord={wrongWord} />
+            {editorContent(handlePopoverClose)}
           </div>
         </PopoverContent>
       </Popover>
       {/* mobile,tab */}
-      <Dialog>
+      <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild className='pc:hidden'>
           {children}
         </DialogTrigger>
@@ -59,7 +72,7 @@ export const CustomTextEditor = ({
             </DialogTitle>
             <CustomTextEditorTitle />
           </DialogHeader>
-          <CustomTextEditorContent wrongWord={wrongWord} />
+          {editorContent(handleDialogClose)}
         </DialogContent>
       </Dialog>
     </>
