@@ -23,7 +23,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
     <>
       {/* pc */}
       <Popover open={open} onOpenChange={() => setOpen(true)}>
-        <PopoverTrigger asChild className='hidden pc:block'>
+        <PopoverTrigger asChild className='hidden pc:inline-flex'>
           {children}
         </PopoverTrigger>
         <PopoverContent
