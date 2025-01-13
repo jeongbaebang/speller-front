@@ -4,7 +4,7 @@ import { UserReplaceRequest } from '../models/user-replace.interface'
 import axios from 'axios'
 
 export const useUserReplace = () => {
-  const handleSubmit = async (payload: UserReplaceRequest) => {
+  const logUserReplace = async (payload: UserReplaceRequest) => {
     try {
       await Client.Instance.post(ENDPOINT.USER_REPLACE, payload)
     } catch (error: unknown) {
@@ -16,5 +16,5 @@ export const useUserReplace = () => {
     }
   }
 
-  return { handleSubmit }
+  return { logUserReplace }
 }

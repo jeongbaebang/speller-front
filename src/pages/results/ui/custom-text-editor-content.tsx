@@ -14,7 +14,7 @@ export const CustomTextEditorContent = ({
   sentence,
   handleClose,
 }: CustomTextEditorContent) => {
-  const { handleSubmit } = useUserReplace()
+  const { logUserReplace } = useUserReplace()
 
   const [value, setValue] = useState('')
 
@@ -26,11 +26,12 @@ export const CustomTextEditorContent = ({
 
   const handleEdit = async () => {
     try {
-      await handleSubmit({ errorWord, replaceWord: value, sentence })
-      handleClose()
+      await logUserReplace({ errorWord, replaceWord: value, sentence })
     } catch (err) {
-      alert('문제가 발생했습니다. 잠시 후 다시 시도하세요.')
       console.error(err)
+    } finally {
+      // 로그 등록 시 에러가 발생하더라도 정상 동작을 유지
+      handleClose()
     }
   }
 

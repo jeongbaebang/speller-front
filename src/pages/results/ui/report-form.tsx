@@ -19,10 +19,15 @@ interface ReportFormProps {
 
 export const ReportForm = ({ children }: ReportFormProps) => {
   const [open, setOpen] = useState(false)
+
+  const reportFormContent = (
+    <ReportFormContent handleClose={() => setOpen(false)} />
+  )
+
   return (
     <>
       {/* pc */}
-      <Popover open={open} onOpenChange={() => setOpen(true)}>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild className='hidden pc:inline-flex'>
           {children}
         </PopoverTrigger>
@@ -39,7 +44,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
                 onClick={() => setOpen(false)}
               ></Button>
             </div>
-            <ReportFormContent />
+            {reportFormContent}
           </div>
         </PopoverContent>
       </Popover>
@@ -55,7 +60,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
             </DialogTitle>
             <ReportFormTitle />
           </DialogHeader>
-          <ReportFormContent />
+          {reportFormContent}
         </DialogContent>
       </Dialog>
     </>
