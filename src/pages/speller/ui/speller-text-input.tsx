@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC, useCallback, useState } from 'react'
 
 import { Textarea } from '@/shared/ui/textarea'
@@ -35,6 +37,7 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
           onScroll={handleScroll}
           placeholder='내용을 입력해 주세요.'
         />
+        <input type='hidden' name='text' value={text} />
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}
         <ScrollGradientFade showGradient={showGradient} />
       </div>
