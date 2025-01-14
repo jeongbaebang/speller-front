@@ -14,7 +14,7 @@ export interface CheckResponse {
     start: number // str 안에서의 오류 문자열 시작 위치(0~n)
     end: number // str 안에서의 오류 문자열 끝 위치(0~n)
     orgStr: string // 오류 문자열
-    canWord: string // 교정 대치어 문자열('|'로 구분)
+    candWord: string // 교정 대치어 문자열('|'로 구분)
     help: string // 도움말 내용
   }[]
   totalPageCnt: number // 전체 페이지 수(1~n)

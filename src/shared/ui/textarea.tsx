@@ -31,7 +31,7 @@ const Textarea: FC<TextareaProps> = ({
   // 실제 편집 가능한 텍스트 영역 요소 참조
   const contentEditableRef = useRef<HTMLDivElement>(null)
   // 마지막으로 업데이트된 값을 저장 (불필요한 리렌더링 방지)
-  const lastValueRef = useRef(value)
+  const lastValueRef = useRef('')
 
   // value prop이 외부에서 변경될 때 동기화
   useEffect(() => {

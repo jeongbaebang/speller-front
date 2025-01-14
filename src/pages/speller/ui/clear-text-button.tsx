@@ -15,6 +15,7 @@ const ClearTextButton: FC<ClearTextButtonProps> = memo(({ onClear }) => {
       onClick={onClear}
       aria-label='문장 삭제'
       className='relative size-4 self-center outline-none hover:bg-transparent focus-visible:ring-2 focus-visible:ring-slate-200 focus-visible:ring-offset-4 focus-visible:ring-offset-white tab:size-5'
+      type='button'
     >
       <Image
         className='object-cover'

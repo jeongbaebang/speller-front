@@ -1,27 +1,36 @@
-import React, { FC } from 'react'
+'use client'
+
+import React from 'react'
 import Image from 'next/image'
+import { useClipboard } from '@frontend-opensource/use-react-hooks'
 
 import { Button } from '@/shared/ui/button'
 import { TextCounter } from '@/shared/ui/text-counter'
+import { useSpeller } from '@/entities/speller'
+import { useRouter } from 'next/navigation'
 
-interface ResultsControlProps {
-  count: number
-}
+const ResultsControl = () => {
+  const {
+    response: { str },
+  } = useSpeller()
+  const router = useRouter()
+  const { copyText } = useClipboard()
 
-const ResultsControl: FC<ResultsControlProps> = ({ count }) => {
   return (
     <div className='mt-2 flex flex-shrink-0 justify-between'>
-      <TextCounter count={count} />
+      <TextCounter count={str.length} />
       <div className='flex gap-3'>
         <ActionButton
           icon='/arrow-return-left.svg'
           label='돌아가기'
           ariaLabel='페이지 돌아가기'
+          onClick={() => router.back()}
         />
         <ActionButton
           icon='/copy.svg'
           label='복사하기'
           ariaLabel='텍스트 복사하기'
+          onClick={() => copyText(str)}
         />
       </div>
     </div>

@@ -26,6 +26,7 @@ const SpellerSetting: FC<SpellerSettingProps> = memo(
           checked={checked}
           onCheckedChange={onCheckedChange}
         />
+        <input type='hidden' name='isStrictCheck' value={String(checked)} />
       </div>
     )
   },

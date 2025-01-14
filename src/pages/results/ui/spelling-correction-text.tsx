@@ -1,14 +1,8 @@
+import { CheckResponse } from '@/entities/speller'
+
 interface CorrectionProps {
   text: string
-  corrections: {
-    errorIdx: number
-    correctMethod: number
-    start: number
-    end: number
-    orgStr: string
-    candWord: string
-    help: string
-  }[]
+  corrections: CheckResponse['errInfo']
 }
 
 const SpellingCorrectionText: React.FC<CorrectionProps> = ({
@@ -31,7 +25,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
     parts.push(
       <span key={`correction-${idx}`} className='relative inline-block'>
         <div className='h-8'>
-          <span className='absolute bottom-7 left-0 text-[0.875rem] text-sm font-bold leading-[1.4875rem] tracking-[-0.0175rem] text-slate-600'>
+          <span className='absolute bottom-7 left-0 min-w-fit whitespace-nowrap text-[0.875rem] text-sm font-bold leading-[1.4875rem] tracking-[-0.0175rem] text-slate-600'>
             {/* 첫 번째 추천 교정 단어 */}
             {pos.candWord.split('|')[0]}
           </span>

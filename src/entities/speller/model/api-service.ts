@@ -1,4 +1,5 @@
 import { AxiosResponse } from 'axios'
+
 import { Client } from '@/shared/api/client'
 import { ENDPOINT } from '@/shared/model/constants'
 import { CheckPayload, CheckResponse, CheckService } from './api-interface'
@@ -17,4 +18,4 @@ class CheckApiService implements CheckService {
 
 const checkApiServiceInstance = new CheckApiService()
 
-export default checkApiServiceInstance
+export { checkApiServiceInstance }
