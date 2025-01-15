@@ -10,7 +10,7 @@ const footerVariants = cva(
   {
     variants: {
       padding: {
-        default: 'tab:pb-[15.52rem]',
+        default: 'tab:pb-[5.06rem]',
         condensed: 'tab:pb-[2.75rem]',
       },
     },

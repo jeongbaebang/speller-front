@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren } from 'react'
+import { cn } from '../lib/tailwind-merge'
 
 /**
  * 컨텐츠 레이아웃을 구성하는 컴포넌트
@@ -8,9 +9,18 @@ import { FC, PropsWithChildren } from 'react'
  *   1. 상단(header): auto 높이
  *   2. 중앙(content): 남은 공간 차지
  */
-const ContentLayout: FC<PropsWithChildren> = ({ children }) => {
+interface ContentLayoutProps extends PropsWithChildren {
+  className?: string
+}
+
+const ContentLayout: FC<ContentLayoutProps> = ({ children, className }) => {
   return (
-    <main className='grid h-full flex-1 shrink-0 grid-rows-[auto_1fr] px-4 pb-8 tab:px-[3.81rem] tab:pb-[3.12rem] pc:px-0'>
+    <main
+      className={cn(
+        'grid h-full flex-1 shrink-0 grid-rows-[auto_1fr] px-4 pb-8 tab:px-[3.81rem] tab:pb-[3.12rem] pc:px-0',
+        className,
+      )}
+    >
       {children}
     </main>
   )
