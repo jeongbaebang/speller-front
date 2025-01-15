@@ -20,8 +20,8 @@ const CorrectionContent = () => {
   return (
     <>
       {/* 교정 문서 텍스트*/}
-      <div className='mb-[0.56rem] flex justify-between tab:mb-[0.62rem]'>
-        <h1 className='text-lg font-semibold tracking-[-0.0225rem]'>
+      <div className='mb-[1rem] flex justify-between tab:mb-[0.62rem]'>
+        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem]'>
           교정 문서
         </h1>
       </div>
