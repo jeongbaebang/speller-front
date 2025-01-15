@@ -30,7 +30,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
             {pos.candWord.split('|')[0]}
           </span>
         </div>
-        <span className='text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem]'>
+        <span className='text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
           {text.slice(pos.start, pos.end)}
         </span>
       </span>,
@@ -45,7 +45,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
   }
 
   return (
-    <div className='h-0 w-full break-all text-[1.125rem] leading-[160%] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[170%] tab:tracking-[-0.03375rem]'>
+    <div className='h-0 w-full break-all text-[1.125rem] leading-[160%] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
       {parts}
     </div>
   )
