@@ -21,7 +21,7 @@ const CorrectionContent = () => {
     <>
       {/* 교정 문서 텍스트*/}
       <div className='mb-[1rem] flex justify-between tab:mb-[1.25rem]'>
-        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem] tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem]'>
+        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem] tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem] pc:text-[1.5rem] pc:leading-[2.55rem] pc:tracking-[-0.03rem]'>
           교정 문서
         </h1>
       </div>
