@@ -25,8 +25,8 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
 
   return (
     <>
-      <div className='mb-[1rem] flex justify-between'>
-        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem] text-slate-600 tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem]'>
+      <div className='mb-[1rem] flex justify-between pc:mb-[1.25rem]'>
+        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem] text-slate-600 tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem] pc:text-[1.5rem] pc:leading-[2.55rem] pc:tracking-[-0.03rem]'>
           원문
         </h1>
         <ClearTextButton onClear={handleOnClear} />
