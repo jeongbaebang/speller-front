@@ -17,7 +17,7 @@ const ContentLayout: FC<ContentLayoutProps> = ({ children, className }) => {
   return (
     <main
       className={cn(
-        'grid h-full flex-1 shrink-0 grid-rows-[auto_1fr] px-4 pb-8 tab:px-[3.81rem] tab:pb-[3.12rem] pc:px-0',
+        'grid h-full flex-1 shrink-0 grid-rows-[auto_1fr] px-4 tab:px-[3.81rem] pc:px-0',
         className,
       )}
     >
