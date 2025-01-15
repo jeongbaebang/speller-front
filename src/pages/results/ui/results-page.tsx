@@ -21,8 +21,6 @@ const ResultsPage = () => {
           <ErrorTrackingSection />
         </div>
       </div>
-      {/* 레이아웃을 위한 하단 간격 */}
-      <div className='min-h-[2rem] tab:min-h-[3.13rem]' />
     </ContentLayout>
   )
 }
