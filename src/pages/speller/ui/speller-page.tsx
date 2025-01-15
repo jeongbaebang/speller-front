@@ -37,7 +37,7 @@ const SpellerPage = () => {
 
   return (
     <form action={formAction} className='flex-1'>
-      <ContentLayout className='tab:pb-[16rem]'>
+      <ContentLayout className='tab:pb-[16rem] pc:pb-[3.12rem]'>
         {/* 강한 검사 */}
         <SpellerSetting
           checked={isStrictCheck}
