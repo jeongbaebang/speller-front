@@ -25,12 +25,12 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
     parts.push(
       <span key={`correction-${idx}`} className='relative inline-block'>
         <div className='h-6'>
-          <span className='absolute bottom-6 left-0 min-w-fit whitespace-nowrap text-[1rem] font-bold leading-[1.7rem] tracking-[-0.02rem] text-slate-600'>
+          <span className='absolute bottom-6 left-0 min-w-fit whitespace-nowrap text-[1rem] font-bold leading-[170%] tracking-[-0.02rem] text-slate-600'>
             {/* 첫 번째 추천 교정 단어 */}
             {pos.candWord.split('|')[0]}
           </span>
         </div>
-        <span className='text-[1.125rem] font-bold leading-[1.8rem] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%]'>
+        <span className='text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem]'>
           {text.slice(pos.start, pos.end)}
         </span>
       </span>,
@@ -45,7 +45,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
   }
 
   return (
-    <div className='h-0 w-full break-all text-[1.125rem] leading-[1.8rem] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[1.9125rem] tab:tracking-[-0.03375rem]'>
+    <div className='h-0 w-full break-all text-[1.125rem] leading-[160%] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[170%] tab:tracking-[-0.03375rem]'>
       {parts}
     </div>
   )
