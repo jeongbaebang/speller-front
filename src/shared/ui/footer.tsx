@@ -32,8 +32,13 @@ const Footer: FC<FooterProps> = ({ footerLayout = 'default' }) => {
           <div className={cn(footerVariants({ padding: footerLayout }))}>
             {/* 고객센터 섹션 */}
             <div className='flex gap-2 text-slate-600'>
-              <span className='text-xs font-semibold'>구매문의</span>
-              <a href='tel:051-516-9268' className='flex items-center gap-1'>
+              <span className='text-xs font-semibold leading-[1.0425rem] tracking-[-0.015rem]'>
+                구매문의
+              </span>
+              <a
+                href='tel:051-516-9268'
+                className='flex items-center gap-1 text-[0.6875rem] leading-[0.95563rem] tracking-[-0.01375rem]'
+              >
                 <div className='relative size-[0.83038rem]'>
                   <Image
                     className='object-cover'
@@ -42,11 +47,11 @@ const Footer: FC<FooterProps> = ({ footerLayout = 'default' }) => {
                     fill
                   />
                 </div>
-                <span className='text-[0.6875rem]'>(주)나라인포테크</span>
+                <span>(주)나라인포테크</span>
               </a>
               <a
                 href='mailto:urimal@pusan.ac.kr'
-                className='flex items-center gap-1'
+                className='flex items-center gap-1 text-[0.6875rem] leading-[0.95563rem] tracking-[-0.01375rem]'
               >
                 <div className='relative size-[0.83038rem]'>
                   <Image
@@ -56,11 +61,11 @@ const Footer: FC<FooterProps> = ({ footerLayout = 'default' }) => {
                     fill
                   />
                 </div>
-                <span className='text-[0.6875rem]'>우리말배움터 관리자</span>
+                <span>우리말배움터 관리자</span>
               </a>
             </div>
             {/* 저작권 정보 */}
-            <div className='text-center text-[0.625rem] font-normal leading-[0.875rem] tracking-[-0.0125rem] text-slate-500 pc:text-start'>
+            <div className='text-center text-[0.625rem] font-normal leading-[0.86875rem] tracking-[-0.0125rem] text-slate-500 pc:text-start'>
               {/* 모바일 버전 */}
               <p className='pc:hidden'>
                 한국어 맞춤법/문법 검사기는 부산대학교 인공지능연구실과
