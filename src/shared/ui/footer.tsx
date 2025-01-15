@@ -1,35 +1,13 @@
-import { FC } from 'react'
 import Image from 'next/image'
-import { cva } from 'class-variance-authority'
 
-import { cn } from '@/shared/lib/tailwind-merge'
 import { FooterAd } from './footer-ad'
 
-const footerVariants = cva(
-  'flex flex-col items-center gap-1 pb-4 text-[0.625rem] pc:items-start pc:pb-0',
-  {
-    variants: {
-      padding: {
-        default: 'tab:pb-[5.06rem]',
-        condensed: 'tab:pb-[2.75rem]',
-      },
-    },
-    defaultVariants: {
-      padding: 'default',
-    },
-  },
-)
-
-interface FooterProps {
-  footerLayout: 'default' | 'condensed'
-}
-
-const Footer: FC<FooterProps> = ({ footerLayout = 'default' }) => {
+const Footer = () => {
   return (
     <footer className='bg-slate-200 pt-6 pc:py-[1.875rem]'>
       <div className='pc:container pc:mx-auto pc:px-[3.81rem]'>
         <div className='flex flex-col items-center justify-center pc:flex-row pc:justify-between'>
-          <div className={cn(footerVariants({ padding: footerLayout }))}>
+          <div className='flex flex-col items-center gap-1 pb-4 text-[0.625rem] tab:pb-[5.06rem] pc:items-start pc:pb-0'>
             {/* 고객센터 섹션 */}
             <div className='flex gap-2 text-slate-600'>
               <span className='text-xs font-semibold leading-[1.0425rem] tracking-[-0.015rem]'>
