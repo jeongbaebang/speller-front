@@ -6,7 +6,7 @@ import { ErrorTrackingSection } from './error-tracking-section'
 
 const ResultsPage = () => {
   return (
-    <ContentLayout>
+    <ContentLayout className='pb-8 tab:pb-[2.63rem] pc:pb-[3.06rem]'>
       <StrongCheckMessage />
       {/* 교정 문서 & 맞춤법/문법 오류 레이아웃*/}
       <div className='flex flex-col gap-[0.44rem] overflow-auto tab:gap-[0.5rem] pc:flex-row pc:gap-0'>
