@@ -48,8 +48,6 @@ const SpellerPage = () => {
           {/* 글자수 & 검사하기 버튼 */}
           <SpellerControl count={text.length} isSubmitted={isPending} />
         </div>
-        {/* 레이아웃을 위한 하단 간격 */}
-        <div className='min-h-8 tab:min-h-[3.12rem]' />
       </ContentLayout>
     </form>
   )
