@@ -11,6 +11,7 @@ const CorrectionContent = () => {
   const { response } = useSpeller()
   const [isFocused, setIsFocused] = useState(false)
   const [showGradient, setShowGradient] = useState(false)
+
   const handleScroll = useCallback((isScrolling: boolean) => {
     setShowGradient(isScrolling)
     setIsFocused(isScrolling)
