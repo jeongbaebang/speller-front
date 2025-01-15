@@ -10,12 +10,12 @@ const Footer = () => {
           <div className='flex flex-col items-center gap-1 pb-4 text-[0.625rem] tab:pb-[5.06rem] pc:items-start pc:pb-0'>
             {/* 고객센터 섹션 */}
             <div className='flex gap-2 text-slate-600'>
-              <span className='text-xs font-semibold leading-[1.0425rem] tracking-[-0.015rem] tab:leading-[1.05rem]'>
+              <span className='text-xs font-semibold leading-[1.0425rem] tracking-[-0.015rem] tab:leading-[1.05rem] pc:text-[0.75rem] pc:leading-[1.035rem] pc:tracking-[-0.015rem]'>
                 구매문의
               </span>
               <a
                 href='tel:051-516-9268'
-                className='flex items-center gap-1 text-[0.6875rem] leading-[0.95563rem] tracking-[-0.01375rem] tab:leading-[0.9625rem]'
+                className='flex items-center gap-1 text-[0.6875rem] leading-[0.95563rem] tracking-[-0.01375rem] tab:leading-[0.9625rem] pc:text-[0.75rem] pc:leading-[1.035rem] pc:tracking-[-0.015rem]'
               >
                 <div className='relative size-[0.83038rem]'>
                   <Image
@@ -31,7 +31,7 @@ const Footer = () => {
                 href='mailto:urimal@pusan.ac.kr'
                 className='flex items-center gap-1 text-[0.6875rem] leading-[0.95563rem] tracking-[-0.01375rem] tab:leading-[0.9625rem]'
               >
-                <div className='relative size-[0.83038rem]'>
+                <div className='relative mb-[0.05rem] size-[0.83038rem]'>
                   <Image
                     className='object-cover'
                     src='/email.svg'
@@ -43,7 +43,7 @@ const Footer = () => {
               </a>
             </div>
             {/* 저작권 정보 */}
-            <div className='text-center text-[0.625rem] font-normal leading-[0.86875rem] tracking-[-0.0125rem] text-slate-500 tab:leading-[0.875rem] pc:text-start'>
+            <div className='text-center text-[0.625rem] font-normal leading-[0.86875rem] tracking-[-0.0125rem] text-slate-500 tab:leading-[0.875rem] pc:text-start pc:text-[0.75rem] pc:leading-[1.035rem] pc:tracking-[-0.015rem]'>
               {/* 모바일 버전 */}
               <p className='pc:hidden'>
                 한국어 맞춤법/문법 검사기는 부산대학교 인공지능연구실과
@@ -60,7 +60,7 @@ const Footer = () => {
               <p>이 검사기는 개인이나 학생만 무료로 사용할 수 있습니다.</p>
             </div>
             {/* 카피라이트 */}
-            <div className='text-center text-[0.625rem] font-normal leading-[1.0625rem] tracking-[-0.0125rem] text-slate-500 tab:leading-[1.0625rem]'>
+            <div className='text-center text-[0.625rem] font-normal leading-[1.0625rem] tracking-[-0.0125rem] text-slate-500 tab:leading-[1.0625rem] pc:text-[0.75rem] pc:leading-[1.035rem] pc:tracking-[-0.015rem]'>
               Copyrightⓒ2001 AI Lab & Narainfotech. All Rights Reserved
             </div>
           </div>
