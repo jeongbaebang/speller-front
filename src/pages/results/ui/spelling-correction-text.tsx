@@ -45,7 +45,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
   }
 
   return (
-    <div className='h-0 w-full break-all text-[1.125rem] leading-[1.6875rem] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[1.9125rem] tab:tracking-[-0.03375rem]'>
+    <div className='h-0 w-full break-all text-[1.125rem] leading-[1.8rem] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[1.9125rem] tab:tracking-[-0.03375rem]'>
       {parts}
     </div>
   )
