@@ -24,7 +24,7 @@ const ResultsControl = () => {
           icon='/arrow-return-left.svg'
           label='돌아가기'
           ariaLabel='페이지 돌아가기'
-          onClick={() => router.back()}
+          onClick={() => router.push('/speller')}
         />
         <ActionButton
           icon='/copy.svg'
