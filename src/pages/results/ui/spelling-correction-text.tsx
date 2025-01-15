@@ -24,13 +24,13 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
     // 상단에 추천 단어를 표시하고 원본 텍스트에 밑줄 표시
     parts.push(
       <span key={`correction-${idx}`} className='relative inline-block'>
-        <div className='h-8'>
-          <span className='absolute bottom-7 left-0 min-w-fit whitespace-nowrap text-[0.875rem] text-sm font-bold leading-[1.4875rem] tracking-[-0.0175rem] text-slate-600'>
+        <div className='h-6'>
+          <span className='absolute bottom-6 left-0 min-w-fit whitespace-nowrap text-[1rem] font-bold leading-[1.7rem] tracking-[-0.02rem] text-slate-600'>
             {/* 첫 번째 추천 교정 단어 */}
             {pos.candWord.split('|')[0]}
           </span>
         </div>
-        <span className='text-[1.125rem] font-bold leading-[1.9125rem] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%]'>
+        <span className='text-[1.125rem] font-bold leading-[1.8rem] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%]'>
           {text.slice(pos.start, pos.end)}
         </span>
       </span>,
