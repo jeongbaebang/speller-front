@@ -97,9 +97,4 @@ body {
   html {
     font-size: 16px;
   }
-  @screen pc {
-    html {
-      font-size: 19.2px;
-    }
-  }
 }
