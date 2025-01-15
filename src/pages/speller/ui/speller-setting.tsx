@@ -11,10 +11,10 @@ interface SpellerSettingProps {
 const SpellerSetting: FC<SpellerSettingProps> = memo(
   ({ checked, onCheckedChange }) => {
     return (
-      <div className='mb-2 mt-[1.13rem] flex items-center justify-end gap-2 tab:mb-[1.38rem] tab:mt-[1.75rem]'>
+      <div className='mb-2 mt-[0.94rem] flex items-center justify-end gap-2 tab:mb-[1.38rem] tab:mt-[1.75rem]'>
         <Label
           htmlFor='airplane-mode'
-          className='self-center text-[0.9375rem] font-medium tracking-[-0.01875rem] text-slate-600'
+          className='self-center text-[0.9375rem] font-medium leading-[1.40625rem] tracking-[-0.01875rem] text-slate-600'
         >
           강한 검사
         </Label>
