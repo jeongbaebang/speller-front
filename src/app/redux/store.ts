@@ -8,27 +8,14 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-  PersistConfig,
 } from 'redux-persist'
-import { createNoopStorage } from '@/shared/lib/create-noop-storage'
-import createWebStorage from 'redux-persist/lib/storage/createWebStorage'
 
 import { rootReducer } from './reducers'
+import { persistConfig } from './persist-config'
 
 declare global {
   type AppDispatch = typeof store.dispatch
   type RootState = ReturnType<typeof rootReducer>
-}
-
-const storage =
-  typeof window !== 'undefined'
-    ? createWebStorage('session')
-    : createNoopStorage()
-
-const persistConfig: PersistConfig<RootState> = {
-  key: 'root',
-  storage: storage,
-  whitelist: ['speller'],
 }
 
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducer)
