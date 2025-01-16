@@ -8,7 +8,7 @@ import { ContentLayout } from '@/shared/ui/content-layout'
 import { SpellerSetting } from './speller-setting'
 import { SpellerTextInput } from './speller-text-input'
 import { SpellerControl } from './speller-control'
-import { spellCheckAction } from '../model/spell-check-action'
+import { spellCheckAction } from '../api/spell-check-action'
 
 const SpellerPage = () => {
   const router = useRouter()
