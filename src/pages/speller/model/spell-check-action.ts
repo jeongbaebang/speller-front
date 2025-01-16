@@ -13,7 +13,7 @@ const spellCheckAction = async (
 ): Promise<ActionState> => {
   try {
     const text = formData.get('text') as string
-    const isStrictCheck = formData.get('isStrictCheck') === 'true'
+    const isStrictCheck = formData.get('isStrictCheck') === 'on'
 
     const { data } = await checkApiServiceInstance.check({
       text,

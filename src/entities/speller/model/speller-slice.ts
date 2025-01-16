@@ -9,13 +9,11 @@ type Response = CheckResponse & { requestedWithStrictMode: boolean }
 
 interface SpellerState {
   text: string
-  isStrictCheck: boolean
   response: Response
 }
 
 const initialState: SpellerState = {
   text: '',
-  isStrictCheck: false,
   response: {
     str: '',
     errInfo: [],
@@ -32,22 +30,14 @@ const spellerSlice = createSlice({
     setText: (state, action: PayloadAction<string>) => {
       state.text = action.payload
     },
-    setStrickCheck: (state, action: PayloadAction<boolean>) => {
-      state.isStrictCheck = action.payload
-    },
+
     updateResponse: (state, action: PayloadAction<Response>) => {
       state.response = action.payload
     },
   },
 })
 
-const { setText, setStrickCheck, updateResponse } = spellerSlice.actions
+const { setText, updateResponse } = spellerSlice.actions
 const spellerReducer = spellerSlice.reducer
 
-export {
-  setText,
-  setStrickCheck,
-  updateResponse,
-  spellerReducer,
-  type SpellerState,
-}
+export { setText, updateResponse, spellerReducer, type SpellerState }

@@ -3,12 +3,7 @@
 import { useCallback } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/shared/lib/use-redux'
-import {
-  setStrickCheck,
-  setText,
-  SpellerState,
-  updateResponse,
-} from './speller-slice'
+import { setText, SpellerState, updateResponse } from './speller-slice'
 
 const useSpeller = () => {
   const dispatch = useAppDispatch()
@@ -17,13 +12,6 @@ const useSpeller = () => {
   const handleTextChange = useCallback(
     (value: string) => {
       dispatch(setText(value))
-    },
-    [dispatch],
-  )
-
-  const toggleStrictCheck = useCallback(
-    (value: boolean) => {
-      dispatch(setStrickCheck(value))
     },
     [dispatch],
   )
@@ -38,7 +26,6 @@ const useSpeller = () => {
   return {
     ...state,
     handleTextChange,
-    toggleStrictCheck,
     handleReceiveResponse,
   }
 }
