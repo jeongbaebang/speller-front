@@ -1,3 +1,5 @@
+'use client'
+
 import React, { FC, useCallback, useState } from 'react'
 
 import { Textarea } from '@/shared/ui/textarea'
@@ -23,8 +25,10 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
 
   return (
     <>
-      <div className='mb-[0.56rem] flex justify-between tab:mb-[0.62rem]'>
-        <h1 className='text-lg font-semibold tracking-[-0.0225rem]'>원문</h1>
+      <div className='mb-[1rem] flex justify-between pc:mb-[1.25rem]'>
+        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem] text-slate-600 tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem] pc:text-[1.5rem] pc:leading-[2.55rem] pc:tracking-[-0.03rem]'>
+          원문
+        </h1>
         <ClearTextButton onClear={handleOnClear} />
       </div>
       {/* 텍스트 입력 */}
@@ -35,6 +39,7 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
           onScroll={handleScroll}
           placeholder='내용을 입력해 주세요.'
         />
+        <input type='hidden' name='text' value={text} />
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}
         <ScrollGradientFade showGradient={showGradient} />
       </div>

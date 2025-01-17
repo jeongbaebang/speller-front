@@ -31,7 +31,7 @@ const Textarea: FC<TextareaProps> = ({
   // 실제 편집 가능한 텍스트 영역 요소 참조
   const contentEditableRef = useRef<HTMLDivElement>(null)
   // 마지막으로 업데이트된 값을 저장 (불필요한 리렌더링 방지)
-  const lastValueRef = useRef(value)
+  const lastValueRef = useRef('')
 
   // value prop이 외부에서 변경될 때 동기화
   useEffect(() => {
@@ -151,7 +151,7 @@ const Textarea: FC<TextareaProps> = ({
         ref={contentEditableRef}
         data-placeholder={placeholder}
         className={cn(
-          'h-0 min-h-full w-full whitespace-pre-wrap break-all text-justify text-[1.125rem] font-normal leading-[1.6875rem] tracking-[-0.0225rem] text-slate-600 outline-none empty:before:text-slate-300 empty:before:content-[attr(data-placeholder)] tab:leading-[1.9125rem]',
+          'h-0 min-h-full w-full whitespace-pre-wrap break-all text-justify text-[1.125rem] font-normal leading-[1.8rem] tracking-[-0.0225rem] text-slate-600 outline-none empty:before:text-slate-300 empty:before:content-[attr(data-placeholder)] tab:leading-[1.9125rem] pc:text-[1.25rem] pc:leading-[2.125rem] pc:tracking-[-0.025rem]',
           className,
         )}
         contentEditable

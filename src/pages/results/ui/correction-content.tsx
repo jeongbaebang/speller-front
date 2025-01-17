@@ -3,13 +3,15 @@
 import React, { useCallback, useState } from 'react'
 
 import { SpellingCorrectionText } from './spelling-correction-text'
-import { errInfo, mock_text } from '../mock'
 import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
+import { useSpeller } from '@/entities/speller'
 
 const CorrectionContent = () => {
+  const { response } = useSpeller()
   const [isFocused, setIsFocused] = useState(false)
   const [showGradient, setShowGradient] = useState(false)
+
   const handleScroll = useCallback((isScrolling: boolean) => {
     setShowGradient(isScrolling)
     setIsFocused(isScrolling)
@@ -18,8 +20,8 @@ const CorrectionContent = () => {
   return (
     <>
       {/* 교정 문서 텍스트*/}
-      <div className='mb-[0.56rem] flex justify-between tab:mb-[0.62rem]'>
-        <h1 className='text-lg font-semibold tracking-[-0.0225rem]'>
+      <div className='mb-[1rem] flex justify-between tab:mb-[1.25rem]'>
+        <h1 className='text-[1.125rem] font-semibold leading-[1.9125rem] tracking-[-0.0225rem] tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem] pc:text-[1.5rem] pc:leading-[2.55rem] pc:tracking-[-0.03rem]'>
           교정 문서
         </h1>
       </div>
@@ -30,7 +32,10 @@ const CorrectionContent = () => {
           isFocused={isFocused}
           className='h-full min-h-40 flex-1'
         >
-          <SpellingCorrectionText text={mock_text} corrections={errInfo} />
+          <SpellingCorrectionText
+            text={response.str}
+            corrections={response.errInfo}
+          />
         </ScrollContainer>
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}
         <ScrollGradientFade showGradient={showGradient} />
