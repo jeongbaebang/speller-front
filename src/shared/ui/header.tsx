@@ -28,7 +28,10 @@ const Header = () => {
               <span className='sr-only'>메뉴보기</span>
             </Button>
           </PopoverTrigger>
-          <PopoverContent className='w-auto rounded-lg bg-slate-100 p-0'>
+          <PopoverContent
+            align='end'
+            className='w-auto rounded-lg bg-slate-100 p-0'
+          >
             <ul>
               <li className='group'>
                 <Link
