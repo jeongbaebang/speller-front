@@ -1,39 +1,17 @@
 import { useUserReplace } from '@/pages/results/api/use-user-replace'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
-import { ChangeEvent, useState } from 'react'
 
 interface CustomTextEditorContent {
-  errorWord: string
-  sentence: string
   handleClose: () => void
 }
 
 export const CustomTextEditorContent = ({
-  errorWord,
-  sentence,
   handleClose,
 }: CustomTextEditorContent) => {
-  const { logUserReplace } = useUserReplace()
-
-  const [value, setValue] = useState('')
-
-  const handleChange = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
-    setValue(value)
-  }
-
-  const handleEdit = async () => {
-    try {
-      await logUserReplace({ errorWord, replaceWord: value, sentence })
-    } catch (err) {
-      console.error(err)
-    } finally {
-      // 로그 등록 시 에러가 발생하더라도 정상 동작을 유지
-      handleClose()
-    }
-  }
+  const { handleChange, handleEdit, value, errorWord } = useUserReplace({
+    handleClose,
+  })
 
   return (
     <>

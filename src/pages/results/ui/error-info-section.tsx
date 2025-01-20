@@ -9,7 +9,8 @@ import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
 import { cn } from '@/shared/lib/tailwind-merge'
 import { CustomTextEditor } from './custom-text-editor'
 import { useAppDispatch } from '@/shared/lib/use-redux'
-import { ReportForm, setErrInfoIdx } from '@/entities/report'
+import { ReportForm } from '@/entities/report'
+import { setSelectedErrIdx } from '@/entities/speller'
 
 const errInfoIdx = 0 // TODO: props or store
 
@@ -18,8 +19,8 @@ const ErrorInfoSection = () => {
 
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const openReportModal = () => {
-    dispatch(setErrInfoIdx(errInfoIdx))
+  const updateErrInfoIndex = () => {
+    dispatch(setSelectedErrIdx(errInfoIdx))
   }
 
   return (
@@ -37,7 +38,7 @@ const ErrorInfoSection = () => {
             <Button
               variant='ghost'
               className='h-auto p-0 hover:bg-transparent pc:gap-[8px]'
-              onClick={openReportModal}
+              onClick={updateErrInfoIndex}
             >
               <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
               <span className='sr-only font-medium text-slate-500 tab:not-sr-only pc:text-[18px]'>
@@ -50,11 +51,12 @@ const ErrorInfoSection = () => {
           대치어
         </dt>
         <dd>
-          <CustomTextEditor errorWord='이들 요소들을'>
+          <CustomTextEditor>
             <div className='flex items-center justify-between'>
               <Button
                 variant='ghost'
                 className='h-auto p-0 text-[1rem] font-medium text-slate-500 hover:bg-transparent tab:gap-4 tab:text-[1.125rem] pc:gap-[16px] pc:text-[18px]'
+                onClick={updateErrInfoIndex}
               >
                 <EditIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
                 대치어 직접 수정하기

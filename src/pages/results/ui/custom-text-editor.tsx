@@ -15,13 +15,9 @@ import { CustomTextEditorContent } from './custom-text-editor-content'
 
 interface CustomTextEditorProps {
   children: ReactNode
-  errorWord: string
 }
 
-export const CustomTextEditor = ({
-  children,
-  errorWord,
-}: CustomTextEditorProps) => {
+export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
   const [isPopoverOpen, setPopoverOpen] = useState(false)
   const [isDialogOpen, setDialogOpen] = useState(false)
 
@@ -29,11 +25,7 @@ export const CustomTextEditor = ({
   const handleDialogClose = () => setDialogOpen(false)
 
   const editorContent = (handleClose: () => void) => (
-    <CustomTextEditorContent
-      errorWord={errorWord}
-      sentence=''
-      handleClose={handleClose}
-    />
+    <CustomTextEditorContent handleClose={handleClose} />
   )
 
   return (

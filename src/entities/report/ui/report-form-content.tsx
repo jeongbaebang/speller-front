@@ -8,7 +8,7 @@ interface ReportFormContentProps {
 
 export const ReportFormContent = ({ handleClose }: ReportFormContentProps) => {
   const { comment, handleChange, handleSubmit } = useSendReport({
-    onSuccess: () => handleClose(),
+    handleClose, // TODO: 완료 팝업 표시 (디자인팀 작업중)
   })
 
   return (

@@ -1,19 +1,19 @@
 import { useAppSelector } from '@/shared/lib/use-redux'
 import { ChangeEvent, useState } from 'react'
 import { getWordsAroundIndex } from '@/shared/lib/util'
-import { sendReportAction } from '../api/post-report'
+import { sendReportAction } from '../api/send-report-action'
 
 interface useSendReportParams {
-  onSuccess: () => void
+  handleClose: () => void
 }
 
-export const useSendReport = ({ onSuccess }: useSendReportParams) => {
-  const { errInfoIdx } = useAppSelector(state => state.report)
+export const useSendReport = ({ handleClose }: useSendReportParams) => {
   const {
     response: { errInfo, str },
+    selectedErrIdx,
   } = useAppSelector(state => state.speller)
 
-  const { orgStr, candWord, start } = errInfo[errInfoIdx]
+  const { orgStr, candWord, start } = errInfo[selectedErrIdx]
 
   const [comment, setComment] = useState('')
 
@@ -32,7 +32,7 @@ export const useSendReport = ({ onSuccess }: useSendReportParams) => {
         replaceWord: candWord.replaceAll('|', '<br>'),
         comment,
       })
-      onSuccess()
+      handleClose()
     } catch (err) {
       alert('문제가 발생했습니다. 잠시 후 다시 시도하세요.')
       console.error(err)
