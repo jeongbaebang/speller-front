@@ -74,7 +74,7 @@ const classes = {
   popoverButton:
     'flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-[0.875rem] leading-none group-hover:text-primary tab:text-base',
   popoverIcon:
-    'box-content inline-flex size-4 rounded-full bg-[length:1rem] bg-center bg-no-repeat p-1 group-hover:bg-primary group-hover:text-white tab:size-5',
+    'box-content inline-flex size-4 rounded-full bg-[length:1rem] bg-center bg-no-repeat p-1 group-hover:bg-primary group-hover:text-white tab:size-5 tab:bg-[length:1.25rem]',
 }
 
 export { Header }
