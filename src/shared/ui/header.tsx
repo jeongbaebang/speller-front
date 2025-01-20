@@ -4,10 +4,10 @@ import { Popover, PopoverContent, PopoverTrigger } from './popover'
 
 const Header = () => {
   return (
-    <header className='flex items-center justify-between bg-white p-[1.125rem_1.5625rem] pc:p-[2rem_3.75rem]'>
+    <header className='flex items-center justify-between bg-white px-6 py-4 tab:px-[3.75rem] tab:py-5 pc:p-[2rem_3.75rem]'>
       <div className='flex items-center gap-[1.25rem]'>
-        <h1 className='text-[1.125rem] font-[700]'>한국어 맞춤법 검사기</h1>
-        <Link href='/' className={`hidden ${classes.linkButton}`}>
+        <h1 className='text-xl font-bold tab:text-2xl'>한국어 맞춤법 검사기</h1>
+        <Link href='/' className={`hidden tab:text-xl ${classes.linkButton}`}>
           이전 버전 사용하기
         </Link>
       </div>
@@ -21,7 +21,7 @@ const Header = () => {
       </div>
       <Popover>
         <PopoverTrigger asChild>
-          <Button className='h-[1.5rem] w-[1.5rem] bg-icon-menu bg-[length:1.25rem] bg-center bg-no-repeat p-0 hover:bg-accent pc:hidden'>
+          <Button className='size-6 bg-icon-menu bg-[length:1.25rem] bg-center bg-no-repeat p-0 hover:bg-accent tab:size-7 tab:bg-[length:1.75rem] pc:hidden'>
             <span className='sr-only'>메뉴보기</span>
           </Button>
         </PopoverTrigger>
@@ -50,8 +50,9 @@ const Header = () => {
 }
 
 const classes = {
-  linkButton: 'p-[0.625rem_0.75rem] tab:inline-flex',
-  popoverButton: 'block p-[0.75rem] text-[0.875rem] leading-none',
+  linkButton:
+    'rounded-md p-[0.625rem_0.75rem] !leading-none hover:bg-accent tab:inline-flex pc:text-xl',
+  popoverButton: 'block p-[0.75rem] text-[0.875rem] leading-none tab:text-base',
 }
 
 export { Header }
