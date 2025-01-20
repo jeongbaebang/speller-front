@@ -52,7 +52,6 @@ const ActionButton = ({
 }: ActionButtonProps) => (
   <Button
     variant='ghost'
-    size='icon'
     aria-label={ariaLabel}
     onClick={onClick}
     className='size-fit p-1 focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-4 focus-visible:ring-offset-white'
