@@ -8,10 +8,20 @@ import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
 import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
 import { cn } from '@/shared/lib/tailwind-merge'
 import { CustomTextEditor } from './custom-text-editor'
-import { ReportForm } from './report-form'
+import { useAppDispatch } from '@/shared/lib/use-redux'
+import { ReportForm, setErrInfoIdx } from '@/entities/report'
+
+const errInfoIdx = 0 // TODO: props or store
 
 const ErrorInfoSection = () => {
+  const dispatch = useAppDispatch()
+
   const [isExpanded, setIsExpanded] = useState(false)
+
+  const openReportModal = () => {
+    dispatch(setErrInfoIdx(errInfoIdx))
+  }
+
   return (
     <div className='my-[1.125rem]'>
       <dl className='grid grid-cols-[3.5rem_1fr] gap-3 tab:grid-cols-[4.75rem_1fr] pc:grid-cols-[72px_1fr] pc:gap-[4px]'>
@@ -27,6 +37,7 @@ const ErrorInfoSection = () => {
             <Button
               variant='ghost'
               className='h-auto p-0 hover:bg-transparent pc:gap-[8px]'
+              onClick={openReportModal}
             >
               <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
               <span className='sr-only font-medium text-slate-500 tab:not-sr-only pc:text-[18px]'>
