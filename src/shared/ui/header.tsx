@@ -1,14 +1,11 @@
 import Link from 'next/link'
 import { Button } from './button'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
-import IconInfo from '@/shared/ui/icon/icon-info.svg'
-import IconQuestion from '@/shared/ui/icon/icon-question.svg'
-import IconHistoryBack from '@/shared/ui/icon/icon-history-back.svg'
 
 const Header = () => {
   return (
     <div className='flex items-center justify-center bg-white'>
-      <header className='flex items-center justify-between px-6 py-4 pc:container tab:px-[3.75rem] tab:py-5 pc:p-[2rem_3.75rem]'>
+      <header className='flex flex-1 items-center justify-between px-6 py-4 pc:container tab:px-[3.75rem] tab:py-5 pc:p-[2rem_3.75rem]'>
         <div className='flex items-center gap-[1.25rem]'>
           <h1 className='text-xl font-bold tab:text-2xl'>
             한국어 맞춤법 검사기
@@ -38,13 +35,17 @@ const Header = () => {
                   href='/'
                   className='flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-[0.875rem] leading-none group-hover:text-primary tab:text-base'
                 >
-                  <IconInfo className='box-content size-4 rounded-full p-1 group-hover:bg-primary group-hover:text-white tab:size-5' />
+                  <i
+                    className={`${classes.popoverIcon} bg-icon-info group-hover:bg-icon-info-white`}
+                  />
                   검사기 사용법
                 </Link>
               </li>
               <li className='group'>
                 <Link href='/' className={classes.popoverButton}>
-                  <IconQuestion className={classes.popoverIcon} />
+                  <i
+                    className={`${classes.popoverIcon} bg-icon-question group-hover:bg-icon-question-white`}
+                  />
                   문의하기
                 </Link>
               </li>
@@ -53,7 +54,9 @@ const Header = () => {
                   href='/'
                   className={`${classes.popoverButton} border-none`}
                 >
-                  <IconHistoryBack className={classes.popoverIcon} />
+                  <i
+                    className={`${classes.popoverIcon} bg-icon-history-back group-hover:bg-icon-history-back-white`}
+                  />
                   이전 버전 사용하기
                 </Link>
               </li>
@@ -71,7 +74,7 @@ const classes = {
   popoverButton:
     'flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-[0.875rem] leading-none group-hover:text-primary tab:text-base',
   popoverIcon:
-    'box-content size-4 rounded-full p-1 group-hover:bg-primary group-hover:text-white tab:size-5',
+    'box-content inline-flex size-4 rounded-full bg-[length:1rem] bg-center bg-no-repeat p-1 group-hover:bg-primary group-hover:text-white tab:size-5',
 }
 
 export { Header }
