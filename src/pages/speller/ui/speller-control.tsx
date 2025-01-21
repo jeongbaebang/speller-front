@@ -18,7 +18,8 @@ const SpellerControl: FC<SpellerControlProps> = ({ count, isSubmitted }) => {
       <TextCounter count={count} />
       <Button
         type='submit'
-        className='h-[3.375rem] w-[8rem]'
+        variant='action'
+        className='h-[3.375rem] w-[8rem] pc:h-[4.0625rem] pc:w-[9.625rem]'
         disabled={isButtonDisabled}
       >
         {isSubmitted ? '검사중...' : '검사하기'}
