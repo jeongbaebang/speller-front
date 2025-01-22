@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className='flex items-center justify-center bg-white'>
       <header className='flex flex-1 items-center justify-between px-6 py-4 pc:container tab:px-[3.75rem] tab:py-5 pc:p-[2rem_3.75rem]'>
-        <div className='flex items-center gap-[1.25rem]'>
+        <div className='flex items-center gap-5'>
           <h1 className='text-xl font-bold tab:text-2xl'>
             한국어 맞춤법 검사기
           </h1>
@@ -14,7 +14,7 @@ const Header = () => {
             이전 버전 사용하기
           </Link>
         </div>
-        <div className='hidden items-center gap-[1rem] pc:flex'>
+        <div className='hidden items-center gap-4 pc:flex'>
           <Link href='/' className={classes.linkButton}>
             검사기 사용법
           </Link>
@@ -36,7 +36,7 @@ const Header = () => {
               <li className='group'>
                 <Link
                   href='/'
-                  className='flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-[0.875rem] leading-none group-hover:text-primary tab:text-base'
+                  className='flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-sm leading-none group-hover:text-primary tab:text-base'
                 >
                   <i
                     className={`${classes.popoverIcon} bg-icon-info group-hover:bg-icon-info-white`}
@@ -75,7 +75,7 @@ const classes = {
   linkButton:
     'rounded-md p-[0.625rem_0.75rem] !leading-none hover:bg-accent tab:inline-flex pc:text-xl',
   popoverButton:
-    'flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-[0.875rem] leading-none group-hover:text-primary tab:text-base',
+    'flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-sm leading-none group-hover:text-primary tab:text-base',
   popoverIcon:
     'box-content inline-flex size-4 rounded-full bg-[length:1rem] bg-center bg-no-repeat p-1 group-hover:bg-primary group-hover:text-white tab:size-5 tab:bg-[length:1.25rem]',
 }
