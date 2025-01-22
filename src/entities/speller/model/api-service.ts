@@ -2,9 +2,9 @@ import { AxiosResponse } from 'axios'
 
 import { Client } from '@/shared/api/client'
 import { ENDPOINT } from '@/shared/model/constants'
-import { CheckPayload, CheckResponse, CheckService } from './api-interface'
+import { CheckPayload, CheckResponse, ApiService } from './api-interface'
 
-class CheckApiService implements CheckService {
+class SpellerApiService implements ApiService {
   readonly #client: Client
 
   constructor() {
@@ -16,6 +16,6 @@ class CheckApiService implements CheckService {
   }
 }
 
-const checkApiServiceInstance = new CheckApiService()
+const spellerApiService = new SpellerApiService()
 
-export { checkApiServiceInstance }
+export { spellerApiService }

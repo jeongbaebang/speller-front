@@ -1,5 +1,5 @@
 export type { CheckResponse } from './model/api-interface'
-export { checkApiServiceInstance } from './model/api-service'
+export { spellerApiService } from './model/api-service'
 export { useSpeller } from './model/use-speller'
 export {
   spellerReducer,
