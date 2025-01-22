@@ -1,5 +1,12 @@
+import { ContentLayout } from './content-layout'
+import { Header } from './header'
+
 const FeedbackPage = () => {
-  return <div>FeedbackPage</div>
+  return (
+    <ContentLayout>
+      <Header />
+    </ContentLayout>
+  )
 }
 
 export { FeedbackPage }
