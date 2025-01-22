@@ -22,11 +22,11 @@ class SpellerApiService implements ApiService {
   }
 
   async logUserReplace(payload: UserReplacePayload) {
-    return () => this.#client.post(ENDPOINT.USER_REPLACE, payload)
+    return this.#client.post(ENDPOINT.USER_REPLACE, payload)
   }
 
   async sendReport(payload: BugReportPayload) {
-    return () => this.#client.post(ENDPOINT.BUG_REPORT, payload)
+    return this.#client.post(ENDPOINT.BUG_REPORT, payload)
   }
 
   async notChange() {

@@ -23,6 +23,9 @@ export interface CheckResponse {
 
 export interface ApiService {
   check: (payload: CheckPayload) => Promise<AxiosResponse<CheckResponse>>
+  logUserReplace: (payload: UserReplacePayload) => void
+  sendReport: (payload: BugReportPayload) => void
+  notChange: () => void
 }
 
 export interface UserReplacePayload {
