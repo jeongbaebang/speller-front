@@ -1,4 +1,4 @@
-import { useUserReplace } from '@/pages/results/api/use-user-replace'
+import { useUserReplace } from '../model/use-user-replace'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 

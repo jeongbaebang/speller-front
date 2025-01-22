@@ -1,7 +1,7 @@
-import { logUserReplaceAction } from '@/entities/speller'
 import { getWordsAroundIndex } from '@/shared/lib/util'
 import { ChangeEvent, useState } from 'react'
 import { useAppSelector } from '@/shared/lib/use-redux'
+import { logUserReplaceAction } from '../api/log-user-replace-action'
 
 interface useUserReplaceParams {
   handleClose: () => void

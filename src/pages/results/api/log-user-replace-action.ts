@@ -1,11 +1,11 @@
 'use server'
 
+import { spellerApiService, UserReplacePayload } from '@/entities/speller'
 import axios from 'axios'
-import { BugReportPayload, spellerApiService } from '@/entities/speller'
 
-export const sendReportAction = async (payload: BugReportPayload) => {
+export const logUserReplaceAction = async (payload: UserReplacePayload) => {
   try {
-    await spellerApiService.sendReport(payload)
+    await spellerApiService.logUserReplace(payload)
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.message)
