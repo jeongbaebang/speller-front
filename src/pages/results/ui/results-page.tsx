@@ -6,10 +6,10 @@ import { ErrorTrackingSection } from './error-tracking-section'
 
 const ResultsPage = () => {
   return (
-    <ContentLayout className='pb-8 tab:pb-[2.625rem] pc:pb-[3.06rem]'>
+    <ContentLayout className='pb-8 tab:pb-[2.625rem] pc:pb-12'>
       <StrongCheckMessage />
       {/* 교정 문서 & 맞춤법/문법 오류 레이아웃*/}
-      <div className='flex flex-col gap-[0.4375rem] overflow-auto pc:flex-row pc:gap-0'>
+      <div className='flex flex-col gap-2 overflow-auto pc:flex-row pc:gap-0'>
         {/* 교정 문서*/}
         <div className='flex max-h-[30.5rem] min-h-[30.5rem] w-full flex-1 flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 pc:max-h-[40.25rem] pc:rounded-br-none pc:rounded-tr-none'>
           <CorrectionContent />

@@ -27,7 +27,7 @@ const ErrorInfoSection = () => {
               className='h-auto p-0 text-slate-500 hover:bg-transparent pc:gap-2'
             >
               <SendIcon className='!size-6 tab:!size-8' />
-              <span className='sr-only text-lg font-medium tab:not-sr-only pc:text-lg'>
+              <span className='sr-only text-lg font-normal tab:not-sr-only pc:text-lg'>
                 오류 제보
               </span>
             </Button>
@@ -39,7 +39,7 @@ const ErrorInfoSection = () => {
             <div className='flex items-center justify-between text-[0]'>
               <Button
                 variant='ghost'
-                className='h-auto p-0 text-base font-medium text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg'
+                className='h-auto p-0 text-base font-normal text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg'
               >
                 <EditIcon className='!size-6 tab:!size-8' />
                 대치어 직접 수정하기
