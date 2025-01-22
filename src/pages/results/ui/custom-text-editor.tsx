@@ -24,10 +24,6 @@ export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
   const handlePopoverClose = () => setPopoverOpen(false)
   const handleDialogClose = () => setDialogOpen(false)
 
-  const editorContent = (handleClose: () => void) => (
-    <CustomTextEditorContent handleClose={handleClose} />
-  )
-
   return (
     <>
       {/* pc */}
@@ -48,7 +44,7 @@ export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
                 onClick={handlePopoverClose}
               ></Button>
             </div>
-            {editorContent(handlePopoverClose)}
+            <CustomTextEditorContent handleClose={handlePopoverClose} />
           </div>
         </PopoverContent>
       </Popover>
@@ -64,7 +60,7 @@ export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
             </DialogTitle>
             <CustomTextEditorTitle />
           </DialogHeader>
-          {editorContent(handleDialogClose)}
+          <CustomTextEditorContent handleClose={handleDialogClose} />
         </DialogContent>
       </Dialog>
     </>

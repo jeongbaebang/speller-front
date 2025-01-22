@@ -24,10 +24,6 @@ export const ReportForm = ({ children }: ReportFormProps) => {
   const handlePopoverClose = () => setPopoverOpen(false)
   const handleDialogClose = () => setDialogOpen(false)
 
-  const reportFormContent = (handleClose: () => void) => (
-    <ReportFormContent handleClose={handleClose} />
-  )
-
   return (
     <>
       {/* pc */}
@@ -48,7 +44,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
                 onClick={handlePopoverClose}
               ></Button>
             </div>
-            {reportFormContent(handlePopoverClose)}
+            <ReportFormContent handleClose={handlePopoverClose} />
           </div>
         </PopoverContent>
       </Popover>
@@ -64,7 +60,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
             </DialogTitle>
             <ReportFormTitle />
           </DialogHeader>
-          {reportFormContent(handleDialogClose)}
+          <ReportFormContent handleClose={handleDialogClose} />
         </DialogContent>
       </Dialog>
     </>
