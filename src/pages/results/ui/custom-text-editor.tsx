@@ -15,18 +15,19 @@ import { CustomTextEditorContent } from './custom-text-editor-content'
 
 interface CustomTextEditorProps {
   children: ReactNode
-  wrongWord: string
 }
 
-export const CustomTextEditor = ({
-  children,
-  wrongWord,
-}: CustomTextEditorProps) => {
-  const [open, setOpen] = useState(false)
+export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
+  const [isPopoverOpen, setPopoverOpen] = useState(false)
+  const [isDialogOpen, setDialogOpen] = useState(false)
+
+  const handlePopoverClose = () => setPopoverOpen(false)
+  const handleDialogClose = () => setDialogOpen(false)
+
   return (
     <>
       {/* pc */}
-      <Popover open={open} onOpenChange={() => setOpen(true)}>
+      <Popover open={isPopoverOpen} onOpenChange={setPopoverOpen}>
         <PopoverTrigger asChild className='hidden pc:block'>
           {children}
         </PopoverTrigger>
@@ -40,15 +41,15 @@ export const CustomTextEditor = ({
               <Button
                 variant='ghost'
                 className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
-                onClick={() => setOpen(false)}
+                onClick={handlePopoverClose}
               ></Button>
             </div>
-            <CustomTextEditorContent wrongWord={wrongWord} />
+            <CustomTextEditorContent handleClose={handlePopoverClose} />
           </div>
         </PopoverContent>
       </Popover>
       {/* mobile,tab */}
-      <Dialog>
+      <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild className='pc:hidden'>
           {children}
         </DialogTrigger>
@@ -59,7 +60,7 @@ export const CustomTextEditor = ({
             </DialogTitle>
             <CustomTextEditorTitle />
           </DialogHeader>
-          <CustomTextEditorContent wrongWord={wrongWord} />
+          <CustomTextEditorContent handleClose={handleDialogClose} />
         </DialogContent>
       </Dialog>
     </>

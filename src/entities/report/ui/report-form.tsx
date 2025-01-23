@@ -18,11 +18,16 @@ interface ReportFormProps {
 }
 
 export const ReportForm = ({ children }: ReportFormProps) => {
-  const [open, setOpen] = useState(false)
+  const [isPopoverOpen, setPopoverOpen] = useState(false)
+  const [isDialogOpen, setDialogOpen] = useState(false)
+
+  const handlePopoverClose = () => setPopoverOpen(false)
+  const handleDialogClose = () => setDialogOpen(false)
+
   return (
     <>
       {/* pc */}
-      <Popover open={open} onOpenChange={() => setOpen(true)}>
+      <Popover open={isPopoverOpen} onOpenChange={setPopoverOpen}>
         <PopoverTrigger asChild className='hidden pc:inline-flex'>
           {children}
         </PopoverTrigger>
@@ -36,15 +41,15 @@ export const ReportForm = ({ children }: ReportFormProps) => {
               <Button
                 variant='ghost'
                 className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
-                onClick={() => setOpen(false)}
+                onClick={handlePopoverClose}
               ></Button>
             </div>
-            <ReportFormContent />
+            <ReportFormContent handleClose={handlePopoverClose} />
           </div>
         </PopoverContent>
       </Popover>
       {/* mobile,tab */}
-      <Dialog>
+      <Dialog open={isDialogOpen} onOpenChange={setDialogOpen}>
         <DialogTrigger asChild className='pc:hidden'>
           {children}
         </DialogTrigger>
@@ -55,7 +60,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
             </DialogTitle>
             <ReportFormTitle />
           </DialogHeader>
-          <ReportFormContent />
+          <ReportFormContent handleClose={handleDialogClose} />
         </DialogContent>
       </Dialog>
     </>

@@ -7,11 +7,22 @@ import EditIcon from '@/shared/ui/icon/icon-edit.svg'
 import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
 import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
 import { cn } from '@/shared/lib/tailwind-merge'
-import { ReportForm } from './report-form'
+import { ReportForm } from '@/entities/report'
 import { CustomTextEditor } from './custom-text-editor'
+import { useAppDispatch } from '@/shared/lib/use-redux'
+import { setSelectedErrIdx } from '@/entities/speller'
+
+const errInfoIdx = 0 // TODO: props or store
 
 const ErrorInfoSection = () => {
+  const dispatch = useAppDispatch()
+
   const [isExpanded, setIsExpanded] = useState(false)
+
+  const updateErrInfoIndex = () => {
+    dispatch(setSelectedErrIdx(errInfoIdx))
+  }
+
   return (
     <div className='my-[1.125rem]'>
       <dl className='grid grid-cols-[3.5rem_1fr] gap-2 tab:grid-cols-[4.5rem_1fr]'>
@@ -25,6 +36,7 @@ const ErrorInfoSection = () => {
             <Button
               variant='ghost'
               className='h-auto p-0 text-slate-500 hover:bg-transparent pc:gap-2'
+              onClick={updateErrInfoIndex}
             >
               <SendIcon className='!size-6 tab:!size-8' />
               <span className='sr-only text-lg font-normal tab:not-sr-only pc:text-lg'>
@@ -35,11 +47,12 @@ const ErrorInfoSection = () => {
         </dd>
         <dt className='py-0.5 text-sm font-semibold tab:text-lg'>대치어</dt>
         <dd>
-          <CustomTextEditor wrongWord='이들 요소들을'>
+          <CustomTextEditor>
             <div className='flex items-center justify-between text-[0]'>
               <Button
                 variant='ghost'
                 className='h-auto p-0 text-base font-normal text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg'
+                onClick={updateErrInfoIndex}
               >
                 <EditIcon className='!size-6 tab:!size-8' />
                 대치어 직접 수정하기

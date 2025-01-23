@@ -1,28 +1,24 @@
+import { useUserReplace } from '../model/use-user-replace'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
-import { ChangeEvent, useState } from 'react'
 
 interface CustomTextEditorContent {
-  wrongWord: string
+  handleClose: () => void
 }
 
 export const CustomTextEditorContent = ({
-  wrongWord,
+  handleClose,
 }: CustomTextEditorContent) => {
-  const [value, setValue] = useState('')
-
-  const handleChange = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
-    setValue(value)
-  }
+  const { handleChange, handleEdit, value, errorWord } = useUserReplace({
+    handleClose,
+  })
 
   return (
     <>
       <div className='flex flex-col items-center justify-center gap-[0.38rem] pc:gap-[0.36rem]'>
         <p className='flex items-center justify-center gap-[0.44rem] text-lg text-green-100 pc:gap-[0.42rem] pc:text-[0.72917rem] pc:leading-normal'>
           <span className='inline-block h-[11px] w-[11px] rounded-full bg-green-100'></span>
-          {wrongWord}
+          {errorWord}
         </p>
         <div className='h-[1.125rem] w-[1.125rem] bg-chevron-down bg-contain bg-center bg-no-repeat focus-visible:ring-0' />
       </div>
@@ -35,6 +31,7 @@ export const CustomTextEditorContent = ({
       <Button
         disabled={!value}
         className='py-[0.88rem] pc:h-[2.08333rem] pc:rounded-[0.31rem] pc:py-[0.57rem] pc:text-[0.83333rem]'
+        onClick={handleEdit}
       >
         수정하기
       </Button>

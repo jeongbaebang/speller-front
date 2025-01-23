@@ -1,6 +1,6 @@
 'use server'
 
-import { checkApiServiceInstance, SpellerState } from '@/entities/speller'
+import { spellerApiService, SpellerState } from '@/entities/speller'
 
 export type ActionState = {
   data: SpellerState['response'] | null
@@ -15,7 +15,7 @@ const spellCheckAction = async (
     const text = formData.get('text') as string
     const isStrictCheck = formData.get('isStrictCheck') === 'on'
 
-    const { data } = await checkApiServiceInstance.check({
+    const { data } = await spellerApiService.check({
       text,
       isStrictCheck,
     })

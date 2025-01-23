@@ -10,6 +10,7 @@ type Response = CheckResponse & { requestedWithStrictMode: boolean }
 interface SpellerState {
   text: string
   response: Response
+  selectedErrIdx: number
 }
 
 const initialState: SpellerState = {
@@ -21,6 +22,7 @@ const initialState: SpellerState = {
     remaningText: '',
     requestedWithStrictMode: false,
   },
+  selectedErrIdx: -1,
 }
 
 const spellerSlice = createSlice({
@@ -34,10 +36,20 @@ const spellerSlice = createSlice({
     updateResponse: (state, action: PayloadAction<Response>) => {
       state.response = action.payload
     },
+
+    setSelectedErrIdx: (state, action: PayloadAction<number>) => {
+      state.selectedErrIdx = action.payload
+    },
   },
 })
 
-const { setText, updateResponse } = spellerSlice.actions
+const { setText, updateResponse, setSelectedErrIdx } = spellerSlice.actions
 const spellerReducer = spellerSlice.reducer
 
-export { setText, updateResponse, spellerReducer, type SpellerState }
+export {
+  setText,
+  updateResponse,
+  spellerReducer,
+  setSelectedErrIdx,
+  type SpellerState,
+}
