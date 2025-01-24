@@ -38,7 +38,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
           <p className='flex items-center gap-2 text-base font-semibold tab:gap-3.5 tab:text-xl'>
             <BulletBadge
               method={correctMethod}
-              className='mx-1.5 h-3 w-3 tab:mx-2.5'
+              className='mx-1.5 size-3 tab:mx-2.5'
             />
             {orgStr}
           </p>
@@ -48,7 +48,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
               className='h-auto p-0 text-slate-500 hover:bg-transparent pc:gap-2'
               onClick={updateErrInfoIndex}
             >
-              <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
+              <SendIcon className='!size-6 tab:!size-8' />
               <span className='sr-only font-normal tab:not-sr-only tab:text-lg'>
                 오류 제보
               </span>
@@ -61,7 +61,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
             <div className='flex items-center justify-between text-[0]'>
               <Button
                 variant='ghost'
-                className='h-auto p-0 text-base font-normal text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg pc:gap-4'
+                className='h-auto p-0 text-base font-normal text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg'
                 onClick={updateErrInfoIndex}
               >
                 <EditIcon className='!size-6 tab:!size-8' />
