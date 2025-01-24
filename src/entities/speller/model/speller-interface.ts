@@ -29,7 +29,7 @@ export interface CheckResponse {
   remaningText: string // 다음 페이지에서 검사해야 할 나머지 텍스트
 }
 
-export interface ApiService {
+export interface SpellerService {
   check: (payload: CheckPayload) => Promise<AxiosResponse<CheckResponse>>
   logUserReplace: (payload: UserReplacePayload) => void
   sendReport: (payload: BugReportPayload) => void

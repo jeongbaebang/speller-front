@@ -3,7 +3,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import { CheckResponse } from './api-interface'
+import { CheckResponse } from './speller-interface'
 
 type Response = CheckResponse & { requestedWithStrictMode: boolean }
 
@@ -49,7 +49,7 @@ const spellerReducer = spellerSlice.reducer
 export {
   setText,
   updateResponse,
-  spellerReducer,
   setSelectedErrIdx,
+  spellerReducer,
   type SpellerState,
 }

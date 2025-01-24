@@ -4,8 +4,8 @@ export {
   type CheckResponse,
   type BugReportPayload,
   type UserReplacePayload,
-} from './model/api-interface'
-export { spellerApiService } from './api/api-service'
+} from './model/speller-interface'
+export { SpellerApi } from './api/speller-service'
 export { useSpeller } from './model/use-speller'
 export {
   spellerReducer,

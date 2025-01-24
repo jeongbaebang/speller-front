@@ -5,12 +5,12 @@ import { ENDPOINT } from '@/shared/model/constants'
 import {
   CheckPayload,
   CheckResponse,
-  ApiService,
+  SpellerService,
   UserReplacePayload,
   BugReportPayload,
-} from '../model/api-interface'
+} from '../model/speller-interface'
 
-class SpellerApiService implements ApiService {
+class SpellerApiService implements SpellerService {
   readonly #client: Client
 
   constructor() {
@@ -34,6 +34,6 @@ class SpellerApiService implements ApiService {
   }
 }
 
-const spellerApiService = new SpellerApiService()
+const SpellerApi = new SpellerApiService()
 
-export { spellerApiService }
+export { SpellerApi }
