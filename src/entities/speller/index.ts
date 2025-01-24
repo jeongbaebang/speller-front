@@ -1,9 +1,9 @@
 export {
-  type CheckResponse,
-  type ErrorInfo,
   CorrectMethod,
-  BugReportPayload,
-  UserReplacePayload,
+  type ErrorInfo,
+  type CheckResponse,
+  type BugReportPayload,
+  type UserReplacePayload,
 } from './model/api-interface'
 export { spellerApiService } from './api/api-service'
 export { useSpeller } from './model/use-speller'
