@@ -6,7 +6,7 @@ import { Label } from '@/shared/ui/label'
 import { TextCounter } from '@/shared/ui/text-counter'
 import { Textarea } from '@/shared/ui/textarea'
 
-const Form = () => {
+const FeedbackForm = () => {
   return (
     <form className='flex grid-cols-1 flex-col tab:block'>
       {/* 이메일 */}
@@ -59,4 +59,4 @@ const FormLabel = ({ label, htmlFor }: { label: string; htmlFor: string }) => {
   )
 }
 
-export { Form }
+export { FeedbackForm }

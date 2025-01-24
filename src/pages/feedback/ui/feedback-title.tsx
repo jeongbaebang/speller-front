@@ -1,4 +1,4 @@
-const Header = () => {
+const FeedbackTitle = () => {
   return (
     <div>
       <h1 className='mb-2 text-2xl font-bold leading-[140%] tracking-[-0.03rem] tab:mb-[0.625rem] tab:text-[1.75rem] tab:tracking-[-0.035rem] pc:mb-0 pc:text-[3.125rem] pc:leading-[170%] pc:tracking-[-0.06rem]'>
@@ -11,4 +11,4 @@ const Header = () => {
   )
 }
 
-export { Header }
+export { FeedbackTitle }

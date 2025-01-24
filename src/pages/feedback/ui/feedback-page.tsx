@@ -1,12 +1,12 @@
 import { ContentLayout } from './content-layout'
-import { Form } from './form'
-import { Header } from './header'
+import { FeedbackForm } from './feedback-form'
+import { FeedbackTitle } from './feedback-title'
 
 const FeedbackPage = () => {
   return (
     <ContentLayout>
-      <Header />
-      <Form />
+      <FeedbackTitle />
+      <FeedbackForm />
     </ContentLayout>
   )
 }
