@@ -49,7 +49,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
               onClick={updateErrInfoIndex}
             >
               <SendIcon className='!h-6 !w-6 tab:!h-8 tab:!w-8' />
-              <span className='sr-only font-medium tab:not-sr-only tab:text-lg'>
+              <span className='sr-only font-normal tab:not-sr-only tab:text-lg'>
                 오류 제보
               </span>
             </Button>
