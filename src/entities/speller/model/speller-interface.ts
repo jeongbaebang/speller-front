@@ -22,6 +22,10 @@ export interface ErrorInfo {
   help: string // 도움말 내용
 }
 
+export interface CorrectInfo extends ErrorInfo {
+  crtStr?: string
+}
+
 export interface CheckResponse {
   str: string // 현재 페이지에서 검사한 텍스트 전체
   errInfo: ErrorInfo[]

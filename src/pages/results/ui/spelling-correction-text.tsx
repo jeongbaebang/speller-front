@@ -1,8 +1,8 @@
-import { CheckResponse } from '@/entities/speller'
+import { CorrectInfo } from '@/entities/speller/model/speller-interface'
 
 interface CorrectionProps {
   text: string
-  corrections: CheckResponse['errInfo']
+  corrections: CorrectInfo[]
 }
 
 const SpellingCorrectionText: React.FC<CorrectionProps> = ({
@@ -31,7 +31,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
           </span>
         </div>
         <span className='text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
-          {text.slice(pos.start, pos.end)}
+          {pos.crtStr ?? pos.orgStr}
         </span>
       </span>,
     )

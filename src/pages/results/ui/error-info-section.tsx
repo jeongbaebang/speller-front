@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { type ErrorInfo } from '@/entities/speller'
+import { type ErrorInfo, useSpeller } from '@/entities/speller'
 import { Button } from '@/shared/ui/button'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import EditIcon from '@/shared/ui/icon/icon-edit.svg'
@@ -20,6 +20,7 @@ interface ErrorInfoSectionProps {
 }
 
 const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
+  const { handleUpdateCorrectInfo } = useSpeller()
   const [isExpanded, setIsExpanded] = useState(false)
 
   const { correctMethod, orgStr, candWord, help } = errorInfo ?? {}
@@ -75,6 +76,9 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
                 key={id}
                 variant={null}
                 className='h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg'
+                onClick={() =>
+                  handleUpdateCorrectInfo({ ...errorInfo, crtStr: word })
+                }
               >
                 {word}
               </Button>
