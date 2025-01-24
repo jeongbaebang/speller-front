@@ -1,5 +1,7 @@
 export type {
   CheckResponse,
+  ErrorInfo,
+  CorrectMethod,
   BugReportPayload,
   UserReplacePayload,
 } from './model/api-interface'
