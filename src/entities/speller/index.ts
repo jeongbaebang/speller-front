@@ -1,6 +1,6 @@
-export type {
-  CheckResponse,
-  ErrorInfo,
+export {
+  type CheckResponse,
+  type ErrorInfo,
   CorrectMethod,
   BugReportPayload,
   UserReplacePayload,
