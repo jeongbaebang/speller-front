@@ -2,7 +2,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { CheckResponse, CorrectInfo } from './speller-interface'
+import { CheckResponse, CorrectInfo } from './speller-schema'
 
 type Response = CheckResponse & { requestedWithStrictMode: boolean }
 

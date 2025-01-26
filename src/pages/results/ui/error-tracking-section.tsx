@@ -1,7 +1,7 @@
 'use client'
 
 import { Fragment, useCallback, useState } from 'react'
-import { CorrectMethod, useSpeller } from '@/entities/speller'
+import { useSpeller, CorrectMethodEnum } from '@/entities/speller'
 import { cn } from '@/shared/lib/tailwind-merge'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
@@ -40,17 +40,23 @@ const ErrorTrackingSection = () => {
         <div className='flex items-center gap-4 text-sm font-medium'>
           <span className='flex items-center gap-2 tab:text-lg'>
             <BulletBadge
-              method={CorrectMethod.띄어쓰기}
+              method={CorrectMethodEnum.enum.띄어쓰기}
               className='tab:size-3'
             />
             띄어쓰기 오류
           </span>
           <span className='flex items-center gap-2 tab:text-lg'>
-            <BulletBadge method={CorrectMethod.오탈자} className='tab:size-3' />
+            <BulletBadge
+              method={CorrectMethodEnum.enum.오탈자}
+              className='tab:size-3'
+            />
             오탈자 오류
           </span>
           <span className='flex items-center gap-2 tab:text-lg'>
-            <BulletBadge method={CorrectMethod.문맥} className='tab:size-3' />
+            <BulletBadge
+              method={CorrectMethodEnum.enum.문맥}
+              className='tab:size-3'
+            />
             문맥상 오류
           </span>
         </div>

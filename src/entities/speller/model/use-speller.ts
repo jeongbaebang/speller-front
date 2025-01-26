@@ -9,7 +9,7 @@ import {
   updateCorrectInfo,
   type SpellerState,
 } from './speller-slice'
-import { CorrectInfo } from './speller-interface'
+import { CorrectInfo } from './speller-schema'
 
 const useSpeller = () => {
   const dispatch = useAppDispatch()

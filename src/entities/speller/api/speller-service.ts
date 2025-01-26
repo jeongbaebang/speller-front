@@ -3,12 +3,11 @@ import { AxiosResponse } from 'axios'
 import { Client } from '@/shared/api/client'
 import { ENDPOINT } from '@/shared/model/constants'
 import {
-  CheckPayload,
-  CheckResponse,
   SpellerService,
   UserReplacePayload,
   BugReportPayload,
 } from '../model/speller-interface'
+import { CheckPayload, CheckResponse } from '../model/speller-schema'
 
 class SpellerApiService implements SpellerService {
   readonly #client: Client

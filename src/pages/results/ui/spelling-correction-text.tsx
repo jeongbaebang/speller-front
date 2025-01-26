@@ -1,4 +1,4 @@
-import { CorrectInfo } from '@/entities/speller/model/speller-interface'
+import { CorrectInfo } from '@/entities/speller'
 
 interface CorrectionProps {
   text: string
