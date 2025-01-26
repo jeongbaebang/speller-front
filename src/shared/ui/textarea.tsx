@@ -16,6 +16,7 @@ interface TextareaProps {
   placeholder: string
   onChange: (value: string) => void
   onScroll?: (isScrolling: boolean) => void
+  name?: string
   className?: string
 }
 
@@ -24,6 +25,7 @@ const Textarea: FC<TextareaProps> = ({
   value,
   placeholder,
   onScroll,
+  name,
   className,
 }) => {
   const isClient = useClient()
@@ -146,6 +148,7 @@ const Textarea: FC<TextareaProps> = ({
         onBlur={handleBlur}
         onPaste={handlePaste}
       />
+      <input type='hidden' name={name} value={value} />
     </ScrollContainer>
   )
 }

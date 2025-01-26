@@ -12,9 +12,8 @@ const spellCheckAction = async (
   formData: FormData,
 ): Promise<ActionState> => {
   try {
-    const text = formData.get('text') as string
+    const text = formData.get('speller-text') as string
     const isStrictCheck = formData.get('isStrictCheck') === 'on'
-
     const { data } = await spellerApiService.check({
       text,
       isStrictCheck,
