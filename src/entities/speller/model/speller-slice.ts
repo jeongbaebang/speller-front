@@ -22,8 +22,8 @@ const initialState: SpellerState = {
     remaningText: '',
     requestedWithStrictMode: false,
   },
-  selectedErrIdx: -1,
   correctInfo: {},
+  selectedErrIdx: -1,
 }
 
 const spellerSlice = createSlice({

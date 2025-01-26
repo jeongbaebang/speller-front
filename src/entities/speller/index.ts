@@ -13,9 +13,5 @@ export {
 } from './model/speller-schema'
 export { SpellerApi } from './api/speller-service'
 export { useSpeller } from './model/use-speller'
-export {
-  spellerReducer,
-  setSelectedErrIdx,
-  type SpellerState,
-} from './model/speller-slice'
+export { spellerReducer, type SpellerState } from './model/speller-slice'
 export { logUserReplaceAction } from '../../pages/results/api/log-user-replace-action'
