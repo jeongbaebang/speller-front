@@ -1,4 +1,5 @@
 import { CorrectInfo } from '@/entities/speller'
+import { cn } from '@/shared/lib/tailwind-merge'
 
 interface CorrectionProps {
   text: string
@@ -13,6 +14,8 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
   const parts: React.ReactNode[] = []
 
   corrections.forEach((pos, idx) => {
+    const isResolved = !!pos.crtStr
+
     // 현재 교정 위치 이전의 일반 텍스트 처리
     if (pos.start > lastIndex) {
       parts.push(
@@ -24,13 +27,20 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
     // 상단에 추천 단어를 표시하고 원본 텍스트에 밑줄 표시
     parts.push(
       <span key={`correction-${idx}`} className='relative inline-block'>
-        <div className='h-6'>
-          <span className='absolute bottom-6 left-0 min-w-fit whitespace-nowrap text-[1rem] font-bold leading-[170%] tracking-[-0.02rem] text-slate-600'>
-            {/* 첫 번째 추천 교정 단어 */}
-            {pos.candWord.split('|')[0]}
-          </span>
-        </div>
-        <span className='text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
+        {!isResolved && (
+          <div className='h-6'>
+            <span className='absolute bottom-6 left-0 min-w-fit whitespace-nowrap text-[1rem] font-bold leading-[170%] tracking-[-0.02rem] text-slate-600'>
+              {/* 첫 번째 추천 교정 단어 */}
+              {pos.candWord.split('|')[0]}
+            </span>
+          </div>
+        )}
+        <span
+          className={cn(
+            'text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]',
+            isResolved && 'text-slate-600',
+          )}
+        >
           {pos.crtStr ?? pos.orgStr}
         </span>
       </span>,

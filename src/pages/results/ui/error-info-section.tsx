@@ -1,17 +1,20 @@
 'use client'
 
 import { useState } from 'react'
-import { type ErrorInfo, useSpeller } from '@/entities/speller'
+import {
+  type ErrorInfo,
+  useSpeller,
+  setSelectedErrIdx,
+} from '@/entities/speller'
+import { ReportForm } from '@/entities/report'
 import { Button } from '@/shared/ui/button'
+import { cn } from '@/shared/lib/tailwind-merge'
+import { useAppDispatch } from '@/shared/lib/use-redux'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import EditIcon from '@/shared/ui/icon/icon-edit.svg'
 import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
 import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
-import { cn } from '@/shared/lib/tailwind-merge'
-import { ReportForm } from '@/entities/report'
 import { CustomTextEditor } from './custom-text-editor'
-import { useAppDispatch } from '@/shared/lib/use-redux'
-import { setSelectedErrIdx } from '@/entities/speller'
 
 const errInfoIdx = 0 // TODO: props or store
 
@@ -20,13 +23,14 @@ interface ErrorInfoSectionProps {
 }
 
 const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
+  const dispatch = useAppDispatch()
   const { handleUpdateCorrectInfo } = useSpeller()
-  const [isExpanded, setIsExpanded] = useState(false)
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
   const { correctMethod, orgStr, candWord, help } = errorInfo ?? {}
   const candidateWords = candWord.split('|').map((word, id) => ({ id, word }))
 
-  const dispatch = useAppDispatch()
   const updateErrInfoIndex = () => {
     dispatch(setSelectedErrIdx(errInfoIdx))
   }
@@ -75,10 +79,14 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
               <Button
                 key={id}
                 variant={null}
-                className='h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg'
-                onClick={() =>
+                className={cn(
+                  'h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg',
+                  selectedIndex === id && 'font-bold text-blue-500',
+                )}
+                onClick={() => {
                   handleUpdateCorrectInfo({ ...errorInfo, crtStr: word })
-                }
+                  setSelectedIndex(id)
+                }}
               >
                 {word}
               </Button>
