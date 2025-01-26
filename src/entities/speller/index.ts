@@ -4,8 +4,11 @@ export type {
 } from './model/speller-interface'
 export {
   CorrectMethodEnum,
+  checkPayloadSchema,
+  checkResponseSchema,
   type ErrorInfo,
   type CorrectInfo,
+  type CheckPayload,
   type CheckResponse,
 } from './model/speller-schema'
 export { SpellerApi } from './api/speller-service'

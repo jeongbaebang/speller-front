@@ -1,11 +1,5 @@
 import { AxiosResponse } from 'axios'
-import { CheckResponse } from './speller-schema'
-
-export interface CheckPayload {
-  text: string // 검사할 텍스트 내용
-  isStrictCheck?: boolean // 강한 검사 여부
-  pageIdx?: number // 현재 페이지 번호
-}
+import { CheckPayload, CheckResponse } from './speller-schema'
 
 export interface UserReplacePayload {
   errorWord: string // 오류 문자열
