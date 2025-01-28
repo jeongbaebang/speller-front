@@ -14,7 +14,7 @@ interface GoogleAdSenseProps {
   className?: string
 }
 const GoogleAdSense = ({ slot, className }: GoogleAdSenseProps) => {
-  const adRef = useRef<HTMLDivElement>(null)
+  const adRef = useRef<HTMLModElement>(null)
 
   useEffect(() => {
     if (adRef.current) {
@@ -25,9 +25,15 @@ const GoogleAdSense = ({ slot, className }: GoogleAdSenseProps) => {
     }
   }, [])
 
+  if (!process.env.NEXT_PUBLIC_AD_CLIENT) {
+    console.error('AdSense client ID is missing.')
+    return null
+  }
+
   return (
     <ins
-      className={cn('adsbygoogle block', className)}
+      ref={adRef}
+      className={cn('adsbygoogle', 'block', className)}
       data-ad-client={process.env.NEXT_PUBLIC_AD_CLIENT}
       data-ad-slot={slot}
       data-ad-format='auto'
