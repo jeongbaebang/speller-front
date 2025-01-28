@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { FooterAd } from './footer-ad'
+import { FooterAd } from '@/entities/google-ad-sense'
 
 const Footer = () => {
   return (
