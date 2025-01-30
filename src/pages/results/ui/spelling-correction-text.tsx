@@ -1,5 +1,9 @@
 import { Fragment } from 'react'
-import { useSpeller, type CorrectInfo } from '@/entities/speller'
+import {
+  useSpeller,
+  CorrectMethodEnum,
+  type CorrectInfo,
+} from '@/entities/speller'
 import { cn } from '@/shared/lib/tailwind-merge'
 
 interface CorrectionProps {
@@ -68,7 +72,13 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
         </button>
         <span
           className={cn(
-            'text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]',
+            'text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-purple-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]',
+            pos.correctMethod === CorrectMethodEnum.enum.띄어쓰기 &&
+              'text-green-100',
+            pos.correctMethod === CorrectMethodEnum.enum.오탈자 &&
+              'text-red-100',
+            pos.correctMethod === CorrectMethodEnum.enum.문맥 &&
+              'text-purple-100',
             isResolved && 'text-slate-600',
           )}
         >
