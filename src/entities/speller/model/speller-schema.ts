@@ -10,7 +10,7 @@ export const CorrectMethodEnum = z.nativeEnum(CorrectMethod)
 
 export const errorInfoSchema = z.object({
   errorIdx: z.number(), // 에러 번호(0~n)
-  correctMethod: CorrectMethodEnum, // 교정 방법 번호(1~n)
+  correctMethod: z.number(), // 교정 방법 번호(1~n)
   start: z.number(), // str 안에서의 오류 문자열 시작 위치(0~n)
   end: z.number(), // str 안에서의 오류 문자열 끝 위치(0~n)
   orgStr: z.string(), // 오류 문자열
