@@ -39,7 +39,7 @@ const SpellerPage = () => {
       <ContentLayout className='pb-9 tab:pb-40 pc:pb-[3.06rem]'>
         {/* 강한 검사 */}
         <SpellerSetting />
-        <div className='flex h-full w-full flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 tab:pb-6'>
+        <div className='flex h-full w-full flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 tab:pb-6 pc:max-h-[40.25rem]'>
           <SpellerTextInput text={text} onTextChange={handleTextChange} />
           {/* 글자수 & 검사하기 버튼 */}
           <SpellerControl count={text.length} isSubmitted={isPending} />
