@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import { initCaretPositionPolyfill } from '@/shared/lib/caret-position.polyfill'
 import { ScrollContainer } from './scroll-container'
@@ -14,9 +14,10 @@ if (typeof window !== 'undefined') {
 interface TextareaProps {
   value: string
   placeholder: string
+  name?: string
+  className?: React.HTMLAttributes<HTMLDivElement>['className']
   onChange: (value: string) => void
   onScroll?: (isScrolling: boolean) => void
-  className?: React.HTMLAttributes<HTMLDivElement>['className']
 }
 
 const Textarea: FC<TextareaProps> = ({
@@ -24,6 +25,7 @@ const Textarea: FC<TextareaProps> = ({
   value,
   placeholder,
   onScroll,
+  name,
   className,
 }) => {
   const isClient = useClient()
@@ -44,13 +46,15 @@ const Textarea: FC<TextareaProps> = ({
   }, [isClient, value])
 
   const handleInput = (event: React.FormEvent<HTMLDivElement>) => {
-    const text = event.currentTarget.textContent || ''
+    const content = event.currentTarget
+    const text = convertHtmlToLineBreaks(content.innerHTML)
+
     lastValueRef.current = text
     onChange(text)
 
     // 빈 텍스트일 때 <br> 태그 제거
-    if (!text && event.currentTarget.innerHTML === '<br>') {
-      event.currentTarget.innerHTML = ''
+    if (!text && content.innerHTML === '<br>') {
+      content.innerHTML = ''
     }
   }
 
@@ -69,80 +73,62 @@ const Textarea: FC<TextareaProps> = ({
     }
   }
 
-  // 공백 클릭 시 마지막 텍스트 포커스 처리되게 하는 로직
-  const handleClick = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    const element = contentEditableRef.current
+  // 붙여넣기 처리
+  const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    const text = e.clipboardData.getData('text')
+    const selection = window.getSelection()
 
-    // 클릭된 위치의 정확한 노드 확인
-    const range = document.caretPositionFromPoint?.(
-      event.clientX,
-      event.clientY,
-    )
+    if (selection?.rangeCount) {
+      const range = selection.getRangeAt(0)
+      range.deleteContents()
+      range.insertNode(document.createTextNode(text))
+    }
 
-    if (!range || !element) return
-
-    const isDivNode = range.offsetNode.nodeType === Node.ELEMENT_NODE
-
-    if (isDivNode && element.textContent) {
-      // 스크롤 이동 없이 포커스 설정
-      element.focus({ preventScroll: true })
-
-      // 현재 선택 영역 정보 가져오기
-      const selection = window.getSelection()
-      // 새로운 범위 객체 생성
+    // 커서를 삽입된 텍스트 끝으로 이동
+    if (contentEditableRef.current) {
       const newRange = document.createRange()
-      // 마지막 텍스트 노드 선택
-      const lastChild = element.lastChild || element
-
-      // 해당 노드의 컨텐츠를 선택 범위로 지정
+      const lastChild =
+        contentEditableRef.current.lastChild || contentEditableRef.current
       newRange.selectNodeContents(lastChild)
-      // 선택 범위를 끝점으로 접기 (커서를 끝으로 이동)
       newRange.collapse(false)
-      // 기존 선택 영역 모두 제거
       selection?.removeAllRanges()
-      // 새로운 선택 영역 추가 (커서 위치 설정)
       selection?.addRange(newRange)
     }
 
-    setIsFocused(true)
-  }, [])
+    // 상태 업데이트
+    if (contentEditableRef.current) {
+      const text = convertHtmlToLineBreaks(contentEditableRef.current.innerHTML)
+      // 태그 소각
+      const decodedText =
+        new DOMParser().parseFromString(text, 'text/html').documentElement
+          .textContent || ''
 
-  // 공백 클릭 시 드래그 가능하게 처리하는 로직
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      if (!(event.buttons === 1)) return
+      lastValueRef.current = text
+      onChange(text)
 
-      const element = contentEditableRef.current
-      const range = document.caretPositionFromPoint?.(
-        event.clientX,
-        event.clientY,
-      )
-
-      if (!range || !element) return
-
-      const isDivNode = range.offsetNode.nodeType === Node.ELEMENT_NODE
-
-      if (isDivNode) {
-        const selection = window.getSelection()
-        const newRange = document.createRange()
-        const lastChild = element.lastChild || element
-
-        // 시작점 설정
-        newRange.setStart(lastChild, 0)
-        newRange.collapse(false)
-        selection?.removeAllRanges()
-        selection?.addRange(newRange)
+      // 빈 텍스트일 때 <br> 태그 제거
+      if (!decodedText && contentEditableRef.current.innerHTML === '<br>') {
+        contentEditableRef.current.innerHTML = ''
       }
-    },
-    [],
-  )
+    }
+  }
+
+  const convertHtmlToLineBreaks = (innerHTML: string) => {
+    const text = innerHTML
+      .replace(/<div><br><\/div>/g, '\n')
+      .replace(/<div>/g, '\n')
+      .replace(/<\/div>/g, '')
+      .replace(/<br>/g, '')
+      .replace(/&nbsp;/g, ' ')
+
+    return text
+  }
 
   return (
     <ScrollContainer
       suppressHydrationWarning
       suppressContentEditableWarning
-      onClick={handleClick}
-      onMouseMove={handleMouseMove}
       isFocused={isFocused}
       onScrollStatusChange={onScroll}
       className='h-full min-h-40 flex-1'
@@ -160,7 +146,9 @@ const Textarea: FC<TextareaProps> = ({
         onFocus={() => setIsFocused(true)}
         onInput={handleInput}
         onBlur={handleBlur}
+        onPaste={handlePaste}
       />
+      <input type='hidden' name={name} value={value} />
     </ScrollContainer>
   )
 }

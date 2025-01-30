@@ -35,11 +35,11 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
       <div className='min-w-0 flex-1'>
         <Textarea
           value={text}
+          name='speller-text'
           onChange={onTextChange}
           onScroll={handleScroll}
           placeholder='내용을 입력해 주세요.'
         />
-        <input type='hidden' name='text' value={text} />
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}
         <ScrollGradientFade showGradient={showGradient} />
       </div>

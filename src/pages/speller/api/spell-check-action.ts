@@ -1,10 +1,15 @@
 'use server'
 
-import { spellerApiService, SpellerState } from '@/entities/speller'
+import {
+  SpellerApi,
+  type SpellerState,
+  checkPayloadSchema,
+  checkResponseSchema,
+} from '@/entities/speller'
 
 export type ActionState = {
   data: SpellerState['response'] | null
-  error: string | null
+  error: unknown
 }
 
 const spellCheckAction = async (
@@ -12,22 +17,37 @@ const spellCheckAction = async (
   formData: FormData,
 ): Promise<ActionState> => {
   try {
-    const text = formData.get('text') as string
+    const text = formData.get('speller-text') as string
     const isStrictCheck = formData.get('isStrictCheck') === 'on'
 
-    const { data } = await spellerApiService.check({
+    const validateCheckPayload = checkPayloadSchema.safeParse({
       text,
       isStrictCheck,
     })
 
+    if (!validateCheckPayload.success) {
+      throw new Error(validateCheckPayload.error.message)
+    }
+
+    const { data } = await SpellerApi.check(validateCheckPayload.data)
+
+    const validateCheckResponse = checkResponseSchema.safeParse(data)
+
+    if (!validateCheckResponse.success) {
+      throw new Error(validateCheckResponse.error.message)
+    }
+
     return {
-      data: { ...data, requestedWithStrictMode: isStrictCheck },
+      data: {
+        ...validateCheckResponse.data,
+        requestedWithStrictMode: isStrictCheck,
+      },
       error: null,
     }
-  } catch {
+  } catch (error) {
     return {
       data: null,
-      error: '맞춤법 검사 중 오류가 발생했습니다.',
+      error,
     }
   }
 }

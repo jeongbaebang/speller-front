@@ -1,17 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { type ErrorInfo } from '@/entities/speller'
+import { useSpeller, type ErrorInfo } from '@/entities/speller'
+import { ReportForm } from '@/entities/report'
 import { Button } from '@/shared/ui/button'
+import { cn } from '@/shared/lib/tailwind-merge'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import EditIcon from '@/shared/ui/icon/icon-edit.svg'
 import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
 import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
-import { cn } from '@/shared/lib/tailwind-merge'
-import { ReportForm } from '@/entities/report'
 import { CustomTextEditor } from './custom-text-editor'
-import { useAppDispatch } from '@/shared/lib/use-redux'
-import { setSelectedErrIdx } from '@/entities/speller'
 
 const errInfoIdx = 0 // TODO: props or store
 
@@ -20,15 +18,12 @@ interface ErrorInfoSectionProps {
 }
 
 const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
-  const [isExpanded, setIsExpanded] = useState(false)
+  const { correctInfo, handleUpdateCorrectInfo, updateErrInfoIndex } =
+    useSpeller()
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
-  const { correctMethod, orgStr, candWord, help } = errorInfo ?? {}
+  const { errorIdx, correctMethod, orgStr, candWord, help } = errorInfo ?? {}
   const candidateWords = candWord.split('|').map((word, id) => ({ id, word }))
-
-  const dispatch = useAppDispatch()
-  const updateErrInfoIndex = () => {
-    dispatch(setSelectedErrIdx(errInfoIdx))
-  }
 
   return (
     <div className='my-[1.125rem]'>
@@ -46,7 +41,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
             <Button
               variant='ghost'
               className='h-auto p-0 text-slate-500 hover:bg-transparent pc:gap-2'
-              onClick={updateErrInfoIndex}
+              onClick={() => updateErrInfoIndex(errInfoIdx)}
             >
               <SendIcon className='!size-6 tab:!size-8' />
               <span className='sr-only font-normal tab:not-sr-only tab:text-lg'>
@@ -62,7 +57,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
               <Button
                 variant='ghost'
                 className='h-auto p-0 text-base font-normal text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg'
-                onClick={updateErrInfoIndex}
+                onClick={() => updateErrInfoIndex(errInfoIdx)}
               >
                 <EditIcon className='!size-6 tab:!size-8' />
                 대치어 직접 수정하기
@@ -74,7 +69,14 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
               <Button
                 key={id}
                 variant={null}
-                className='h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg'
+                className={cn(
+                  'h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg',
+                  correctInfo[errorIdx]?.crtStr === word &&
+                    'font-bold text-blue-500',
+                )}
+                onClick={() => {
+                  handleUpdateCorrectInfo({ ...errorInfo, crtStr: word })
+                }}
               >
                 {word}
               </Button>

@@ -2,8 +2,7 @@
 
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-
-import { CheckResponse } from './api-interface'
+import { CheckResponse, CorrectInfo } from './speller-schema'
 
 type Response = CheckResponse & { requestedWithStrictMode: boolean }
 
@@ -11,6 +10,7 @@ interface SpellerState {
   text: string
   response: Response
   selectedErrIdx: number
+  correctInfo: Record<number, CorrectInfo>
 }
 
 const initialState: SpellerState = {
@@ -22,6 +22,7 @@ const initialState: SpellerState = {
     remaningText: '',
     requestedWithStrictMode: false,
   },
+  correctInfo: {},
   selectedErrIdx: -1,
 }
 
@@ -35,6 +36,15 @@ const spellerSlice = createSlice({
 
     updateResponse: (state, action: PayloadAction<Response>) => {
       state.response = action.payload
+
+      state.correctInfo = action.payload.errInfo.reduce(
+        (acc, info) => ({ ...acc, [info.errorIdx]: info }),
+        {},
+      )
+    },
+
+    updateCorrectInfo: (state, action: PayloadAction<CorrectInfo>) => {
+      state.correctInfo[action.payload.errorIdx] = action.payload
     },
 
     setSelectedErrIdx: (state, action: PayloadAction<number>) => {
@@ -43,13 +53,15 @@ const spellerSlice = createSlice({
   },
 })
 
-const { setText, updateResponse, setSelectedErrIdx } = spellerSlice.actions
+const { setText, updateResponse, updateCorrectInfo, setSelectedErrIdx } =
+  spellerSlice.actions
 const spellerReducer = spellerSlice.reducer
 
 export {
   setText,
   updateResponse,
-  spellerReducer,
+  updateCorrectInfo,
   setSelectedErrIdx,
+  spellerReducer,
   type SpellerState,
 }
