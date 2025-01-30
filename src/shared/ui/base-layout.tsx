@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react'
 
 import { Header } from './header'
-import { MainAd } from './main-ad'
+import { MainAd } from '@/entities/google-ad-sense'
 import { Footer } from './footer'
 
 const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
