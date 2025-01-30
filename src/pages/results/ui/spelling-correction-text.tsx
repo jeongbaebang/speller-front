@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 import { CheckResponse } from '@/entities/speller'
 
 interface CorrectionProps {
@@ -12,11 +14,23 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
   let lastIndex = 0 // useRef 대신 일반 변수 사용 - 매 렌더링마다 초기화 필요
   const parts: React.ReactNode[] = []
 
+  // 줄바꿈 문자를 포함한 텍스트를 처리하는 함수
+  const processText = (textPart: string) => {
+    return textPart.split(/\r\n|\n\r|\n|\r/).map((line, i, arr) => (
+      <Fragment key={i}>
+        {line}
+        {i < arr.length - 1 && <br />}
+      </Fragment>
+    ))
+  }
+
   corrections.forEach((pos, idx) => {
     // 현재 교정 위치 이전의 일반 텍스트 처리
     if (pos.start > lastIndex) {
       parts.push(
-        <span key={`text-${idx}`}>{text.slice(lastIndex, pos.start)}</span>,
+        <span key={`text-${idx}`}>
+          {processText(text.slice(lastIndex, pos.start))}
+        </span>,
       )
     }
 
@@ -31,7 +45,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
           </span>
         </div>
         <span className='text-[1.125rem] font-bold leading-[160%] tracking-[-0.0225rem] text-green-100 underline decoration-[2px] underline-offset-[25%] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
-          {text.slice(pos.start, pos.end)}
+          {processText(text.slice(pos.start, pos.end))}
         </span>
       </span>,
     )
@@ -41,11 +55,11 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
 
   // 마지막 교정 위치 이후의 남은 텍스트 처리
   if (lastIndex < text.length) {
-    parts.push(<span key='final'>{text.slice(lastIndex)}</span>)
+    parts.push(<span key='final'>{processText(text.slice(lastIndex))}</span>)
   }
 
   return (
-    <div className='h-0 w-full break-all text-[1.125rem] leading-[160%] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
+    <div className='h-0 w-full whitespace-pre-wrap break-all text-[1.125rem] leading-[160%] tracking-[-0.0225rem] [text-justify:distribute] tab:leading-[170%] tab:tracking-[-0.03375rem] pc:text-[1.25rem] pc:tracking-[-0.025rem]'>
       {parts}
     </div>
   )

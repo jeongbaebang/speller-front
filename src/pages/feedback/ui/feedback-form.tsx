@@ -30,11 +30,11 @@ const FeedbackForm = () => {
             value={
               '검사기를 사용할 때 교정 문서에서 대치어를 어떻게 변경하는 건지 잘 모르겠습니다.'
             }
+            name='feedback-text'
             onChange={() => {}}
             placeholder='내용을 입력해 주세요.'
             className='text-slate-600 pc:text-xl pc:leading-[160%] pc:tracking-[-0.025rem]'
           />
-          <input type='hidden' name='text' value={'text'} />
           <TextCounter count={12} className='self-start' />
         </div>
       </div>
