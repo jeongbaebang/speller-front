@@ -23,6 +23,11 @@ const SpellerPage = () => {
       router.push('/results')
       handleReceiveResponse(state.data)
     }
+
+    // TODO: Error Boundary 적용
+    if (state.error) {
+      console.error(state.error)
+    }
   }, [state, router, handleReceiveResponse])
 
   useEffect(() => {

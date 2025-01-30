@@ -8,7 +8,7 @@ import { ScrollContainer } from '@/shared/ui/scroll-container'
 import { useSpeller } from '@/entities/speller'
 
 const CorrectionContent = () => {
-  const { response } = useSpeller()
+  const { response, correctInfo } = useSpeller()
   const [isFocused, setIsFocused] = useState(false)
   const [showGradient, setShowGradient] = useState(false)
 
@@ -34,7 +34,7 @@ const CorrectionContent = () => {
         >
           <SpellingCorrectionText
             text={response.str}
-            corrections={response.errInfo}
+            corrections={Object.values(correctInfo)}
           />
         </ScrollContainer>
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}

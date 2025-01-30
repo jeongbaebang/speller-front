@@ -14,10 +14,10 @@ if (typeof window !== 'undefined') {
 interface TextareaProps {
   value: string
   placeholder: string
+  name?: string
+  className?: React.HTMLAttributes<HTMLDivElement>['className']
   onChange: (value: string) => void
   onScroll?: (isScrolling: boolean) => void
-  name?: string
-  className?: string
 }
 
 const Textarea: FC<TextareaProps> = ({

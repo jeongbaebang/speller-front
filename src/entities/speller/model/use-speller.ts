@@ -3,7 +3,14 @@
 import { useCallback } from 'react'
 
 import { useAppDispatch, useAppSelector } from '@/shared/lib/use-redux'
-import { setText, SpellerState, updateResponse } from './speller-slice'
+import {
+  setText,
+  updateResponse,
+  updateCorrectInfo,
+  setSelectedErrIdx,
+  type SpellerState,
+} from './speller-slice'
+import { CorrectInfo } from './speller-schema'
 
 const useSpeller = () => {
   const dispatch = useAppDispatch()
@@ -23,10 +30,26 @@ const useSpeller = () => {
     [dispatch],
   )
 
+  const handleUpdateCorrectInfo = useCallback(
+    (payload: CorrectInfo) => {
+      dispatch(updateCorrectInfo(payload))
+    },
+    [dispatch],
+  )
+
+  const updateErrInfoIndex = useCallback(
+    (index: number) => {
+      dispatch(setSelectedErrIdx(index))
+    },
+    [dispatch],
+  )
+
   return {
     ...state,
     handleTextChange,
     handleReceiveResponse,
+    handleUpdateCorrectInfo,
+    updateErrInfoIndex,
   }
 }
 
