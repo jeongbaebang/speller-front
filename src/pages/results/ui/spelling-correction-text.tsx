@@ -1,25 +1,15 @@
 import { Fragment } from 'react'
 import {
   useSpeller,
+  useSpellerRefs,
   CorrectMethodEnum,
-  type CorrectInfo,
 } from '@/entities/speller'
 import { cn } from '@/shared/lib/tailwind-merge'
 
-interface CorrectionProps {
-  text: string
-  corrections: CorrectInfo[]
-  refs: React.RefObject<HTMLDivElement>[]
-  handleMouseOver: (index: number) => void
-}
-
-const SpellingCorrectionText: React.FC<CorrectionProps> = ({
-  text,
-  corrections,
-  refs,
-  handleMouseOver,
-}) => {
-  const { handleUpdateCorrectInfo } = useSpeller()
+const SpellingCorrectionText = () => {
+  const { correctRefs, scrollSection } = useSpellerRefs()
+  const { response, correctInfo, handleUpdateCorrectInfo } = useSpeller()
+  const { str: text } = response
 
   let lastIndex = 0 // useRef 대신 일반 변수 사용 - 매 렌더링마다 초기화 필요
   const parts: React.ReactNode[] = []
@@ -34,7 +24,7 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
     ))
   }
 
-  corrections.forEach((pos, idx) => {
+  Object.values(correctInfo).forEach((pos, idx) => {
     const isResolved = !!pos.crtStr
     const recommendedWord = pos.candWord.split('|')[0]
 
@@ -56,8 +46,8 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
           'relative inline-block pt-6 transition-all duration-300',
           isResolved && 'pt-0',
         )}
-        ref={refs[idx]}
-        onMouseOver={() => handleMouseOver(idx)}
+        ref={correctRefs[idx]}
+        onMouseOver={() => scrollSection('error')(idx)}
       >
         <button
           className={cn(

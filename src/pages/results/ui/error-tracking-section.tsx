@@ -1,22 +1,19 @@
 'use client'
 
 import { Fragment, useCallback, useState } from 'react'
-import { useSpeller, CorrectMethodEnum } from '@/entities/speller'
+import {
+  useSpeller,
+  CorrectMethodEnum,
+  useSpellerRefs,
+} from '@/entities/speller'
 import { cn } from '@/shared/lib/tailwind-merge'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
 import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
 import { ErrorInfoSection } from './error-info-section'
 
-interface ErrorTrackingSectionProps {
-  errorRefs: React.RefObject<HTMLDivElement>[]
-  correctSectionHandler: (index: number) => void
-}
-
-const ErrorTrackingSection = ({
-  errorRefs,
-  correctSectionHandler,
-}: ErrorTrackingSectionProps) => {
+const ErrorTrackingSection = () => {
+  const { errorRefs, scrollSection } = useSpellerRefs()
   const { response } = useSpeller()
   const { errInfo } = response ?? {}
 
@@ -33,13 +30,13 @@ const ErrorTrackingSection = ({
         <span className='text-red-100'>{errInfo.length}개</span>
       </h2>
       <ScrollContainer onScrollStatusChange={handleScroll}>
-        {errInfo.map((info, i) => (
+        {errInfo.map((info, idx) => (
           <Fragment key={info.errorIdx}>
-            <hr className={cn('border-slate-200', i === 0 && 'hidden')} />
+            <hr className={cn('border-slate-200', idx === 0 && 'hidden')} />
             <ErrorInfoSection
               errorInfo={info}
-              ref={errorRefs[i]}
-              onMouseOver={() => correctSectionHandler(i)}
+              ref={errorRefs[idx]}
+              onMouseOver={() => scrollSection('correct')(idx)}
             />
           </Fragment>
         ))}

@@ -4,18 +4,8 @@ import React, { useCallback, useState } from 'react'
 import { SpellingCorrectionText } from './spelling-correction-text'
 import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
-import { useSpeller } from '@/entities/speller'
 
-interface CorrectionContentProps {
-  correctRefs: React.RefObject<HTMLDivElement>[]
-  errorSectionHandler: (index: number) => void
-}
-
-const CorrectionContent = ({
-  correctRefs,
-  errorSectionHandler,
-}: CorrectionContentProps) => {
-  const { response, correctInfo } = useSpeller()
+const CorrectionContent = () => {
   const [isFocused, setIsFocused] = useState(false)
   const [showGradient, setShowGradient] = useState(false)
 
@@ -39,12 +29,7 @@ const CorrectionContent = ({
           isFocused={isFocused}
           className='h-full min-h-40 flex-1'
         >
-          <SpellingCorrectionText
-            text={response.str}
-            corrections={Object.values(correctInfo)}
-            refs={correctRefs}
-            handleMouseOver={errorSectionHandler}
-          />
+          <SpellingCorrectionText />
         </ScrollContainer>
         {/* 스크롤 시 그라디언트 블러 도형 표시 */}
         <ScrollGradientFade showGradient={showGradient} />
