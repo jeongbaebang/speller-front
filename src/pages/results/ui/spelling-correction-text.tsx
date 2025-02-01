@@ -9,11 +9,15 @@ import { cn } from '@/shared/lib/tailwind-merge'
 interface CorrectionProps {
   text: string
   corrections: CorrectInfo[]
+  refs: React.RefObject<HTMLDivElement>[]
+  handleMouseOver: (index: number) => void
 }
 
 const SpellingCorrectionText: React.FC<CorrectionProps> = ({
   text,
   corrections,
+  refs,
+  handleMouseOver,
 }) => {
   const { handleUpdateCorrectInfo } = useSpeller()
 
@@ -52,6 +56,8 @@ const SpellingCorrectionText: React.FC<CorrectionProps> = ({
           'relative inline-block pt-6 transition-all duration-300',
           isResolved && 'pt-0',
         )}
+        ref={refs[idx]}
+        onMouseOver={() => handleMouseOver(idx)}
       >
         <button
           className={cn(

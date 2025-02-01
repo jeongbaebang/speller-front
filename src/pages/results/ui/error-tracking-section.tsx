@@ -8,7 +8,15 @@ import { ScrollContainer } from '@/shared/ui/scroll-container'
 import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
 import { ErrorInfoSection } from './error-info-section'
 
-const ErrorTrackingSection = () => {
+interface ErrorTrackingSectionProps {
+  errorRefs: React.RefObject<HTMLDivElement>[]
+  correctSectionHandler: (index: number) => void
+}
+
+const ErrorTrackingSection = ({
+  errorRefs,
+  correctSectionHandler,
+}: ErrorTrackingSectionProps) => {
   const { response } = useSpeller()
   const { errInfo } = response ?? {}
 
@@ -20,18 +28,19 @@ const ErrorTrackingSection = () => {
 
   return (
     <>
-      <h2 className='z-10 flex items-center gap-1 bg-white pb-[1.125rem] text-lg font-semibold tab:text-xl pc:text-2xl'>
+      <h2 className='z-10 mb-[1.125rem] flex items-center gap-1 bg-white text-lg font-semibold tab:text-xl pc:text-2xl'>
         맞춤법/문법 오류
         <span className='text-red-100'>{errInfo.length}개</span>
       </h2>
-      <ScrollContainer
-        onScrollStatusChange={handleScroll}
-        className='-mt-[1.125rem]'
-      >
+      <ScrollContainer onScrollStatusChange={handleScroll}>
         {errInfo.map((info, i) => (
           <Fragment key={info.errorIdx}>
             <hr className={cn('border-slate-200', i === 0 && 'hidden')} />
-            <ErrorInfoSection errorInfo={info} />
+            <ErrorInfoSection
+              errorInfo={info}
+              ref={errorRefs[i]}
+              onMouseOver={() => correctSectionHandler(i)}
+            />
           </Fragment>
         ))}
       </ScrollContainer>
