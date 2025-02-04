@@ -32,15 +32,16 @@ export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
           {children}
         </PopoverTrigger>
         <PopoverContent
-          className='w-[18.0625rem] rounded-2xl p-[1.12rem]'
-          sideOffset={0}
+          className='w-[21.66rem] rounded-2xl p-[1.08rem]'
+          sideOffset={8}
+          align='start'
         >
           <div className='grid gap-4'>
             <div className='flex items-center justify-between'>
               <CustomTextEditorTitle />
               <Button
                 variant='ghost'
-                className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
+                className='h-[1.44rem] w-[1.44rem] bg-close bg-contain bg-no-repeat p-[0.22rem] hover:bg-transparent'
                 onClick={handlePopoverClose}
               ></Button>
             </div>
@@ -53,7 +54,7 @@ export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
         <DialogTrigger asChild className='pc:hidden'>
           {children}
         </DialogTrigger>
-        <DialogContent className='w-[22.5625rem] rounded-2xl bg-white'>
+        <DialogContent className='w-[22.5625rem] rounded-2xl bg-white p-[1.125rem]'>
           <DialogHeader>
             <DialogTitle>
               <VisuallyHidden>대치어 직접 수정하기</VisuallyHidden>
@@ -69,8 +70,8 @@ export const CustomTextEditor = ({ children }: CustomTextEditorProps) => {
 
 const CustomTextEditorTitle = () => {
   return (
-    <h4 className='flex items-center gap-3 text-[1.75rem] font-bold text-slate-600 pc:gap-[0.62rem] pc:text-[1.04167rem]'>
-      <span className='h-7 w-7 bg-icon-pencil bg-contain bg-no-repeat pc:h-[1.14583rem] pc:w-[1.14583rem]'></span>
+    <h4 className='flex items-center gap-3 text-[1.75rem] font-bold text-slate-600 pc:gap-[0.62rem] pc:text-[1.65rem]'>
+      <span className='h-7 w-7 bg-icon-pencil bg-contain bg-no-repeat pc:h-[1.68rem] pc:w-[1.68rem]'></span>
       대치어 직접 수정하기
     </h4>
   )
