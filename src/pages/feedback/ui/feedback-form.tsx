@@ -1,29 +1,18 @@
 'use client'
 
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
 import { TextCounter } from '@/shared/ui/text-counter'
 import { Textarea } from '@/shared/ui/textarea'
 
 const FeedbackForm = () => {
   return (
-    <form className='flex grid-cols-1 flex-col tab:block'>
-      {/* 이메일 */}
-      <div className='flex flex-col gap-3 pc:grid pc:grid-cols-[9.25rem_1fr] pc:gap-0'>
-        <FormLabel htmlFor='email' label='이메일 주소' />
-        <Input
-          type='email'
-          id='email'
-          placeholder='이메일을 입력해 주세요.'
-          className='h-[3.25rem] rounded-lg bg-white px-5 py-4 text-lg leading-[150%] tracking-[-0.0225rem] text-slate-600 placeholder:text-slate-300 pc:h-[4.125rem] pc:text-xl pc:leading-[160%] pc:tracking-[-0.025rem]'
-        />
-      </div>
+    <form className='flex grid-cols-1 flex-col'>
       {/* 문의 내용 */}
-      <div className='mt-2 flex flex-1 flex-col gap-3 pc:mt-[1.125rem] pc:grid pc:grid-cols-[9.25rem_1fr] pc:gap-0'>
+      <div className='mt-2 flex flex-col gap-3 pc:mt-[1.125rem] pc:grid pc:grid-cols-[9.25rem_1fr] pc:gap-0'>
         <FormLabel htmlFor='description' label='문의 내용' />
         <div
-          className='flex h-full min-h-[13.75rem] w-full flex-col rounded-lg bg-white px-5 py-4 tab:max-h-52 pc:min-h-[21.25rem]'
+          className='flex h-full max-h-[13.75rem] w-full flex-col rounded-lg bg-white px-5 py-4 pc:max-h-[21.25rem] pc:min-h-[21.25rem]'
           id='description'
         >
           <Textarea
