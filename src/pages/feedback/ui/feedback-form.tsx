@@ -40,7 +40,7 @@ const FeedbackForm = () => {
       </div>
       {/* 폼 전송 버튼 */}
       <div className='mt-3 text-end tab:mt-4'>
-        <Button className='w-full tab:w-32 pc:h-16 pc:w-[9.625rem]'>
+        <Button className='h-[3.375rem] w-full text-lg tab:w-32 pc:h-16 pc:w-[9.625rem] pc:text-[1.375rem]'>
           전송하기
         </Button>
       </div>
