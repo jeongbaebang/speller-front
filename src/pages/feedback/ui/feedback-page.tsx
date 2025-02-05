@@ -4,7 +4,7 @@ import { FeedbackTitle } from './feedback-title'
 
 const FeedbackPage = () => {
   return (
-    <ContentLayout>
+    <ContentLayout className='gap-10'>
       <FeedbackTitle />
       <FeedbackForm />
     </ContentLayout>
