@@ -1,4 +1,5 @@
 import { ContentLayout } from '@/shared/ui/content-layout'
+import { Navigator } from './navigator'
 import { StrongCheckMessage } from './strong-check-message'
 import { CorrectionContent } from './correction-content'
 import { ResultsControl } from './results-control'
@@ -7,7 +8,10 @@ import { ErrorTrackingSection } from './error-tracking-section'
 const ResultsPage = () => {
   return (
     <ContentLayout className='pb-8 tab:pb-[2.625rem] pc:pb-12'>
-      <StrongCheckMessage />
+      <div className='mb-2 mt-[1.125rem] flex items-center justify-between'>
+        <Navigator />
+        <StrongCheckMessage />
+      </div>
       {/* 교정 문서 & 맞춤법/문법 오류 레이아웃*/}
       <div className='flex flex-col gap-2 overflow-auto pc:flex-row pc:gap-0'>
         {/* 교정 문서*/}

@@ -28,12 +28,14 @@ const ErrorTrackingSection = () => {
         onScrollStatusChange={handleScroll}
         className='-mt-[1.125rem]'
       >
-        {errInfo.map((info, i) => (
-          <Fragment key={info.errorIdx}>
-            <hr className={cn('border-slate-200', i === 0 && 'hidden')} />
-            <ErrorInfoSection errorInfo={info} />
-          </Fragment>
-        ))}
+        <div>
+          {errInfo.map((info, i) => (
+            <Fragment key={info.errorIdx}>
+              <hr className={cn('border-slate-200', i === 0 && 'hidden')} />
+              <ErrorInfoSection errorInfo={info} />
+            </Fragment>
+          ))}
+        </div>
       </ScrollContainer>
       <div>
         <ScrollGradientFade showGradient={showGradient} />
