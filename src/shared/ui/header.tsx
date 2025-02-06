@@ -18,7 +18,7 @@ const Header = () => {
           <Link href='/' className={classes.linkButton}>
             검사기 사용법
           </Link>
-          <Link href='/' className={classes.linkButton}>
+          <Link href='/feedback' className={classes.linkButton}>
             문의하기
           </Link>
         </div>

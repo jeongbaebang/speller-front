@@ -1,13 +1,38 @@
 'use client'
 
+import { useActionState, useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+
 import { Button } from '@/shared/ui/button'
 import { Label } from '@/shared/ui/label'
 import { TextCounter } from '@/shared/ui/text-counter'
 import { Textarea } from '@/shared/ui/textarea'
+import { feedbackReportAction } from '../api/feedback-report-action'
 
 const FeedbackForm = () => {
+  const router = useRouter()
+  const [content, setContent] = useState('')
+  const [state, formAction, isPending] = useActionState(feedbackReportAction, {
+    data: null,
+    error: null,
+  })
+  const isButtonDisabled = content.length <= 0 || isPending
+
+  useEffect(() => {
+    if (state.data) {
+      router.push(
+        `/feedback/submitted?content=${encodeURIComponent(state.data)}`,
+      )
+    }
+
+    // TODO: Error Boundary 적용
+    if (state.error) {
+      console.error(state.error)
+    }
+  }, [state, router])
+
   return (
-    <form className='flex grid-cols-1 flex-col'>
+    <form className='flex grid-cols-1 flex-col' action={formAction}>
       {/* 문의 내용 */}
       <div className='mt-2 flex flex-col gap-3 pc:mt-[1.125rem] pc:grid pc:grid-cols-[9.25rem_1fr] pc:gap-0'>
         <FormLabel htmlFor='description' label='문의 내용' />
@@ -16,22 +41,24 @@ const FeedbackForm = () => {
           id='description'
         >
           <Textarea
-            value={
-              '검사기를 사용할 때 교정 문서에서 대치어를 어떻게 변경하는 건지 잘 모르겠습니다.'
-            }
+            value={content}
             name='feedback-text'
-            onChange={() => {}}
+            onChange={text => setContent(text)}
             placeholder='내용을 입력해 주세요.'
             className='text-slate-600 pc:text-xl pc:leading-[160%] pc:tracking-[-0.025rem]'
           />
-          <TextCounter count={12} className='self-start' />
+          <TextCounter count={content.length} className='self-start' />
         </div>
       </div>
       {/* 폼 전송 버튼 */}
-
       <div className='mt-3 pb-28 text-end tab:mt-4 tab:pb-[20.875rem] pc:pb-[4.375rem]'>
-        <Button className='h-[3.375rem] w-full text-lg tab:w-32 pc:h-16 pc:w-[9.625rem] pc:text-[1.375rem]'>
-          전송하기
+        <Button
+          className='h-[3.375rem] w-full text-lg tab:w-32 pc:h-16 pc:w-[9.625rem] pc:text-[1.375rem]'
+          type='submit'
+          variant='action'
+          disabled={isButtonDisabled}
+        >
+          {isPending ? '전송중...' : '전송하기'}
         </Button>
       </div>
     </form>

@@ -1,5 +1,8 @@
 'use server'
 
+import axios from 'axios'
+import { ZodError } from 'zod'
+
 import {
   SpellerApi,
   type SpellerState,
@@ -7,7 +10,7 @@ import {
   checkResponseSchema,
 } from '@/entities/speller'
 
-export type ActionState = {
+type ActionState = {
   data: SpellerState['response'] | null
   error: unknown
 }
@@ -19,35 +22,34 @@ const spellCheckAction = async (
   try {
     const text = formData.get('speller-text') as string
     const isStrictCheck = formData.get('isStrictCheck') === 'on'
-
-    const validateCheckPayload = checkPayloadSchema.safeParse({
+    const validateCheckPayload = checkPayloadSchema.parse({
       text,
       isStrictCheck,
     })
-
-    if (!validateCheckPayload.success) {
-      throw new Error(validateCheckPayload.error.message)
-    }
-
-    const { data } = await SpellerApi.check(validateCheckPayload.data)
-
-    const validateCheckResponse = checkResponseSchema.safeParse(data)
-
-    if (!validateCheckResponse.success) {
-      throw new Error(validateCheckResponse.error.message)
-    }
+    const { data } = await SpellerApi.check(validateCheckPayload)
+    const validateCheckResponse = checkResponseSchema.parse(data)
 
     return {
       data: {
-        ...validateCheckResponse.data,
+        ...validateCheckResponse,
         requestedWithStrictMode: isStrictCheck,
       },
       error: null,
     }
   } catch (error) {
+    let errorMessage: string = '에러가 발생하였습니다.'
+
+    if (axios.isAxiosError(error)) {
+      errorMessage = error.message
+    }
+
+    if (error instanceof ZodError) {
+      errorMessage = String(error)
+    }
+
     return {
       data: null,
-      error,
+      error: errorMessage,
     }
   }
 }

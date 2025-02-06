@@ -3,7 +3,13 @@ import { SubmittedSuccessMessage } from './submitted-success-message'
 import { SubmittedContent } from './submitted-content'
 import { SubmittedControl } from './submitted-control'
 
-const SubmittedPage = () => {
+const SubmittedPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ content: string }>
+}) => {
+  const { content } = await searchParams
+
   return (
     <ContentLayout className='gap-5 pt-[2.125rem] tab:pt-[3.75rem] pc:grid-cols-[1fr_auto] pc:gap-x-9 pc:gap-y-0 pc:pt-[6.125rem]'>
       {/* 제출 완료 이미지 */}
@@ -12,7 +18,7 @@ const SubmittedPage = () => {
         {/* 의견 제출 성공 메시지 */}
         <SubmittedSuccessMessage />
         {/* 발송된 문의 내용   */}
-        <SubmittedContent />
+        <SubmittedContent data={content} />
         {/* 다시 제출, 홈 이동 버튼 */}
         <SubmittedControl />
       </div>

@@ -1,0 +1,46 @@
+'use server'
+
+import axios from 'axios'
+import { ZodError } from 'zod'
+
+import { feedbackPayloadSchema, SpellerApi } from '@/entities/speller'
+
+type ActionState = {
+  data: string | null
+  error: string | null
+}
+
+const feedbackReportAction = async (
+  _prevState: ActionState,
+  formData: FormData,
+): Promise<ActionState> => {
+  try {
+    const content = formData.get('feedback-text')
+    const validateFeedbackPayload = feedbackPayloadSchema.parse({ content })
+    await SpellerApi.sendReportMail({
+      content: validateFeedbackPayload.content,
+    })
+
+    return {
+      data: validateFeedbackPayload.content,
+      error: null,
+    }
+  } catch (error) {
+    let errorMessage: string = '에러가 발생하였습니다.'
+
+    if (axios.isAxiosError(error)) {
+      errorMessage = error.message
+    }
+
+    if (error instanceof ZodError) {
+      errorMessage = String(error)
+    }
+
+    return {
+      data: null,
+      error: errorMessage,
+    }
+  }
+}
+
+export { feedbackReportAction }
