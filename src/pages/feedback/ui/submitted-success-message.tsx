@@ -1,6 +1,6 @@
 const SubmittedSuccessMessage = () => {
   return (
-    <div className='text-center pc:text-left'>
+    <div className='text-center pc:mb-[2.875rem] pc:text-left'>
       <h2 className='text-2xl font-bold tracking-[-0.03rem] text-slate-600 tab:text-[2rem] tab:font-semibold tab:leading-[3rem] tab:tracking-[-0.04rem] pc:text-5xl pc:tracking-[-0.06rem]'>
         의견 발송 완료
       </h2>
