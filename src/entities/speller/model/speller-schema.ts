@@ -35,7 +35,12 @@ export const checkResponseSchema = z.object({
   remaningText: z.string(), // 다음 페이지에서 검사해야 할 나머지 텍스트
 })
 
+export const feedbackPayloadSchema = z.object({
+  content: z.string(), // 사용자 의견 내용
+})
+
 export type ErrorInfo = z.infer<typeof errorInfoSchema>
 export type CorrectInfo = z.infer<typeof correctInfoSchema>
 export type CheckPayload = z.infer<typeof checkPayloadSchema>
 export type CheckResponse = z.infer<typeof checkResponseSchema>
+export type FeedbackPayload = z.infer<typeof feedbackPayloadSchema>
