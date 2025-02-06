@@ -45,7 +45,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className='group'>
-                <Link href='/' className={classes.popoverButton}>
+                <Link href='/feedback' className={classes.popoverButton}>
                   <i
                     className={`${classes.popoverIcon} bg-icon-question group-hover:bg-icon-question-white`}
                   />
