@@ -9,8 +9,9 @@ type Response = CheckResponse & { requestedWithStrictMode: boolean }
 interface SpellerState {
   text: string
   response: Response
-  selectedErrIdx: number
+  responseMap: Record<number, Response>
   correctInfo: Record<number, CorrectInfo>
+  selectedErrIdx: number
 }
 
 const initialState: SpellerState = {
@@ -22,6 +23,7 @@ const initialState: SpellerState = {
     remaningText: '',
     requestedWithStrictMode: false,
   },
+  responseMap: {},
   correctInfo: {},
   selectedErrIdx: -1,
 }
@@ -36,7 +38,6 @@ const spellerSlice = createSlice({
 
     updateResponse: (state, action: PayloadAction<Response>) => {
       state.response = action.payload
-
       state.correctInfo = action.payload.errInfo.reduce(
         (acc, info) => ({ ...acc, [info.errorIdx]: info }),
         {},
@@ -50,11 +51,24 @@ const spellerSlice = createSlice({
     setSelectedErrIdx: (state, action: PayloadAction<number>) => {
       state.selectedErrIdx = action.payload
     },
+
+    setResponseMap: (
+      state,
+      action: PayloadAction<Response & { pageIdx: number }>,
+    ) => {
+      const { pageIdx, ...response } = action.payload
+      state.responseMap[pageIdx] = response
+    },
   },
 })
 
-const { setText, updateResponse, updateCorrectInfo, setSelectedErrIdx } =
-  spellerSlice.actions
+const {
+  setText,
+  updateResponse,
+  updateCorrectInfo,
+  setSelectedErrIdx,
+  setResponseMap,
+} = spellerSlice.actions
 const spellerReducer = spellerSlice.reducer
 
 export {
@@ -62,6 +76,7 @@ export {
   updateResponse,
   updateCorrectInfo,
   setSelectedErrIdx,
+  setResponseMap,
   spellerReducer,
   type SpellerState,
 }

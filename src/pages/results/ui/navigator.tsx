@@ -1,14 +1,16 @@
 'use client'
 
+import { useEffect } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useSpeller } from '@/entities/speller'
-import { spellCheckAction } from '../api/spell-check-action'
+import { clientSpellCheck } from '../api/client-spell-check'
 
 const Navigator = () => {
-  const pathname = usePathname()
   const { push } = useRouter()
+  const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { response, handleReceiveResponse } = useSpeller()
+  const { response, responseMap, handleReceiveResponse, updateResponseMap } =
+    useSpeller()
   const currentPage = Number(searchParams?.get('page')) || 1
 
   const createPageURL = (nextPage: number) => {
@@ -19,48 +21,63 @@ const Navigator = () => {
     return `${pathname}?${params.toString()}`
   }
 
-  const handleSpellCheck = async (page: number) => {
+  const handlePagination = (page: number) => {
     try {
-      const data = await spellCheckAction({
-        text: response.remaningText,
-        isStrictCheck: response.requestedWithStrictMode,
-        pageIdx: page,
-      })
-      console.log('data: ', data)
-      handleReceiveResponse({
-        ...data,
-        requestedWithStrictMode: response.requestedWithStrictMode,
-      })
+      handleReceiveResponse({ ...responseMap[page] })
     } catch (error) {
       throw new Error(error as string)
     }
   }
 
+  useEffect(() => {
+    ;(async () => {
+      if (!!responseMap[currentPage + 1]) return
+      if (responseMap[currentPage].remaningText === '') return
+
+      if (!responseMap[currentPage]) {
+        updateResponseMap({ ...response, pageIdx: currentPage })
+      }
+
+      const nextPageResponse = await clientSpellCheck({
+        text: responseMap[currentPage].remaningText,
+        isStrictCheck: responseMap[currentPage].requestedWithStrictMode,
+        pageIdx: currentPage + 1,
+      })
+      updateResponseMap({
+        ...nextPageResponse,
+        requestedWithStrictMode:
+          responseMap[currentPage].requestedWithStrictMode,
+        pageIdx: currentPage + 1,
+      })
+    })()
+  }, [response, currentPage])
+
   return (
     response.totalPageCnt > 1 && (
-      <div className='flex items-center gap-2'>
+      <div className='flex items-center gap-5'>
         <button
           className='inline-flex'
-          onClick={async () => {
-            await handleSpellCheck(currentPage - 1)
+          onClick={() => {
+            handlePagination(currentPage - 1)
             push(createPageURL(currentPage - 1))
           }}
           disabled={currentPage === 1}
         >
-          <i className='bg-icon-circle-arrow inline-flex size-6 bg-contain bg-center bg-no-repeat' />
+          <i className='inline-flex size-6 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat' />
         </button>
         <span className='flex items-center gap-1 text-base font-medium text-slate-400'>
-          <span>{currentPage}</span>/<span>{response.totalPageCnt}</span>
+          <span className='text-slate-600'>{currentPage}</span>/
+          <span>{response.totalPageCnt}</span>
         </span>
         <button
           className='inline-flex'
-          onClick={async () => {
-            await handleSpellCheck(currentPage + 1)
+          onClick={() => {
+            handlePagination(currentPage + 1)
             push(createPageURL(currentPage + 1))
           }}
           disabled={currentPage === response.totalPageCnt}
         >
-          <i className='bg-icon-circle-arrow inline-flex size-6 rotate-180 bg-contain bg-center bg-no-repeat' />
+          <i className='inline-flex size-6 rotate-180 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat' />
         </button>
       </div>
     )

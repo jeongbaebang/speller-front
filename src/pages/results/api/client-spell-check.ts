@@ -1,9 +1,7 @@
-'use server'
-
 import axios from 'axios'
 import { SpellerApi, type CheckPayload } from '@/entities/speller'
 
-export const spellCheckAction = async (payload: CheckPayload) => {
+export const clientSpellCheck = async (payload: CheckPayload) => {
   try {
     const response = await SpellerApi.check(payload)
     return response.data

@@ -8,6 +8,7 @@ import {
   updateResponse,
   updateCorrectInfo,
   setSelectedErrIdx,
+  setResponseMap,
   type SpellerState,
 } from './speller-slice'
 import { CorrectInfo } from './speller-schema'
@@ -44,12 +45,20 @@ const useSpeller = () => {
     [dispatch],
   )
 
+  const updateResponseMap = useCallback(
+    (payload: SpellerState['response'] & { pageIdx: number }) => {
+      dispatch(setResponseMap(payload))
+    },
+    [dispatch],
+  )
+
   return {
     ...state,
     handleTextChange,
     handleReceiveResponse,
     handleUpdateCorrectInfo,
     updateErrInfoIndex,
+    updateResponseMap,
   }
 }
 
