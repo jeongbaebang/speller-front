@@ -2,6 +2,8 @@ import { useAppSelector } from '@/shared/lib/use-redux'
 import { ChangeEvent, useState } from 'react'
 import { getWordsAroundIndex } from '@/shared/lib/util'
 import { sendReportAction } from '../api/send-report-action'
+import { toast } from '@/shared/lib/use-toast'
+import { ToastType } from '@/shared/ui/toaster'
 
 interface useSendReportParams {
   handleClose: () => void
@@ -34,7 +36,10 @@ export const useSendReport = ({ handleClose }: useSendReportParams) => {
       })
       handleClose()
     } catch (err) {
-      alert('문제가 발생했습니다. 잠시 후 다시 시도하세요.')
+      toast({
+        variant: 'destructive',
+        toastType: ToastType.SERVER_ERROR,
+      })
       console.error(err)
     }
   }
