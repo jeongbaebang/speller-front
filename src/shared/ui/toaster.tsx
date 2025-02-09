@@ -9,11 +9,8 @@ import {
   ToastTitle,
   ToastViewport,
 } from '@/shared/ui/toast'
-import WarningIcon from '@/shared/ui/icon/warning.svg'
-
-export enum ToastType {
-  SERVER_ERROR,
-}
+import WarningIcon from '@/shared/ui/icon/toast-warning.svg'
+import CheckIcon from '@/shared/ui/icon/toast-check.svg'
 
 export function Toaster() {
   const { toasts } = useToast()
@@ -25,19 +22,24 @@ export function Toaster() {
           <Toast key={id} {...props}>
             <div className='grid gap-1'>
               {title && <ToastTitle>{title}</ToastTitle>}
-              {props.toastType === ToastType.SERVER_ERROR && (
+              {description && (
                 <ToastDescription>
-                  <div className='flex gap-[1.03rem]'>
-                    <WarningIcon />
-                    <p>
-                      서버 처리 중 오류가 발생했습니다. <br />
-                      잠시 후 다시 시도해 주세요.
-                    </p>
+                  <div className='flex items-center gap-[1.03rem]'>
+                    {props.variant === 'destructive' ? (
+                      <WarningIcon />
+                    ) : (
+                      <CheckIcon />
+                    )}
+                    {typeof description === 'string'
+                      ? description.split('\n').map(text => (
+                          <>
+                            {text}
+                            <br />
+                          </>
+                        ))
+                      : description}
                   </div>
                 </ToastDescription>
-              )}
-              {description && (
-                <ToastDescription>{description}</ToastDescription>
               )}
             </div>
             {action}

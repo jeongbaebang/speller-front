@@ -1,6 +1,7 @@
 import { useSendReport } from '@/entities/report/model/use-send-report'
 import { BasicTextarea } from '@/shared/ui/basic-textarea'
 import { Button } from '@/shared/ui/button'
+import { toast } from '@/shared/lib/use-toast'
 
 interface ReportFormContentProps {
   handleClose: () => void
@@ -8,7 +9,12 @@ interface ReportFormContentProps {
 
 export const ReportFormContent = ({ handleClose }: ReportFormContentProps) => {
   const { comment, handleChange, handleSubmit } = useSendReport({
-    handleClose, // TODO: 완료 팝업 표시 (디자인팀 작업중)
+    handleClose: () => {
+      toast({
+        description: '제출되었습니다.',
+      })
+      handleClose()
+    },
   })
 
   return (

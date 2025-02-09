@@ -4,7 +4,6 @@
 import * as React from 'react'
 
 import type { ToastActionElement, ToastProps } from '@/shared/ui/toast'
-import { ToastType } from '../ui/toaster'
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
@@ -14,7 +13,6 @@ type ToasterToast = ToastProps & {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
-  toastType?: ToastType
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */

@@ -3,7 +3,6 @@ import { ChangeEvent, useState } from 'react'
 import { getWordsAroundIndex } from '@/shared/lib/util'
 import { sendReportAction } from '../api/send-report-action'
 import { toast } from '@/shared/lib/use-toast'
-import { ToastType } from '@/shared/ui/toaster'
 
 interface useSendReportParams {
   handleClose: () => void
@@ -38,7 +37,8 @@ export const useSendReport = ({ handleClose }: useSendReportParams) => {
     } catch (err) {
       toast({
         variant: 'destructive',
-        toastType: ToastType.SERVER_ERROR,
+        description:
+          '서버 처리 중 오류가 발생했습니다.\n잠시 후 다시 시도해 주세요.',
       })
       console.error(err)
     }
