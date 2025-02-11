@@ -17,9 +17,7 @@ const feedbackReportAction = async (
   try {
     const content = formData.get('feedback-text')
     const validateFeedbackPayload = feedbackPayloadSchema.parse({ content })
-    await SpellerApi.sendReportMail({
-      content: validateFeedbackPayload.content,
-    })
+    await SpellerApi.sendReportMail(validateFeedbackPayload)
 
     return {
       data: validateFeedbackPayload.content,
