@@ -7,11 +7,7 @@ import {
   UserReplacePayload,
   BugReportPayload,
 } from '../model/speller-interface'
-import {
-  CheckPayload,
-  CheckResponse,
-  FeedbackPayload,
-} from '../model/speller-schema'
+import { CheckPayload, CheckResponse } from '../model/speller-schema'
 
 class SpellerApiService implements SpellerService {
   readonly #client: Client
@@ -34,10 +30,6 @@ class SpellerApiService implements SpellerService {
 
   async notChange() {
     return this.#client.post(ENDPOINT.NOT_CHANGE) // FIXME: payload 추가
-  }
-
-  async sendReportMail(payload: FeedbackPayload) {
-    return this.#client.post(ENDPOINT.SEND_REPORT_MAIL, payload)
   }
 }
 

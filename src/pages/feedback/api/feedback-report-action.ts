@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { ZodError } from 'zod'
 
-import { feedbackPayloadSchema, SpellerApi } from '@/entities/speller'
+import { FeedbackApi, feedbackPayloadSchema } from '@/entities/feedback'
 
 type ActionState = {
   data: string | null
@@ -17,7 +17,7 @@ const feedbackReportAction = async (
   try {
     const content = formData.get('feedback-text')
     const validateFeedbackPayload = feedbackPayloadSchema.parse({ content })
-    await SpellerApi.sendReportMail(validateFeedbackPayload)
+    await FeedbackApi.sendReportMail(validateFeedbackPayload)
 
     return {
       data: validateFeedbackPayload.content,
