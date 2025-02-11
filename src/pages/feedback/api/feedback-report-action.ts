@@ -26,14 +26,15 @@ const feedbackReportAction = async (
       error: null,
     }
   } catch (error) {
-    let errorMessage: string = '에러가 발생하였습니다.'
+    let errorMessage: string =
+      '[Error] feedbackReportAction: 함수를 실행하던 동안 에러가 발생했습니다.'
 
     if (axios.isAxiosError(error)) {
       errorMessage = error.message
     }
 
     if (error instanceof ZodError) {
-      errorMessage = String(error)
+      errorMessage = error.message
     }
 
     return {
