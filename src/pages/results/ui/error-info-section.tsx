@@ -1,17 +1,21 @@
 'use client'
 
-import { useState } from 'react'
-import { useSpeller, type ErrorInfo } from '@/entities/speller'
+import {
+  useSpeller,
+  type ErrorInfo,
+  parseCandidateWords,
+} from '@/entities/speller'
 import { ReportForm } from '@/entities/report'
 import { Button } from '@/shared/ui/button'
 import { cn } from '@/shared/lib/tailwind-merge'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import EditIcon from '@/shared/ui/icon/icon-edit.svg'
 import SendIcon from '@/shared/ui/icon/icon-send-gray.svg'
-import ArrowBottomIcon from '@/shared/ui/icon/icon-arrow-bottom.svg'
-import { CustomTextEditor } from './custom-text-editor'
 
-const errInfoIdx = 0 // TODO: props or store
+import { HelpSection } from './help-section'
+import { CustomTextEditor } from './custom-text-editor'
+import { logClickReplaceAction } from '../api/log-click-replace-action'
+import { extractContext } from '../lib/extractContext'
 
 interface ErrorInfoSectionProps<T>
   extends React.RefAttributes<T>,
@@ -23,12 +27,20 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
   errorInfo,
   ...props
 }: ErrorInfoSectionProps<T>) => {
-  const { correctInfo, handleUpdateCorrectInfo, updateErrInfoIndex } =
+  const { response, correctInfo, handleUpdateCorrectInfo, updateErrInfoIndex } =
     useSpeller()
-  const [isExpanded, setIsExpanded] = useState<boolean>(false)
-
   const { errorIdx, correctMethod, orgStr, candWord, help } = errorInfo ?? {}
-  const candidateWords = candWord.split('|').map((word, id) => ({ id, word }))
+  const candidateWords = parseCandidateWords(candWord)
+
+  const handleClickReplace = (replaceWord: string) => {
+    const sentence = extractContext(response.str, errorInfo, replaceWord)
+    logClickReplaceAction({
+      errorWord: orgStr,
+      replaceWord,
+      sentence,
+      wordList: candWord,
+    })
+  }
 
   return (
     <div className={cn('my-[1.125rem]', errorIdx === 0 && 'mt-0')} {...props}>
@@ -46,7 +58,7 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
             <Button
               variant='ghost'
               className='h-auto p-0 text-slate-500 hover:bg-transparent pc:gap-2'
-              onClick={() => updateErrInfoIndex(errInfoIdx)}
+              onClick={() => updateErrInfoIndex(errorIdx)}
             >
               <SendIcon className='!size-6 tab:!size-8' />
               <span className='sr-only font-normal tab:not-sr-only tab:text-lg'>
@@ -62,7 +74,7 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
               <Button
                 variant='ghost'
                 className='h-auto p-0 text-base font-normal text-slate-500 hover:bg-transparent tab:gap-4 tab:text-lg'
-                onClick={() => updateErrInfoIndex(errInfoIdx)}
+                onClick={() => updateErrInfoIndex(errorIdx)}
               >
                 <EditIcon className='!size-6 tab:!size-8' />
                 대치어 직접 수정하기
@@ -81,6 +93,7 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
                 )}
                 onClick={() => {
                   handleUpdateCorrectInfo({ ...errorInfo, crtStr: word })
+                  if (id > 0) handleClickReplace(word)
                 }}
               >
                 {word}
@@ -92,30 +105,7 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
           도움말
         </dt>
         <dd>
-          <div
-            className={cn(
-              'relative max-h-[4.5rem] overflow-hidden transition-[max-height,padding-bottom] duration-300 tab:max-h-[3.5rem] pc:mt-2 pc:max-h-12',
-              isExpanded && '!max-h-full pb-6 tab:pb-7 pc:pb-6',
-            )}
-          >
-            <p
-              className='text-base tab:text-lg pc:text-base'
-              dangerouslySetInnerHTML={{ __html: help }}
-            />
-            <Button
-              variant={null}
-              className={cn(
-                'absolute bottom-0 right-0 h-6 gap-1 rounded-none bg-white p-0 text-sm font-normal text-slate-600 underline before:absolute before:bottom-0 before:right-full before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:to-white before:content-[""] tab:h-7 tab:text-base pc:h-auto',
-                isExpanded && 'text-slate-400',
-              )}
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
-              {isExpanded ? '접기' : '자세히 보기'}
-              <ArrowBottomIcon
-                className={cn('!size-6', isExpanded ? 'rotate-180' : '')}
-              />
-            </Button>
-          </div>
+          <HelpSection help={help} />
         </dd>
       </dl>
     </div>
