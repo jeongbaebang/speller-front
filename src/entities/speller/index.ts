@@ -6,10 +6,12 @@ export {
   CorrectMethodEnum,
   checkPayloadSchema,
   checkResponseSchema,
+  clickReplacePayloadSchema,
   type ErrorInfo,
   type CorrectInfo,
   type CheckPayload,
   type CheckResponse,
+  type ClickReplacePayload,
 } from './model/speller-schema'
 export { SpellerApi } from './api/speller-service'
 export { useSpeller } from './model/use-speller'
