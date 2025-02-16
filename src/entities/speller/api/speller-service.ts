@@ -2,11 +2,7 @@ import { AxiosResponse } from 'axios'
 
 import { Client } from '@/shared/api/client'
 import { ENDPOINT } from '@/shared/model/constants'
-import {
-  SpellerService,
-  UserReplacePayload,
-  BugReportPayload,
-} from '../model/speller-interface'
+import { SpellerService, UserReplacePayload } from '../model/speller-interface'
 import { CheckPayload, CheckResponse } from '../model/speller-schema'
 
 class SpellerApiService implements SpellerService {
@@ -22,10 +18,6 @@ class SpellerApiService implements SpellerService {
 
   async logUserReplace(payload: UserReplacePayload) {
     return this.#client.post(ENDPOINT.USER_REPLACE, payload)
-  }
-
-  async sendReport(payload: BugReportPayload) {
-    return this.#client.post(ENDPOINT.BUG_REPORT, payload)
   }
 
   async notChange() {
