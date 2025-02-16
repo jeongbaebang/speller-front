@@ -31,10 +31,10 @@ const Navigator = () => {
 
   useEffect(() => {
     ;(async () => {
-      if (!!responseMap[currentPage + 1]) return
-      if (responseMap[currentPage].remaningText === '') return
+      if (!!responseMap?.[currentPage + 1]) return
+      if (!responseMap?.[currentPage]?.remaningText) return
 
-      if (!responseMap[currentPage]) {
+      if (!responseMap?.[currentPage]) {
         updateResponseMap({ ...response, pageIdx: currentPage })
       }
 
@@ -50,7 +50,7 @@ const Navigator = () => {
         pageIdx: currentPage + 1,
       })
     })()
-  }, [response, currentPage])
+  }, [currentPage, response, responseMap, updateResponseMap])
 
   return (
     response.totalPageCnt > 1 && (
