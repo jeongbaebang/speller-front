@@ -8,6 +8,7 @@ import { Button } from '@/shared/ui/button'
 import { TextCounter } from '@/shared/ui/text-counter'
 import { useSpeller } from '@/entities/speller'
 import { useRouter } from 'next/navigation'
+import { toast } from '@/shared/lib/use-toast'
 
 const ResultsControl = () => {
   const {
@@ -15,6 +16,13 @@ const ResultsControl = () => {
   } = useSpeller()
   const router = useRouter()
   const { copyText } = useClipboard()
+
+  const handleCopy = () => {
+    copyText(str)
+    toast({
+      description: '복사 완료!\n원하는 곳에 붙여넣어 보세요.',
+    })
+  }
 
   return (
     <div className='mt-2 flex flex-shrink-0 justify-between'>
@@ -30,7 +38,7 @@ const ResultsControl = () => {
           icon='/copy.svg'
           label='복사하기'
           ariaLabel='텍스트 복사하기'
-          onClick={() => copyText(str)}
+          onClick={handleCopy}
         />
       </div>
     </div>

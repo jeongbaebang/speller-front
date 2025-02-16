@@ -20,7 +20,7 @@ const ErrorTrackingSection = () => {
 
   return (
     <>
-      <h2 className='z-10 flex items-center gap-1 bg-white pb-[1.125rem] text-lg font-semibold tab:text-xl pc:text-2xl'>
+      <h2 className='z-10 mb-[1.125rem] flex items-center gap-1 bg-white text-lg font-semibold tab:text-xl pc:text-2xl'>
         맞춤법/문법 오류
         <span className='text-red-100'>{errInfo.length}개</span>
       </h2>

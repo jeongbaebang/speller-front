@@ -1,0 +1,53 @@
+'use client'
+
+import { useToast } from '@/shared/lib/use-toast'
+import {
+  Toast,
+  ToastClose,
+  ToastDescription,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
+} from '@/shared/ui/toast'
+import WarningIcon from '@/shared/ui/icon/toast-warning.svg'
+import CheckIcon from '@/shared/ui/icon/toast-check.svg'
+
+export function Toaster() {
+  const { toasts } = useToast()
+
+  return (
+    <ToastProvider swipeDirection='up' duration={3000}>
+      {toasts.map(function ({ id, title, description, action, ...props }) {
+        return (
+          <Toast key={id} {...props}>
+            <div className='grid gap-1'>
+              {title && <ToastTitle>{title}</ToastTitle>}
+              {description && (
+                <ToastDescription>
+                  <div className='flex items-center gap-[1.03rem]'>
+                    {props.variant === 'destructive' ? (
+                      <WarningIcon />
+                    ) : (
+                      <CheckIcon />
+                    )}
+                    {typeof description === 'string'
+                      ? description.split('\n').map(text => (
+                          <>
+                            {text}
+                            <br />
+                          </>
+                        ))
+                      : description}
+                  </div>
+                </ToastDescription>
+              )}
+            </div>
+            {action}
+            <ToastClose />
+          </Toast>
+        )
+      })}
+      <ToastViewport />
+    </ToastProvider>
+  )
+}

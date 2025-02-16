@@ -2,6 +2,7 @@ import { useAppSelector } from '@/shared/lib/use-redux'
 import { ChangeEvent, useState } from 'react'
 import { getWordsAroundIndex } from '@/shared/lib/util'
 import { sendReportAction } from '../api/send-report-action'
+import { toast } from '@/shared/lib/use-toast'
 
 interface useSendReportParams {
   handleClose: () => void
@@ -34,7 +35,11 @@ export const useSendReport = ({ handleClose }: useSendReportParams) => {
       })
       handleClose()
     } catch (err) {
-      alert('문제가 발생했습니다. 잠시 후 다시 시도하세요.')
+      toast({
+        variant: 'destructive',
+        description:
+          '서버 처리 중 오류가 발생했습니다.\n잠시 후 다시 시도해 주세요.',
+      })
       console.error(err)
     }
   }

@@ -3,6 +3,7 @@ import './styles/globals.css'
 
 import localFont from 'next/font/local'
 import { GoogleAdSenseScript } from '@/entities/google-ad-sense'
+import { Toaster } from '@/shared/ui/toaster'
 
 const pretendard = localFont({
   src: './font/pretendard-variable.woff2',
@@ -18,7 +19,10 @@ const App = ({
 }>) => {
   return (
     <html lang='kr' className={`${pretendard.variable}`}>
-      <body className={`${pretendard.className} antialiased`}>{children}</body>
+      <body className={`${pretendard.className} antialiased`}>
+        {children}
+        <Toaster />
+      </body>
       <GoogleAdSenseScript />
     </html>
   )

@@ -32,15 +32,16 @@ export const ReportForm = ({ children }: ReportFormProps) => {
           {children}
         </PopoverTrigger>
         <PopoverContent
-          className='w-[18.0625rem] rounded-2xl p-[0.78rem] pc:w-[15rem]'
-          sideOffset={0}
+          className='w-[21.66rem] rounded-2xl px-[1.08rem] pb-[1.2rem] pt-[0.9rem]'
+          sideOffset={0.5}
+          align='end'
         >
-          <div className='grid gap-4'>
+          <div className='grid'>
             <div className='flex items-center justify-between'>
               <ReportFormTitle />
               <Button
                 variant='ghost'
-                className='h-[1.0625rem] w-[1.0625rem] bg-close bg-contain bg-no-repeat p-0 hover:bg-transparent'
+                className='h-4 w-4 bg-close bg-contain bg-no-repeat p-[0.22rem] hover:bg-transparent'
                 onClick={handlePopoverClose}
               ></Button>
             </div>
@@ -69,8 +70,8 @@ export const ReportForm = ({ children }: ReportFormProps) => {
 
 const ReportFormTitle = () => {
   return (
-    <h4 className='flex items-center gap-3 text-[1.75rem] font-bold text-slate-600 pc:gap-[0.62rem] pc:text-[1.04167rem]'>
-      <span className='h-7 w-7 bg-icon-send bg-contain bg-no-repeat pc:h-[1.14583rem] pc:w-[1.14583rem]'></span>
+    <h4 className='flex items-center gap-3 text-[1.75rem] font-bold text-slate-600 pc:gap-[0.62rem] pc:text-[1.65rem]'>
+      <span className='h-7 w-7 bg-icon-send bg-contain bg-no-repeat pc:h-[1.68rem] pc:w-[1.68rem]'></span>
       제보 작성하기
     </h4>
   )

@@ -13,11 +13,16 @@ import { CustomTextEditor } from './custom-text-editor'
 
 const errInfoIdx = 0 // TODO: props or store
 
-interface ErrorInfoSectionProps {
+interface ErrorInfoSectionProps<T>
+  extends React.RefAttributes<T>,
+    React.HTMLAttributes<T> {
   errorInfo: ErrorInfo
 }
 
-const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
+const ErrorInfoSection = <T extends HTMLDivElement>({
+  errorInfo,
+  ...props
+}: ErrorInfoSectionProps<T>) => {
   const { correctInfo, handleUpdateCorrectInfo, updateErrInfoIndex } =
     useSpeller()
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
@@ -26,7 +31,7 @@ const ErrorInfoSection = ({ errorInfo }: ErrorInfoSectionProps) => {
   const candidateWords = candWord.split('|').map((word, id) => ({ id, word }))
 
   return (
-    <div className='my-[1.125rem]'>
+    <div className={cn('my-[1.125rem]', errorIdx === 0 && 'mt-0')} {...props}>
       <dl className='grid grid-cols-[3.5rem_1fr] gap-3 tab:grid-cols-[4.75rem_1fr] pc:grid-cols-[4.5rem_1fr] pc:gap-1'>
         <dt className='py-0.5 text-sm font-semibold tab:text-lg'>입력 내용</dt>
         <dd className='flex items-center justify-between'>
