@@ -15,5 +15,5 @@ export function extractContext(
     .split(/\s+/)
     .filter(Boolean)
 
-  return `${beforeWords.slice(-4).join(' ')} ${replaceWord} ${afterWords.slice(0, 4).join(' ')}`
+  return `${beforeWords.slice(-wordCount).join(' ')} ${replaceWord} ${afterWords.slice(0, wordCount).join(' ')}`
 }
