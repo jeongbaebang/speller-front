@@ -1,6 +1,6 @@
 'use client'
 
-import { useActionState, useEffect } from 'react'
+import { useActionState, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { useSpeller } from '@/entities/speller'
@@ -9,6 +9,7 @@ import { SpellerSetting } from './speller-setting'
 import { SpellerTextInput } from './speller-text-input'
 import { SpellerControl } from './speller-control'
 import { spellCheckAction } from '../api/spell-check-action'
+import { ResultsSkeleton } from '@/entities/results'
 
 const SpellerPage = () => {
   const router = useRouter()
@@ -17,16 +18,19 @@ const SpellerPage = () => {
     data: null,
     error: null,
   })
+  const [isRedirectingToResult, setIsRedirectingToResult] = useState(false)
 
   useEffect(() => {
     if (state.data) {
-      router.push('/results')
+      setIsRedirectingToResult(true)
       handleReceiveResponse(state.data)
+      router.push('/results')
     }
 
     // TODO: Error Boundary 적용
     if (state.error) {
       console.error(state.error)
+      setIsRedirectingToResult(false)
     }
   }, [state, router, handleReceiveResponse])
 
@@ -34,15 +38,19 @@ const SpellerPage = () => {
     router.prefetch('/results')
   }, [router])
 
+  if (isPending || isRedirectingToResult) {
+    return <ResultsSkeleton />
+  }
+
   return (
     <form action={formAction} className='flex-1'>
       <ContentLayout className='pb-9 tab:pb-40 pc:pb-[3.06rem]'>
         {/* 강한 검사 */}
         <SpellerSetting />
-        <div className='flex h-full w-full flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 tab:pb-6 pc:max-h-[40.25rem]'>
+        <div className='flex h-full w-full flex-col rounded-lg bg-white p-5 tab:rounded-[1rem] tab:p-10 pc:max-h-[40.25rem]'>
           <SpellerTextInput text={text} onTextChange={handleTextChange} />
           {/* 글자수 & 검사하기 버튼 */}
-          <SpellerControl count={text.length} isSubmitted={isPending} />
+          <SpellerControl count={text.length} />
         </div>
       </ContentLayout>
     </form>
