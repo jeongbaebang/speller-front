@@ -18,11 +18,11 @@ const SpellerPage = () => {
     data: null,
     error: null,
   })
-  const [isNavigating, setIsNavigating] = useState(false)
+  const [isRedirectingToResult, setIsRedirectingToResult] = useState(false)
 
   useEffect(() => {
     if (state.data) {
-      setIsNavigating(true)
+      setIsRedirectingToResult(true)
       handleReceiveResponse(state.data)
       router.push('/results')
     }
@@ -30,7 +30,7 @@ const SpellerPage = () => {
     // TODO: Error Boundary 적용
     if (state.error) {
       console.error(state.error)
-      setIsNavigating(false)
+      setIsRedirectingToResult(false)
     }
   }, [state, router, handleReceiveResponse])
 
@@ -38,7 +38,7 @@ const SpellerPage = () => {
     router.prefetch('/results')
   }, [router])
 
-  if (isPending || isNavigating) {
+  if (isPending || isRedirectingToResult) {
     return <ResultsSkeleton />
   }
 
