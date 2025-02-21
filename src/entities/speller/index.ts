@@ -1,7 +1,4 @@
-export type {
-  BugReportPayload,
-  UserReplacePayload,
-} from './model/speller-interface'
+export type { UserReplacePayload } from './model/speller-interface'
 export {
   CorrectMethodEnum,
   checkPayloadSchema,

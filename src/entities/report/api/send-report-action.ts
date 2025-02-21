@@ -1,7 +1,7 @@
 'use server'
 
 import axios from 'axios'
-import { type BugReportPayload } from '@/entities/speller'
+import { BugReportPayload } from '../model/report-interface'
 import { ReportApi } from './report-service'
 
 export const sendReportAction = async (payload: BugReportPayload) => {
