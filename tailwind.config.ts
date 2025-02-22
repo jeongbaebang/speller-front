@@ -92,6 +92,7 @@ export default {
       },
       backgroundImage: {
         'chevron-down': "url('/icon/chevron-down.svg')",
+        'icon-circle-arrow': "url('/icon/icon-circle-arrow.svg')",
         'icon-history-back': "url('/icon/icon-history-back.svg')",
         'icon-history-back-white': "url('/icon/icon-history-back-w.svg')",
         'icon-info': "url('/icon/icon-info.svg')",
