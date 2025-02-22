@@ -1,5 +1,9 @@
 import { AxiosResponse } from 'axios'
-import { CheckPayload, CheckResponse } from './speller-schema'
+import {
+  CheckPayload,
+  CheckResponse,
+  ClickReplacePayload,
+} from './speller-schema'
 
 export interface UserReplacePayload {
   errorWord: string // 오류 문자열
@@ -18,6 +22,7 @@ export interface BugReportPayload {
 export interface SpellerService {
   check: (payload: CheckPayload) => Promise<AxiosResponse<CheckResponse>>
   logUserReplace: (payload: UserReplacePayload) => void
+  logClickReplace: (payload: ClickReplacePayload) => void
   sendReport: (payload: BugReportPayload) => void
   notChange: () => void
 }
