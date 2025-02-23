@@ -1,9 +1,6 @@
 export { SpellerApi } from './api/speller-service'
 export { parseCandidateWords } from './lib/parse-candidate-words'
-export type {
-  BugReportPayload,
-  UserReplacePayload,
-} from './model/speller-interface'
+export type { UserReplacePayload } from './model/speller-interface'
 export {
   CorrectMethodEnum,
   checkPayloadSchema,

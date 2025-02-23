@@ -24,7 +24,7 @@ export function Toaster() {
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
                 <ToastDescription>
-                  <div className='flex items-center gap-[1.03rem]'>
+                  <div key={id} className='flex items-center gap-[1.03rem]'>
                     {props.variant === 'destructive' ? (
                       <WarningIcon />
                     ) : (
