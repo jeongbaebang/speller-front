@@ -35,7 +35,15 @@ export const checkResponseSchema = z.object({
   remaningText: z.string(), // 다음 페이지에서 검사해야 할 나머지 텍스트
 })
 
+export const clickReplacePayloadSchema = z.object({
+  errorWord: z.string(), // 오류 문자열
+  replaceWord: z.string(), // 사용자가 선택한 대치어
+  sentence: z.string(), // 오류 문자열을 포함한 주변 문맥 문자열 (오류 문자열 좌/우 4개 단어 포함)
+  wordList: z.string(), // 교정 대치어들 문자열 ('|'로 구분됨)
+})
+
 export type ErrorInfo = z.infer<typeof errorInfoSchema>
 export type CorrectInfo = z.infer<typeof correctInfoSchema>
 export type CheckPayload = z.infer<typeof checkPayloadSchema>
 export type CheckResponse = z.infer<typeof checkResponseSchema>
+export type ClickReplacePayload = z.infer<typeof clickReplacePayloadSchema>

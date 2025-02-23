@@ -1,11 +1,7 @@
 'use client'
 
 import { Fragment, useCallback, useState } from 'react'
-import {
-  useSpeller,
-  CorrectMethodEnum,
-  useSpellerRefs,
-} from '@/entities/speller'
+import { useSpeller, CorrectMethodEnum } from '@/entities/speller'
 import { cn } from '@/shared/lib/tailwind-merge'
 import { BulletBadge } from '@/shared/ui/bullet-badge'
 import { ScrollContainer } from '@/shared/ui/scroll-container'
@@ -13,7 +9,6 @@ import { ScrollGradientFade } from '@/shared/ui/scroll-gradient-fade'
 import { ErrorInfoSection } from './error-info-section'
 
 const ErrorTrackingSection = () => {
-  const { errorRefs, scrollSection } = useSpellerRefs()
   const { response } = useSpeller()
   const { errInfo } = response ?? {}
 
@@ -25,21 +20,22 @@ const ErrorTrackingSection = () => {
 
   return (
     <>
-      <h2 className='z-10 mb-[1.125rem] flex items-center gap-1 bg-white text-lg font-semibold tab:text-xl pc:text-2xl'>
+      <h2 className='flex items-center gap-1 pb-[1.125rem] text-lg font-semibold leading-[1.9125rem] tracking-[-0.0225rem] tab:text-[1.375rem] tab:leading-[2.3375rem] tab:tracking-[-0.0275rem] pc:text-[1.5rem] pc:leading-[2.55rem] pc:tracking-[-0.03rem]'>
         맞춤법/문법 오류
         <span className='text-red-100'>{errInfo.length}개</span>
       </h2>
-      <ScrollContainer onScrollStatusChange={handleScroll}>
-        {errInfo.map((info, idx) => (
-          <Fragment key={info.errorIdx}>
-            <hr className={cn('border-slate-200', idx === 0 && 'hidden')} />
-            <ErrorInfoSection
-              errorInfo={info}
-              ref={errorRefs[idx]}
-              onMouseOver={() => scrollSection('correct')(idx)}
-            />
-          </Fragment>
-        ))}
+      <ScrollContainer
+        onScrollStatusChange={handleScroll}
+        className='-mt-[1.125rem]'
+      >
+        <div>
+          {errInfo.map((info, i) => (
+            <Fragment key={info.errorIdx}>
+              <hr className={cn('border-slate-200', i === 0 && 'hidden')} />
+              <ErrorInfoSection errorInfo={info} />
+            </Fragment>
+          ))}
+        </div>
       </ScrollContainer>
       <div>
         <ScrollGradientFade showGradient={showGradient} />
