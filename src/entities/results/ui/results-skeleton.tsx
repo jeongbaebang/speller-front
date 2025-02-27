@@ -5,7 +5,7 @@ import { Skeleton } from '@/shared/ui/skeleton'
 const ResultsSkeleton = () => {
   return (
     <ContentLayout className='pb-8 tab:pb-[2.625rem] pc:pb-12'>
-      <div className='mb-[0.44rem] mt-[1.12rem] flex items-center justify-end gap-2 tab:mb-[0.5rem] tab:mt-[1.94rem] pc:mb-[0.81rem] pc:mt-[2rem]'>
+      <div className='mb-2 mt-[0.94rem] flex min-h-[1.625rem] items-center justify-end tab:mt-[1.75rem] pc:mb-[0.78rem] pc:mt-[1.97rem] pc:min-h-8'>
         <Skeleton className='h-6 w-56 rounded-sm pc:h-[1.875rem] pc:w-64' />
       </div>
       <div className='flex flex-col gap-2 overflow-auto pc:flex-row pc:gap-0'>
