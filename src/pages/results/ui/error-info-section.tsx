@@ -42,18 +42,26 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
     })
   }
 
+  const handleRevert = () => {
+    handleUpdateCorrectInfo({ ...errorInfo, crtStr: orgStr })
+  }
+
   return (
     <div className={cn('my-[1.125rem]', errorIdx === 0 && 'mt-0')} {...props}>
       <dl className='grid grid-cols-[3.5rem_1fr] gap-3 tab:grid-cols-[4.75rem_1fr] pc:grid-cols-[4.5rem_1fr] pc:gap-1'>
         <dt className='py-0.5 text-sm font-semibold tab:text-lg'>입력 내용</dt>
         <dd className='flex items-center justify-between'>
-          <p className='flex items-center gap-2 text-base font-semibold tab:gap-3.5 tab:text-xl'>
+          <Button
+            variant='ghost'
+            className='flex h-auto items-center gap-2 p-0 text-base font-semibold hover:bg-transparent tab:gap-3.5 tab:text-xl'
+            onClick={handleRevert}
+          >
             <BulletBadge
               method={correctMethod}
               className='mx-1.5 size-3 tab:mx-2.5'
             />
             {orgStr}
-          </p>
+          </Button>
           <ReportForm>
             <Button
               variant='ghost'
