@@ -7,6 +7,14 @@ set -e
 
 BASE_DIR="/home/nara/speller-front"
 
+# Load NVM environment
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+NODE_VERSION=$(node -v)
+NPM_VERSION=$(npm -v)
+
 if [[ "$ENVIRONMENT" == "production" ]]; then
   BRANCH="main"
   APP_PORT="4000"
@@ -45,6 +53,7 @@ log() {
 
 log "${ENVIRONMENT^} deployment started: ${TIMESTAMP}"
 log "Using configuration: Branch=${BRANCH}, Port=${APP_PORT}, PM2=${PM2_NAME}"
+log "Node version: ${NODE_VERSION}, NPM version: ${NPM_VERSION}"
 
 # Change to project directory
 log "Changing to project directory: ${BASE_DIR}"
