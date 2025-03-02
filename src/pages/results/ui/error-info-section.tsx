@@ -16,6 +16,7 @@ import { HelpSection } from './help-section'
 import { CustomTextEditor } from './custom-text-editor'
 import { logClickReplaceAction } from '../api/log-click-replace-action'
 import { extractContext } from '../lib/extractContext'
+import { XIcon } from 'lucide-react'
 
 interface ErrorInfoSectionProps<T>
   extends React.RefAttributes<T>,
@@ -91,21 +92,32 @@ const ErrorInfoSection = <T extends HTMLDivElement>({
           </CustomTextEditor>
           <div className='mt-2 flex max-h-[5.625rem] flex-col overflow-y-auto rounded-lg border border-slate-200 bg-slate-100 p-2 tab:mt-3 tab:max-h-[6rem] pc:max-h-[6.5rem]'>
             {candidateWords.map(({ id, word }) => (
-              <Button
-                key={id}
-                variant={null}
-                className={cn(
-                  'h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg',
-                  correctInfo[errorIdx]?.crtStr === word &&
-                    'font-bold text-blue-500',
+              <div key={id} className='flex items-center gap-[0.43rem]'>
+                <Button
+                  variant={null}
+                  className={cn(
+                    'h-auto justify-start p-0 text-base font-medium hover:underline tab:text-base pc:text-lg',
+                    correctInfo[errorIdx]?.crtStr === word &&
+                      'font-bold text-blue-500',
+                  )}
+                  onClick={() => {
+                    handleUpdateCorrectInfo({ ...errorInfo, crtStr: word })
+                    if (id > 0) handleClickReplace(word)
+                  }}
+                >
+                  {word}
+                </Button>
+                {correctInfo[errorIdx]?.crtStr === word && (
+                  <Button
+                    size='icon'
+                    variant='outline'
+                    className='size-[1.125rem] rounded-full border-0 bg-white text-slate-400 shadow-sm hover:bg-white pc:size-5'
+                    onClick={() => handleRevert()}
+                  >
+                    <XIcon className='!w-3 pc:!w-3.5' />
+                  </Button>
                 )}
-                onClick={() => {
-                  handleUpdateCorrectInfo({ ...errorInfo, crtStr: word })
-                  if (id > 0) handleClickReplace(word)
-                }}
-              >
-                {word}
-              </Button>
+              </div>
             ))}
           </div>
         </dd>
