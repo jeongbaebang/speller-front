@@ -41,7 +41,7 @@ jobs:
       - name: Add server to known hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -p 10122 -H 110.15.18.54 >> ~/.ssh/known_hosts
+          ssh-keyscan -p ${{ secrets.SSH_PORT }} -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Set deployment target
         id: set-target
