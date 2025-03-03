@@ -5,7 +5,7 @@ ENVIRONMENT=${1:-"staging"}
 # Exit on error
 set -e
 
-BASE_DIR="/home/nara/speller-front"
+BASE_DIR=$BASE_DIR
 
 # Load NVM environment
 export NVM_DIR="$HOME/.nvm"
