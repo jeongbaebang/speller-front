@@ -60,12 +60,14 @@ jobs:
 
       - name: Copy deployment script
         run: |
-          scp -P ${{ secrets.SSH_PORT }} deploy.sh nara@${{ secrets.SSH_HOST }}:${{ vars.BASE_DIR }}
+          scp -P ${{ secrets.SSH_PORT }} deploy.sh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.BASE_DIR }}
 
       - name: Deploy to Server
         id: deploy
+        env:
+          BASE_DIR: ${{ vars.BASE_DIR }}
         run: |
-          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} nara@${{ secrets.SSH_HOST }} "bash ${{ vars.BASE_DIR }}/deploy.sh ${{ env.DEPLOY_ENV }}" || echo "::set-output name=status::failed"
+          ssh -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "BASE_DIR=${{ vars.BASE_DIR }} bash ${{ vars.BASE_DIR }}/deploy.sh ${{ env.DEPLOY_ENV }}" || echo "::set-output name=status::failed"
 
       - name: Check deployment status
         if: steps.deploy.outputs.status == 'failed'
