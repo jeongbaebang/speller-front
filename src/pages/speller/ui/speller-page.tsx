@@ -10,6 +10,7 @@ import { SpellerTextInput } from './speller-text-input'
 import { SpellerControl } from './speller-control'
 import { spellCheckAction } from '../api/spell-check-action'
 import { ResultsSkeleton } from '@/entities/results'
+import { TIMEOUT_ERROR_CODE } from '../model/error-code'
 
 const SpellerPage = () => {
   const router = useRouter()
@@ -39,6 +40,14 @@ const SpellerPage = () => {
     if (state.error) {
       console.error(state.error)
       setIsRedirectingToResult(false)
+      if (
+        (state.error as { errorCode?: number })?.errorCode ===
+        TIMEOUT_ERROR_CODE
+      ) {
+        router.push(
+          `/timeout?isStrictCheck=${state?.data?.requestedWithStrictMode}`,
+        )
+      }
     }
   }, [state, router, handleReceiveResponse])
 
