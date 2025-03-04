@@ -62,11 +62,18 @@ cd $BASE_DIR || {
   exit 1
 }
 
-# Pull latest code from branch
-log "Pulling latest code from Git repository (${BRANCH} branch)"
+# Reset all local changes and update to latest code
+log "Fetching latest code from Git repository"
 log_cmd "git fetch origin"
+
+log "Checking out ${BRANCH} branch"
 log_cmd "git checkout ${BRANCH}"
-log_cmd "git pull origin ${BRANCH}"
+
+log "Resetting all local changes (hard reset to origin/${BRANCH})"
+log_cmd "git reset --hard origin/${BRANCH}"
+
+log "Cleaning untracked files and directories"
+log_cmd "git clean -fdx --exclude=.env.*"
 
 # Check environment variables
 if [ ! -f ${ENV_FILE} ]; then
@@ -75,11 +82,12 @@ if [ ! -f ${ENV_FILE} ]; then
 fi
 
 # Copy env to .env.local
+log "Copying environment file"
 log_cmd "cp ${ENV_FILE} .env.local"
 
 # Install dependencies
 log "Installing dependencies with NPM"
-log_cmd "npm install"
+log_cmd "npm ci"
 
 # Build application
 log "Building Next.js application"
