@@ -11,14 +11,17 @@ const nextConfig: NextConfig = {
     return config
   },
   experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
-    },
+    turbo:
+      process.env.NODE_ENV === 'development'
+        ? {
+            rules: {
+              '*.svg': {
+                loaders: ['@svgr/webpack'],
+                as: '*.js',
+              },
+            },
+          }
+        : {},
   },
 }
 
