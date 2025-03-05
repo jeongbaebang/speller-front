@@ -99,19 +99,11 @@ if pm2 list | grep -q "${PM2_NAME}"; then
   log "Restarting existing PM2 process"
   log_cmd "pm2 restart ${PM2_NAME} --update-env" || {
     log "WARNING: PM2 restart failed, attempting to start new process"
-    if [[ "$ENVIRONMENT" == "production" ]]; then
-      log_cmd "pm2 start npm --name '${PM2_NAME}' -- run start"
-    else
-      log_cmd "pm2 start npm --name '${PM2_NAME}' -- run start -- -p ${APP_PORT}"
-    fi
+    log_cmd "pm2 start npm --name '${PM2_NAME}' -- run start -- -p ${APP_PORT}"
   }
 else
   log "Starting new PM2 process"
-  if [[ "$ENVIRONMENT" == "production" ]]; then
-    log_cmd "pm2 start npm --name '${PM2_NAME}' -- run start"
-  else
-    log_cmd "pm2 start npm --name '${PM2_NAME}' -- run start -- -p ${APP_PORT}"
-  fi
+  log_cmd "pm2 start npm --name '${PM2_NAME}' -- run start -- -p ${APP_PORT}"
 fi
 
 log "${ENVIRONMENT^} deployment completed: $(date +"%Y-%m-%d %H:%M:%S")"
