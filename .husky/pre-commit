@@ -1,8 +1,13 @@
-#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-# 변경된 파일 목록을 가져오기
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+if [ "$BRANCH_NAME" = "deploy" ]; then
+  exit 0
+fi
+
 changed_files=$(git diff --cached --name-only)
 
-  echo "Running frontend Lint..."
-  npm run format || exit 1
-  npm run lint || exit 1
+echo "Running frontend Lint..."
+npm run format || exit 1
+npm run lint || exit 1
