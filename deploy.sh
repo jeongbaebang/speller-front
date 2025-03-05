@@ -62,12 +62,11 @@ cd $BASE_DIR || {
   exit 1
 }
 
-# Reset all local changes and update to latest code
-log "Fetching latest code from Git repository"
-log_cmd "git fetch origin"
-
 log "Checking out ${BRANCH} branch"
 log_cmd "git checkout ${BRANCH}"
+
+log "Fetching latest code from Git repository"
+log_cmd "git fetch origin"
 
 log "Resetting all local changes (hard reset to origin/${BRANCH})"
 log_cmd "git reset --hard origin/${BRANCH}"

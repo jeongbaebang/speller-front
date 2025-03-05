@@ -8,7 +8,6 @@ REPO_URL="https://github.com/frontend-opensource-project/speller-front.git"
 BRANCH="deploy"
 LOG_FILE="${BASE_DIR}/setup.log"
 
-# 로그 함수 정의
 log() {
   local message="$1"
   local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
