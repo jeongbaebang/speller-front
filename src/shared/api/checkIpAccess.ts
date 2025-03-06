@@ -2,7 +2,7 @@
 
 import { ENDPOINT } from '../model/constants'
 
-type Response = { denied?: 'true' | 'false' }
+type ResponseData = { denied?: 'true' | 'false' }
 
 const errorMsg = '[Error] IP 필터링 서비스를 사용할 수 없습니다.'
 const REVALIDATE_SEC = 300 // 5분(300초)
@@ -25,20 +25,22 @@ const checkIpAccess = async (clientIP: string) => {
     throw new Error(errorMsg)
   }
 
-  const data: Response = await response.json()
+  const data: ResponseData = await response.json()
 
   return isIpAccessDenied(data)
 }
 
-const isIpAccessDenied = (data: Response) => {
-  // 응답값이 false인 경우 차단되어야 함
-  const DENIED = false
+const isIpAccessDenied = (payload: ResponseData) => {
+  const isDeniedFieldMissing = payload.denied === undefined
 
-  if (!data.denied) {
+  if (isDeniedFieldMissing) {
     throw new Error(errorMsg)
   }
 
-  return Boolean(data.denied) === DENIED
+  // 응답값이 false인 경우 차단되어야 함
+  const isAccessDenied = payload.denied === 'false'
+
+  return isAccessDenied
 }
 
 export { checkIpAccess }
