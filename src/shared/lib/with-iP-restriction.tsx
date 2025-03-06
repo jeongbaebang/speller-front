@@ -1,5 +1,5 @@
-import { checkIpAccess } from '../api/checkIpAccess'
-import { getClientIP } from '../api/getClientIP'
+import { checkIpAccess } from '../api/check-ip-access'
+import { getClientIP } from '../api/get-client-iP'
 import { AccessDeniedMessage } from '../ui/access-denied-message'
 
 const withIPRestriction = <P extends object>(
