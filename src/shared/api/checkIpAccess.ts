@@ -5,7 +5,7 @@ import { ENDPOINT } from '../model/constants'
 type Response = { denied?: 'true' | 'false' }
 
 const errorMsg = '[Error] IP 필터링 서비스를 사용할 수 없습니다.'
-const REVALIDATE_MS = 300 // 5분(300초)
+const REVALIDATE_SEC = 300 // 5분(300초)
 
 const checkIpAccess = async (clientIP: string) => {
   const response = await fetch(
@@ -16,7 +16,7 @@ const checkIpAccess = async (clientIP: string) => {
       body: JSON.stringify({ clientIP }),
       cache: 'force-cache',
       next: {
-        revalidate: REVALIDATE_MS,
+        revalidate: REVALIDATE_SEC,
       },
     },
   )
