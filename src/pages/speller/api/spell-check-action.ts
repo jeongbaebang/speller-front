@@ -9,10 +9,11 @@ import {
   checkPayloadSchema,
   checkResponseSchema,
 } from '@/entities/speller'
+import { TIMEOUT_ERROR_CODE } from '../model/error-code'
 
 type ActionState = {
   data: SpellerState['response'] | null
-  error: unknown
+  error: unknown | { errorMessage: string; errorCode: number }
 }
 
 const spellCheckAction = async (
@@ -38,10 +39,19 @@ const spellCheckAction = async (
     }
   } catch (error) {
     let errorMessage: string =
-      '[Error] spellCheckAction: 함수를 실행하던 동안 에러가 발생했습니다.'
+      '[Error] spellCheckAction: 함수를 실행하는 동안 에러가 발생했습니다.'
 
     if (axios.isAxiosError(error)) {
-      errorMessage = error.message
+      if (error.response) {
+        const { errorMessage, errorCode } = error.response.data
+
+        if (errorCode === TIMEOUT_ERROR_CODE) {
+          return {
+            data: null,
+            error: { errorMessage, errorCode },
+          }
+        }
+      }
     }
 
     if (error instanceof ZodError) {
