@@ -55,7 +55,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
         <DialogTrigger asChild className='pc:hidden'>
           {children}
         </DialogTrigger>
-        <DialogContent className='w-[calc(100%-32px)] max-w-[22.5625rem] rounded-2xl bg-white px-4'>
+        <DialogContent className='max-w-[22.5625rem] rounded-2xl bg-white px-4'>
           <DialogHeader>
             <DialogTitle>
               <VisuallyHidden>제보 작성하기</VisuallyHidden>
