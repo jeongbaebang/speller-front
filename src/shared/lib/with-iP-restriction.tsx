@@ -6,12 +6,13 @@ const withIPRestriction = <P extends object>(
   WrappedComponent: React.ComponentType<P>,
 ) => {
   return async function IPRestrictedComponent(props: P) {
+    const clientIP = await getClientIP()
+
     if (process.env.NODE_ENV === 'development') {
       return <WrappedComponent {...props} />
     }
 
     try {
-      const clientIP = await getClientIP()
       const isAccessDenied = await checkIpAccess(clientIP)
 
       return isAccessDenied ? (
