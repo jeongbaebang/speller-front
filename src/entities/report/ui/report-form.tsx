@@ -55,7 +55,7 @@ export const ReportForm = ({ children }: ReportFormProps) => {
         <DialogTrigger asChild className='pc:hidden'>
           {children}
         </DialogTrigger>
-        <DialogContent className='max-w-[22.5625rem] rounded-2xl bg-white px-4'>
+        <DialogContent className='max-w-[19.1781rem] rounded-2xl bg-white p-[0.95rem] tab:max-w-[22.5625rem] tab:px-4'>
           <DialogHeader>
             <DialogTitle>
               <VisuallyHidden>제보 작성하기</VisuallyHidden>
@@ -71,9 +71,11 @@ export const ReportForm = ({ children }: ReportFormProps) => {
 
 const ReportFormTitle = () => {
   return (
-    <h4 className='flex items-center gap-3 font-bold text-slate-600 pc:gap-[0.62rem]'>
-      <SendIcon className='!size-7 pc:!size-[1.375rem]' />
-      <span className='text-[1.75rem] pc:text-[1.375rem]'>제보 작성하기</span>
+    <h4 className='flex items-center gap-2.5 font-bold text-slate-600 tab:gap-3 pc:gap-[0.62rem]'>
+      <SendIcon className='size-[1.48rem] tab:!size-7 pc:!size-[1.375rem]' />
+      <span className='text-[1.48rem] tab:text-[1.75rem] pc:text-[1.375rem]'>
+        제보 작성하기
+      </span>
     </h4>
   )
 }
