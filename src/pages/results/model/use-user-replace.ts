@@ -13,7 +13,7 @@ export const useUserReplace = ({ handleClose }: useUserReplaceParams) => {
     selectedErrIdx,
   } = useAppSelector(state => state.speller)
 
-  const { orgStr: errorWord, start } = errInfo[selectedErrIdx]
+  const { orgStr: errorWord, start, correctMethod } = errInfo[selectedErrIdx]
 
   const [value, setValue] = useState('')
 
@@ -38,5 +38,5 @@ export const useUserReplace = ({ handleClose }: useUserReplaceParams) => {
     }
   }
 
-  return { handleChange, handleEdit, value, errorWord }
+  return { handleChange, handleEdit, value, errorWord, correctMethod }
 }

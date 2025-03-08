@@ -1,6 +1,9 @@
+import { BulletBadge } from '@/shared/ui/bullet-badge'
 import { useUserReplace } from '../model/use-user-replace'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
+import { cn } from '@/shared/lib/tailwind-merge'
+import { CorrectMethodEnum } from '@/entities/speller'
 
 interface CustomTextEditorContent {
   handleClose: () => void
@@ -9,15 +12,27 @@ interface CustomTextEditorContent {
 export const CustomTextEditorContent = ({
   handleClose,
 }: CustomTextEditorContent) => {
-  const { handleChange, handleEdit, value, errorWord } = useUserReplace({
-    handleClose,
-  })
+  const { handleChange, handleEdit, value, errorWord, correctMethod } =
+    useUserReplace({
+      handleClose,
+    })
 
   return (
     <>
       <div className='flex flex-col items-center justify-center'>
-        <p className='flex items-center justify-center gap-[0.44rem] text-[0.95rem] text-green-100 tab:text-lg pc:gap-[0.42rem] pc:text-base pc:leading-normal'>
-          <span className='inline-block h-[9.35px] w-[9.35px] rounded-full bg-green-100 tab:h-[11px] tab:w-[11px] pc:h-[0.66rem] pc:w-[0.66rem]'></span>
+        <p
+          className={cn(
+            'flex items-center justify-center text-[0.95rem] tab:text-lg pc:text-base pc:leading-normal',
+            correctMethod === CorrectMethodEnum.enum.띄어쓰기 &&
+              'text-green-100',
+            correctMethod === CorrectMethodEnum.enum.오탈자 && 'text-red-100',
+            correctMethod === CorrectMethodEnum.enum.문맥 && 'text-purple-100',
+          )}
+        >
+          <BulletBadge
+            method={correctMethod}
+            className='mx-1.5 tab:mx-2.5 tab:size-3 pc:size-2'
+          />
           {errorWord}
         </p>
         <div className='h-[1.125rem] w-[1.125rem] bg-chevron-down bg-contain bg-center bg-no-repeat focus-visible:ring-0 pc:h-[0.96rem] pc:w-[0.96rem]' />
