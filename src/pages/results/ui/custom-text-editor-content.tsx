@@ -31,7 +31,7 @@ export const CustomTextEditorContent = ({
         >
           <BulletBadge
             method={correctMethod}
-            className='mx-1.5 tab:mx-2.5 tab:size-3 pc:size-2'
+            className='mx-1.5 tab:size-3 pc:size-2'
           />
           {errorWord}
         </p>
