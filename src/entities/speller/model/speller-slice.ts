@@ -68,6 +68,10 @@ const spellerSlice = createSlice({
       const { pageIdx, ...response } = action.payload
       state.responseMap[pageIdx] = response
     },
+
+    resetResponseMap: state => {
+      state.responseMap = {}
+    },
   },
 })
 
@@ -77,6 +81,7 @@ const {
   updateCorrectInfo,
   setSelectedErrIdx,
   setResponseMap,
+  resetResponseMap,
 } = spellerSlice.actions
 const spellerReducer = spellerSlice.reducer
 
@@ -86,6 +91,7 @@ export {
   updateCorrectInfo,
   setSelectedErrIdx,
   setResponseMap,
+  resetResponseMap,
   spellerReducer,
   type SpellerState,
 }

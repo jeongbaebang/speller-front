@@ -8,7 +8,7 @@ import { ErrorTrackingSection } from './error-tracking-section'
 const ResultsPage = () => {
   return (
     <ContentLayout className='pb-8 tab:pb-[2.625rem] pc:pb-12'>
-      <div className='mb-2 mt-[0.94rem] flex min-h-[1.625rem] items-center justify-between tab:mt-[1.75rem] pc:mb-[0.78rem] pc:mt-[1.97rem] pc:min-h-8'>
+      <div className='relative mb-2 mt-[0.94rem] flex min-h-[1.625rem] items-center justify-between tab:mt-[1.75rem] tab:justify-center pc:mb-[0.78rem] pc:mt-[1.97rem] pc:min-h-8'>
         <Navigator />
         <StrongCheckMessage />
       </div>
