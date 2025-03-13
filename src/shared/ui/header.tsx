@@ -48,7 +48,7 @@ const Header = () => {
             <ul>
               <li className='group'>
                 <Link
-                  href='/'
+                  href='/guide'
                   className='flex items-center gap-2 border-b border-slate-200 px-2 py-2.5 pr-3 text-sm leading-none group-hover:text-primary tab:text-base'
                 >
                   <i
