@@ -18,7 +18,14 @@ export function Toaster() {
 
   return (
     <ToastProvider swipeDirection='up' duration={3000}>
-      {toasts.map(function ({ id, title, description, action, ...props }) {
+      {toasts.map(function ({
+        id,
+        title,
+        description,
+        action,
+        onlyMessage,
+        ...props
+      }) {
         return (
           <Toast key={id} {...props}>
             <div className='grid gap-1'>
@@ -26,11 +33,12 @@ export function Toaster() {
               {description && (
                 <ToastDescription>
                   <div className='flex items-center gap-[1.03rem]'>
-                    {props.variant === 'destructive' ? (
-                      <WarningIcon />
-                    ) : (
-                      <CheckIcon />
-                    )}
+                    {!onlyMessage &&
+                      (props.variant === 'destructive' ? (
+                        <WarningIcon />
+                      ) : (
+                        <CheckIcon />
+                      ))}
                     {typeof description === 'string'
                       ? description.split('\n').map((text, index) => (
                           <React.Fragment key={index}>

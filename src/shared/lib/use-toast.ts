@@ -13,6 +13,7 @@ type ToasterToast = ToastProps & {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+  onlyMessage?: boolean
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
