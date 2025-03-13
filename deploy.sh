@@ -22,7 +22,8 @@ if [[ "$ENVIRONMENT" == "production" ]]; then
   ENV_FILE=".env.production"
   NODE_ENV="production"
 else
-  BRANCH="deploy"
+  # BRANCH="deploy"
+  BRANCH="main" # MVP 이후에 production/staging 환경 분리
   APP_PORT="3000"
   PM2_NAME="speller-front-staging"
   ENV_FILE=".env.staging"
