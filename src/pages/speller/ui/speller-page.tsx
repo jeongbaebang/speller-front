@@ -3,17 +3,19 @@
 import { useActionState, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { useFlag } from '@/entities/flag'
 import { useSpeller } from '@/entities/speller'
+import { ResultsSkeleton } from '@/entities/results'
 import { ContentLayout } from '@/shared/ui/content-layout'
 import { SpellerSetting } from './speller-setting'
 import { SpellerTextInput } from './speller-text-input'
 import { SpellerControl } from './speller-control'
 import { spellCheckAction } from '../api/spell-check-action'
-import { ResultsSkeleton } from '@/entities/results'
 import { TIMEOUT_ERROR_CODE } from '../model/error-code'
 
 const SpellerPage = () => {
   const router = useRouter()
+  const { handleFlag } = useFlag()
   const { text, handleTextChange, handleReceiveResponse } = useSpeller()
   const [state, formAction, isPending] = useActionState(spellCheckAction, {
     data: null,
@@ -33,6 +35,7 @@ const SpellerPage = () => {
         return
       }
 
+      handleFlag('isSpellCheckExecuted', true)
       router.push('/results')
     }
 

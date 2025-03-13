@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useFlag } from '@/entities/flag'
 import { useSpeller } from '@/entities/speller'
-import { clientSpellCheck } from '../api/client-spell-check'
+import { Spinner } from '@/shared/ui/spinner'
 import { toast } from '@/shared/lib/use-toast'
+import { clientSpellCheck } from '../api/client-spell-check'
 
 const Navigator = () => {
   const { push } = useRouter()
@@ -17,6 +19,8 @@ const Navigator = () => {
     updateResponseMap,
     initResponseMap,
   } = useSpeller()
+  const { isSpellCheckExecuted } = useFlag()
+  const [isInitResponseMap, setIsInitResponseMap] = useState(false)
   const [isUpdatedResponseMap, setIsUpdatedResponseMap] = useState(false)
   const currentPage = Number(searchParams?.get('page')) || 1
 
@@ -37,36 +41,49 @@ const Navigator = () => {
   }
 
   useEffect(() => {
-    initResponseMap()
-    toast({
-      description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
-    })
-  }, [])
-
-  useEffect(() => {
     ;(async () => {
-      if (!responseMap?.[currentPage]) {
+      const isEmptyResponseMap = !responseMap?.[currentPage]
+      const isFetchedNextPage = !!responseMap?.[currentPage + 1]
+      const isNotNextPage = !responseMap?.[currentPage]?.remaningText
+
+      if (isEmptyResponseMap) {
         updateResponseMap({ ...response, pageIdx: currentPage })
       }
 
-      if (!!responseMap?.[currentPage + 1]) return
-      if (!responseMap?.[currentPage]?.remaningText) return
+      if (!isInitResponseMap && isSpellCheckExecuted) {
+        initResponseMap()
+        setIsInitResponseMap(true)
+        return
+      }
 
-      const nextPageResponse = await clientSpellCheck({
-        text: responseMap[currentPage].remaningText,
-        isStrictCheck: responseMap[currentPage].requestedWithStrictMode,
-        pageIdx: currentPage + 1,
-      })
-      updateResponseMap({
-        ...nextPageResponse,
-        requestedWithStrictMode:
-          responseMap[currentPage].requestedWithStrictMode,
-        pageIdx: currentPage + 1,
-      })
-      setIsUpdatedResponseMap(true)
-      console.log('Successfully fetched next page response!')
+      if ((isFetchedNextPage || isNotNextPage) && !isSpellCheckExecuted) {
+        setIsUpdatedResponseMap(true)
+        return
+      }
+
+      if (!isEmptyResponseMap && !isFetchedNextPage && !isNotNextPage) {
+        const nextPageResponse = await clientSpellCheck({
+          text: responseMap[currentPage].remaningText,
+          isStrictCheck: responseMap[currentPage].requestedWithStrictMode,
+          pageIdx: currentPage + 1,
+        })
+        updateResponseMap({
+          ...nextPageResponse,
+          requestedWithStrictMode:
+            responseMap[currentPage].requestedWithStrictMode,
+          pageIdx: currentPage + 1,
+        })
+        setIsUpdatedResponseMap(true)
+      }
     })()
-  }, [currentPage, response, responseMap, updateResponseMap])
+  }, [response, responseMap, currentPage])
+
+  useEffect(() => {
+    toast({
+      description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
+      onlyMessage: true,
+    })
+  }, [isUpdatedResponseMap])
 
   return (
     response.totalPageCnt > 1 && (
@@ -82,8 +99,14 @@ const Navigator = () => {
           <i className='inline-flex size-6 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat pc:size-[1.875rem]' />
         </button>
         <span className='flex items-center gap-1 text-base font-medium text-slate-400 pc:text-xl'>
-          <span className='text-slate-600'>{currentPage}</span>/
-          <span>{response.totalPageCnt}</span>
+          {isUpdatedResponseMap ? (
+            <>
+              <span className='text-slate-600'>{currentPage}</span>/
+              <span>{response.totalPageCnt}</span>
+            </>
+          ) : (
+            <Spinner />
+          )}
         </span>
         <button
           className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
