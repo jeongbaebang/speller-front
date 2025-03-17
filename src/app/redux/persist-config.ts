@@ -11,7 +11,6 @@ const persistConfig: PersistConfig<RootState> = {
   key: 'root',
   storage: storage,
   whitelist: ['speller'],
-  blacklist: ['flag'],
 }
 
 export { persistConfig }
