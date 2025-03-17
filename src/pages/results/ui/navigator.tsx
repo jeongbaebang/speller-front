@@ -84,8 +84,8 @@ const Navigator = () => {
   useEffect(() => {
     if (isUpdatedResponseMap) {
       toast({
+        variant: 'noIcon',
         description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
-        onlyMessage: true,
       })
     }
   }, [isUpdatedResponseMap])
