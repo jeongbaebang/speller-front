@@ -20,9 +20,11 @@ const HelpSection = ({ help }: HelpSectionProps) => {
   const checkContentHeight = useDebounce(() => {
     if (!contentRef.current) return
 
-    let threshold = 4.5 * 16 // mobile
-    if (width! >= 726) threshold = 3.5 * 16 // tab
-    if (width! >= 1377) threshold = 3 * 16 // pc
+    const rem = 16
+    // threshold: 각 디바이스 화면에서 도움말이 2줄까지 보이는 높이
+    let threshold = 4.5 * rem // mobile
+    if (width! >= 726) threshold = 3.5 * rem // tab
+    if (width! >= 1377) threshold = 3 * rem // pc
 
     setShowButton(contentRef.current.scrollHeight > threshold)
   }, 300)
