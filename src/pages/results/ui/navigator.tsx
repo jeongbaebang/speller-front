@@ -1,8 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useFlag } from '@/entities/flag'
 import { useSpeller } from '@/entities/speller'
 import { Spinner } from '@/shared/ui/spinner'
 import { toast } from '@/shared/lib/use-toast'
@@ -19,10 +18,10 @@ const Navigator = () => {
     updateResponseMap,
     initResponseMap,
   } = useSpeller()
-  const { isSpellCheckExecuted } = useFlag()
   const [isInitResponseMap, setIsInitResponseMap] = useState(false)
   const [isUpdatedResponseMap, setIsUpdatedResponseMap] = useState(false)
   const currentPage = Number(searchParams?.get('page')) || 1
+  const currentPageRef = useRef<number | null>(null)
 
   const createPageURL = (nextPage: number) => {
     if (!searchParams) return `${pathname}`
@@ -41,23 +40,26 @@ const Navigator = () => {
   }
 
   useEffect(() => {
+    if (currentPageRef.current === currentPage) return
     ;(async () => {
       const isEmptyResponseMap = !responseMap?.[currentPage]
       const isFetchedNextPage = !!responseMap?.[currentPage + 1]
+      const inNewSpellCheck = responseMap?.[currentPage]?.str !== response?.str
       const isNotNextPage = !responseMap?.[currentPage]?.remaningText
 
       if (isEmptyResponseMap) {
         updateResponseMap({ ...response, pageIdx: currentPage })
       }
 
-      if (!isInitResponseMap && isSpellCheckExecuted) {
+      if (!isInitResponseMap && inNewSpellCheck) {
         initResponseMap()
         setIsInitResponseMap(true)
         return
       }
 
-      if ((isFetchedNextPage || isNotNextPage) && !isSpellCheckExecuted) {
+      if ((isFetchedNextPage || isNotNextPage) && !inNewSpellCheck) {
         setIsUpdatedResponseMap(true)
+        currentPageRef.current = currentPage
         return
       }
 
@@ -74,15 +76,18 @@ const Navigator = () => {
           pageIdx: currentPage + 1,
         })
         setIsUpdatedResponseMap(true)
+        currentPageRef.current = currentPage
       }
     })()
   }, [response, responseMap, currentPage])
 
   useEffect(() => {
-    toast({
-      description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
-      onlyMessage: true,
-    })
+    if (isUpdatedResponseMap) {
+      toast({
+        description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
+        onlyMessage: true,
+      })
+    }
   }, [isUpdatedResponseMap])
 
   return (
