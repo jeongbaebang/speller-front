@@ -44,20 +44,20 @@ const Navigator = () => {
     ;(async () => {
       const isEmptyResponseMap = !responseMap?.[currentPage]
       const isFetchedNextPage = !!responseMap?.[currentPage + 1]
-      const inNewSpellCheck = responseMap?.[currentPage]?.str !== response?.str
+      const isNewSpellCheck = responseMap?.[currentPage]?.str !== response?.str
       const isNotNextPage = !responseMap?.[currentPage]?.remaningText
 
       if (isEmptyResponseMap) {
         updateResponseMap({ ...response, pageIdx: currentPage })
       }
 
-      if (!isInitResponseMap && inNewSpellCheck) {
+      if (!isInitResponseMap && isNewSpellCheck) {
         initResponseMap()
         setIsInitResponseMap(true)
         return
       }
 
-      if ((isFetchedNextPage || isNotNextPage) && !inNewSpellCheck) {
+      if ((isFetchedNextPage || isNotNextPage) && !isNewSpellCheck) {
         setIsUpdatedResponseMap(true)
         currentPageRef.current = currentPage
         return
