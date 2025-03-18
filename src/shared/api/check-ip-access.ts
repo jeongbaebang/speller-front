@@ -9,7 +9,7 @@ const REVALIDATE_SEC = 300 // 5분(300초)
 
 const checkIpAccess = async (clientIP: string) => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}${ENDPOINT.FILTER_IP}`,
+    `${process.env.NEXT_PUBLIC_SERVER_API_URL}${ENDPOINT.FILTER_IP}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
