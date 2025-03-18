@@ -14,7 +14,8 @@ import { TIMEOUT_ERROR_CODE } from '../model/error-code'
 
 const SpellerPage = () => {
   const router = useRouter()
-  const { text, handleTextChange, handleReceiveResponse } = useSpeller()
+  const { text, handleTextChange, handleReceiveResponse, initResponseMap } =
+    useSpeller()
   const [state, formAction, isPending] = useActionState(spellCheckAction, {
     data: null,
     error: null,
@@ -25,6 +26,7 @@ const SpellerPage = () => {
     if (state.data) {
       setIsRedirectingToResult(true)
       handleReceiveResponse(state.data)
+      initResponseMap()
 
       if (state.data.errInfo.length === 0) {
         router.push(

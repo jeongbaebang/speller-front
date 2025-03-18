@@ -11,14 +11,8 @@ const Navigator = () => {
   const { push } = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const {
-    response,
-    responseMap,
-    handleReceiveResponse,
-    updateResponseMap,
-    initResponseMap,
-  } = useSpeller()
-  const [isInitResponseMap, setIsInitResponseMap] = useState(false)
+  const { response, responseMap, handleReceiveResponse, updateResponseMap } =
+    useSpeller()
   const [isUpdatedResponseMap, setIsUpdatedResponseMap] = useState(false)
   const currentPage = Number(searchParams?.get('page')) || 1
   const currentPageRef = useRef<number | null>(null)
@@ -49,12 +43,6 @@ const Navigator = () => {
 
       if (isEmptyResponseMap) {
         updateResponseMap({ ...response, pageIdx: currentPage })
-      }
-
-      if (!isInitResponseMap && isNewSpellCheck) {
-        initResponseMap()
-        setIsInitResponseMap(true)
-        return
       }
 
       if ((isFetchedNextPage || isNotNextPage) && !isNewSpellCheck) {
