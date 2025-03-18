@@ -1,9 +1,7 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 
-const BASE_URL = process.env.PROXY_URL || 'http://localhost:3000'
-
 const defaultConfig: AxiosRequestConfig = {
-  baseURL: `${BASE_URL}/server`,
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 }
 
 const defaultAxiosInstance = axios.create(defaultConfig)
