@@ -44,7 +44,6 @@ const Navigator = () => {
     let data = null
     try {
       if (isFetching) return
-
       if (responseMap[page]) {
         data = responseMap[page]
       } else {
@@ -59,6 +58,13 @@ const Navigator = () => {
           requestedWithStrictMode: response.requestedWithStrictMode,
         }
       }
+
+      // 현재 페이지의 대치어 적용 정보 업데이트
+      updateResponseMap({
+        ...response,
+        errInfo: Object.values(correctInfo),
+        pageIdx: currentPage,
+      })
 
       handleReceiveResponse(data)
       router.push(createPageURL(page))
@@ -103,7 +109,6 @@ const Navigator = () => {
 
   useEffect(() => {
     if (response.totalPageCnt <= 1) return
-
     toast({
       variant: 'noIcon',
       description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
@@ -118,11 +123,6 @@ const Navigator = () => {
         className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
         onClick={() => {
           handlePagination(currentPage - 1)
-          updateResponseMap({
-            ...response,
-            errInfo: Object.values(correctInfo),
-            pageIdx: currentPage,
-          })
         }}
         disabled={currentPage === 1}
       >
@@ -142,11 +142,6 @@ const Navigator = () => {
         className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
         onClick={() => {
           handlePagination(currentPage + 1)
-          updateResponseMap({
-            ...response,
-            errInfo: Object.values(correctInfo),
-            pageIdx: currentPage,
-          })
         }}
         disabled={currentPage === response.totalPageCnt}
       >
