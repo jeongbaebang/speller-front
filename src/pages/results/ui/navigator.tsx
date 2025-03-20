@@ -11,8 +11,13 @@ const Navigator = () => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { response, responseMap, handleReceiveResponse, updateResponseMap } =
-    useSpeller()
+  const {
+    response,
+    responseMap,
+    correctInfo,
+    handleReceiveResponse,
+    updateResponseMap,
+  } = useSpeller()
   const [isFetching, setIsFetching] = useState(false)
   const currentPage = Number(searchParams?.get('page')) || 1
   const currentPageRef = useRef<number | null>(null)
@@ -113,6 +118,11 @@ const Navigator = () => {
         className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
         onClick={() => {
           handlePagination(currentPage - 1)
+          updateResponseMap({
+            ...response,
+            errInfo: Object.values(correctInfo),
+            pageIdx: currentPage,
+          })
         }}
         disabled={currentPage === 1}
       >
@@ -132,6 +142,11 @@ const Navigator = () => {
         className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
         onClick={() => {
           handlePagination(currentPage + 1)
+          updateResponseMap({
+            ...response,
+            errInfo: Object.values(correctInfo),
+            pageIdx: currentPage,
+          })
         }}
         disabled={currentPage === response.totalPageCnt}
       >
