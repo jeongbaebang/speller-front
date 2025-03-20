@@ -9,6 +9,7 @@ import {
   updateCorrectInfo,
   setSelectedErrIdx,
   setResponseMap,
+  resetResponseMap,
   type SpellerState,
 } from './speller-slice'
 import { CorrectInfo } from './speller-schema'
@@ -52,6 +53,10 @@ const useSpeller = () => {
     [dispatch],
   )
 
+  const initResponseMap = useCallback(() => {
+    dispatch(resetResponseMap())
+  }, [dispatch])
+
   return {
     ...state,
     handleTextChange,
@@ -59,6 +64,7 @@ const useSpeller = () => {
     handleUpdateCorrectInfo,
     updateErrInfoIndex,
     updateResponseMap,
+    initResponseMap,
   }
 }
 
