@@ -2,50 +2,52 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+
 import { Button } from '@/shared/ui/button'
 import { SpellerSetting } from '@/pages/speller/ui/speller-setting'
+import { ContentLayout } from '@/shared/ui/content-layout'
+import noErrorMobileImage from '../../../../public/no-errors-mo.png'
+import noErrorTabImage from '../../../../public/no-errors-tab.png'
+import noErrorPcImage from '../../../../public/no-errors-pc.png'
 
 const NoErrorsPage = () => {
   const router = useRouter()
 
   return (
-    <div className='flex w-full flex-col items-center'>
-      <div className='w-full max-w-[22.5rem] tab:max-w-[37.5rem] pc:flex pc:max-w-[65.625rem] pc:justify-end'>
+    <ContentLayout className='pb-8 tab:pb-[2.625rem] pc:pb-12'>
+      <div className='mb-2 mt-[0.94rem] min-h-[1.625rem] tab:mt-[1.75rem] pc:mb-[0.78rem] pc:mt-[1.97rem] pc:min-h-8'>
         <SpellerSetting />
       </div>
-      <div className='m-4 mt-0 w-full max-w-[22.5rem] tab:max-w-[37.5rem] pc:flex pc:max-w-[65.625rem]'>
-        <div className='relative h-[15.5rem] w-full overflow-hidden rounded-tl-lg rounded-tr-lg tab:h-[14.25rem] pc:h-[40.25rem] pc:w-[23.75rem] pc:rounded-bl-[1rem] pc:rounded-tl-[1rem] pc:rounded-tr-none'>
+      <div className='pc:flex'>
+        <div className='h-[15.5rem] overflow-hidden rounded-tl-[1rem] rounded-tr-[1rem] tab:h-[14.25rem] pc:h-[40.25rem] pc:w-[23.75rem] pc:rounded-bl-[1rem] pc:rounded-tr-none'>
           <Image
-            src='/no-errors-mo.png'
-            alt='no-errors-visual'
-            fill
-            className='visible tab:invisible'
+            src={noErrorMobileImage}
+            alt='no-errors-mobile'
+            sizes='100vw'
+            className='h-full w-full bg-background object-cover object-center tab:hidden pc:hidden'
           />
           <Image
-            src='/no-errors-tab.png'
-            alt='no-errors-visual'
-            fill
-            className='invisible tab:visible'
+            src={noErrorTabImage}
+            alt='no-errors-tab'
+            sizes='100vw'
+            className='hidden h-full w-full bg-background object-cover object-center tab:block pc:hidden'
           />
           <Image
-            src='/no-errors-pc.png'
-            alt='no-errors-visual'
-            fill
-            className='invisible pc:visible'
+            src={noErrorPcImage}
+            alt='no-errors-pc'
+            sizes='100vw'
+            className='hidden w-full bg-background pc:block'
           />
         </div>
-        <div className='rounded-bl-lg rounded-br-lg bg-white p-10 pt-7 pc:flex pc:h-[40.25rem] pc:flex-1 pc:flex-col pc:justify-center pc:rounded-bl-none pc:rounded-br-[1rem] pc:rounded-tr-[1rem] pc:px-[3.125rem]'>
-          <div className='text-center pc:text-left'>
-            <p className='text-2xl font-semibold leading-9 tab:text-[2rem] pc:text-[3rem] pc:leading-[4.5rem]'>
-              맞춤법/문법 오류가 없습니다.
-            </p>
-            <span className='mt-2 inline-block text-base tab:mt-3 tab:text-xl pc:mt-6 pc:text-left pc:text-2xl'>
-              기술적 한계로 인해 찾지 못한
-              <br />
-              맞춤법이나 문법 오류가 있을 수 있습니다.
-            </span>
+        <div className='rounded-bl-[1rem] rounded-br-[1rem] bg-white pt-7 text-center pc:h-[40.25rem] pc:flex-1 pc:content-center pc:rounded-bl-none pc:rounded-tr-[1rem] pc:pc:pl-[3.125rem] pc:text-left'>
+          <h2 className='text-2xl font-semibold tracking-[-0.03rem] text-slate-600 tab:text-[2rem] tab:leading-[3rem] tab:tracking-[-0.04rem] pc:text-5xl pc:tracking-[-0.06rem]'>
+            맞춤법/문법 오류가 없습니다.
+          </h2>
+          <div className='pt-2 text-base tracking-[-0.02rem] tab:mt-3 tab:text-[1rem] tab:tracking-[-0.025rem] pc:mt-6 pc:text-2xl pc:tracking-[-0.03rem]'>
+            <p>기술적 한계로 인해 찾지 못한</p>
+            <p>맞춤법이나 문법 오류가 있을 수 있습니다.</p>
           </div>
-          <div className='mt-7 flex justify-center gap-3 tab:mt-8 pc:mt-11 pc:justify-start'>
+          <div className='flex justify-center gap-3 pb-10 pt-7 pc:justify-start'>
             <Button
               variant='outline'
               className='h-14 w-32 border-2 border-[#3046EC] bg-white text-lg text-[#3046EC] hover:text-[#3046EC] pc:h-16 pc:w-[9.5rem] pc:text-[1.375rem]'
@@ -62,7 +64,7 @@ const NoErrorsPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </ContentLayout>
   )
 }
 
