@@ -41,7 +41,9 @@ const SpellerSetting = memo(() => {
         id='airplane-mode'
         name='isStrictCheck'
         onCheckedChange={handleChange}
-        defaultChecked={Boolean(searchParams?.get(QUERY)?.toString())}
+        defaultChecked={Boolean(
+          searchParams?.get(QUERY)?.toString() === 'true',
+        )}
       />
     </div>
   )
