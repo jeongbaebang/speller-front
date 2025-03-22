@@ -16,7 +16,6 @@ const SpellerTextInput: FC<SpellerTextInputProps> = ({
   text,
 }) => {
   const [showGradient, setShowGradient] = useState(false)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleOnClear = useCallback(() => onTextChange(''), [])
   const handleScroll = useCallback(
     (isScrolling: boolean) => setShowGradient(isScrolling),

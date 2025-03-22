@@ -1,7 +1,10 @@
+'use server'
+
 import axios from 'axios'
 import { SpellerApi, type CheckPayload } from '@/entities/speller'
 
-export const clientSpellCheck = async (payload: CheckPayload) => {
+// TODO: `src/pages/speller/api/spell-check-action.ts`와 통합
+export const spellCheckAction = async (payload: CheckPayload) => {
   try {
     const response = await SpellerApi.check(payload)
     return response.data

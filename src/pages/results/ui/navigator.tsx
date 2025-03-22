@@ -2,18 +2,23 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useSpeller } from '@/entities/speller'
+import { CheckPayload, useSpeller } from '@/entities/speller'
 import { Spinner } from '@/shared/ui/spinner'
 import { toast } from '@/shared/lib/use-toast'
-import { clientSpellCheck } from '../api/client-spell-check'
+import { spellCheckAction } from '../api/spell-check-action'
 
 const Navigator = () => {
-  const { push } = useRouter()
+  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { response, responseMap, handleReceiveResponse, updateResponseMap } =
-    useSpeller()
-  const [isUpdatedResponseMap, setIsUpdatedResponseMap] = useState(false)
+  const {
+    response,
+    responseMap,
+    correctInfo,
+    handleReceiveResponse,
+    updateResponseMap,
+  } = useSpeller()
+  const [isFetching, setIsFetching] = useState(false)
   const currentPage = Number(searchParams?.get('page')) || 1
   const currentPageRef = useRef<number | null>(null)
 
@@ -25,9 +30,45 @@ const Navigator = () => {
     return `${pathname}?${params.toString()}`
   }
 
-  const handlePagination = (page: number) => {
+  const fetchSpellCheck = async (payload: Required<CheckPayload>) => {
+    const response = await spellCheckAction(payload)
+    updateResponseMap({
+      ...response,
+      requestedWithStrictMode: payload.isStrictCheck,
+      pageIdx: payload.pageIdx,
+    })
+    return response
+  }
+
+  const handlePagination = async (page: number) => {
+    let data = null
     try {
-      handleReceiveResponse({ ...responseMap[page] })
+      if (isFetching) return
+      if (responseMap[page]) {
+        data = responseMap[page]
+      } else {
+        setIsFetching(true)
+        const res = await fetchSpellCheck({
+          text: response.remaningText,
+          isStrictCheck: response.requestedWithStrictMode,
+          pageIdx: page,
+        })
+        data = {
+          ...res,
+          requestedWithStrictMode: response.requestedWithStrictMode,
+        }
+      }
+
+      // 현재 페이지의 대치어 적용 정보 업데이트
+      updateResponseMap({
+        ...response,
+        errInfo: Object.values(correctInfo),
+        pageIdx: currentPage,
+      })
+
+      handleReceiveResponse(data)
+      router.push(createPageURL(page))
+      setIsFetching(false)
     } catch (error) {
       throw new Error(error as string)
     }
@@ -36,85 +77,77 @@ const Navigator = () => {
   useEffect(() => {
     if (currentPageRef.current === currentPage) return
     ;(async () => {
-      const isEmptyResponseMap = !responseMap?.[currentPage]
-      const isFetchedNextPage = !!responseMap?.[currentPage + 1]
-      const isNewSpellCheck = responseMap?.[currentPage]?.str !== response?.str
-      const isNotNextPage = !responseMap?.[currentPage]?.remaningText
+      try {
+        const isEmptyResponseMap = !responseMap?.[currentPage]
+        const isFetchedNextPage = !!responseMap?.[currentPage + 1]
+        const isNotNextPage = !responseMap?.[currentPage]?.remaningText
 
-      if (isEmptyResponseMap) {
-        updateResponseMap({ ...response, pageIdx: currentPage })
-      }
+        // responseMap에 데이터가 없을 경우(맞춤법 검사 완료 이후)
+        if (isEmptyResponseMap) {
+          updateResponseMap({ ...response, pageIdx: currentPage })
+          return
+        }
 
-      if ((isFetchedNextPage || isNotNextPage) && !isNewSpellCheck) {
-        setIsUpdatedResponseMap(true)
-        currentPageRef.current = currentPage
-        return
-      }
+        // 사전 페치가 이미 완료되었거나 다음 페이지가 없을 경우
+        if (isFetchedNextPage || isNotNextPage) {
+          currentPageRef.current = currentPage
+          return
+        }
 
-      if (!isEmptyResponseMap && !isFetchedNextPage && !isNotNextPage) {
-        const nextPageResponse = await clientSpellCheck({
+        await fetchSpellCheck({
           text: responseMap[currentPage].remaningText,
           isStrictCheck: responseMap[currentPage].requestedWithStrictMode,
           pageIdx: currentPage + 1,
         })
-        updateResponseMap({
-          ...nextPageResponse,
-          requestedWithStrictMode:
-            responseMap[currentPage].requestedWithStrictMode,
-          pageIdx: currentPage + 1,
-        })
-        setIsUpdatedResponseMap(true)
         currentPageRef.current = currentPage
+      } catch (error) {
+        console.error(error)
+        setIsFetching(false)
       }
     })()
   }, [response, responseMap, currentPage])
 
   useEffect(() => {
-    if (isUpdatedResponseMap) {
-      toast({
-        variant: 'noIcon',
-        description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
-      })
-    }
-  }, [isUpdatedResponseMap])
+    if (response.totalPageCnt <= 1) return
+    toast({
+      variant: 'noIcon',
+      description: `총 ${response.totalPageCnt} 페이지입니다.\n화살표를 눌러 페이지를 이동해 주세요.`,
+    })
+  }, [response.totalPageCnt])
+
+  if (response.totalPageCnt <= 1) return null
 
   return (
-    response.totalPageCnt > 1 && (
-      <div className='z-10 flex items-center gap-5 pc:gap-8'>
-        <button
-          className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
-          onClick={() => {
-            handlePagination(currentPage - 1)
-            push(createPageURL(currentPage - 1))
-          }}
-          disabled={!isUpdatedResponseMap || currentPage === 1}
-        >
-          <i className='inline-flex size-6 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat pc:size-[1.875rem]' />
-        </button>
-        <span className='flex items-center gap-1 text-base font-medium text-slate-400 pc:text-xl'>
-          {isUpdatedResponseMap ? (
-            <>
-              <span className='text-slate-600'>{currentPage}</span>/
-              <span>{response.totalPageCnt}</span>
-            </>
-          ) : (
-            <Spinner />
-          )}
-        </span>
-        <button
-          className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
-          onClick={() => {
-            handlePagination(currentPage + 1)
-            push(createPageURL(currentPage + 1))
-          }}
-          disabled={
-            !isUpdatedResponseMap || currentPage === response.totalPageCnt
-          }
-        >
-          <i className='inline-flex size-6 rotate-180 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat pc:size-[1.875rem]' />
-        </button>
-      </div>
-    )
+    <div className='z-10 flex items-center gap-5 pc:gap-8'>
+      <button
+        className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
+        onClick={() => {
+          handlePagination(currentPage - 1)
+        }}
+        disabled={currentPage === 1}
+      >
+        <i className='inline-flex size-6 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat pc:size-[1.875rem]' />
+      </button>
+      <span className='flex items-center gap-1 text-base font-medium text-slate-400 pc:text-xl'>
+        {isFetching ? (
+          <Spinner />
+        ) : (
+          <>
+            <span className='text-slate-600'>{currentPage}</span>/
+            <span>{response.totalPageCnt}</span>
+          </>
+        )}
+      </span>
+      <button
+        className='inline-flex disabled:cursor-not-allowed disabled:opacity-50'
+        onClick={() => {
+          handlePagination(currentPage + 1)
+        }}
+        disabled={currentPage === response.totalPageCnt}
+      >
+        <i className='inline-flex size-6 rotate-180 bg-icon-circle-arrow bg-contain bg-center bg-no-repeat pc:size-[1.875rem]' />
+      </button>
+    </div>
   )
 }
 
