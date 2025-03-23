@@ -1,4 +1,4 @@
-import { Client } from '@/shared/api/client'
+import { Client } from '@/shared/api'
 import { ENDPOINT } from '@/shared/model/constants'
 import { FeedbackService } from '../model/feedback-interface'
 import { FeedbackPayload } from '../model/feedback-schema'

@@ -1,4 +1,4 @@
-import { Client } from '@/shared/api/client'
+import { Client } from '@/shared/api'
 import { ENDPOINT } from '@/shared/model/constants'
 import { BugReportPayload, ReportService } from '../model/report-interface'
 
