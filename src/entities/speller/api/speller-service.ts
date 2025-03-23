@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 
 import { Client } from '@/shared/api'
-import { ENDPOINT } from '@/shared/model/constants'
+import { ENDPOINT } from '@/shared/config'
 import {
   NotChangePayload,
   SpellerService,
