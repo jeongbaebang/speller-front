@@ -19,7 +19,7 @@ const NoErrorsPage = () => {
         <SpellerSetting />
       </div>
       <div className='pc:flex'>
-        <div className='h-[15.5rem] overflow-hidden rounded-tl-[1rem] rounded-tr-[1rem] tab:h-[14.25rem] pc:h-[40.25rem] pc:w-[23.75rem] pc:rounded-bl-[1rem] pc:rounded-tr-none'>
+        <div className='h-[15.5rem] overflow-hidden rounded-t-lg tab:h-[14.25rem] tab:rounded-t-[1rem] pc:h-[40.25rem] pc:w-[23.75rem] pc:rounded-bl-[1rem] pc:rounded-tr-none'>
           <Image
             src={noErrorMobileImage}
             alt='no-errors-mobile'
@@ -39,7 +39,7 @@ const NoErrorsPage = () => {
             className='hidden w-full bg-background pc:block'
           />
         </div>
-        <div className='rounded-bl-[1rem] rounded-br-[1rem] bg-white pt-7 text-center pc:h-[40.25rem] pc:flex-1 pc:content-center pc:rounded-bl-none pc:rounded-tr-[1rem] pc:pc:pl-[3.125rem] pc:text-left'>
+        <div className='rounded-b-lg bg-white pt-7 text-center tab:rounded-b-[1rem] pc:h-[40.25rem] pc:flex-1 pc:content-center pc:rounded-bl-none pc:rounded-tr-[1rem] pc:pc:pl-[3.125rem] pc:text-left'>
           <h2 className='text-2xl font-semibold tracking-[-0.03rem] text-slate-600 tab:text-[2rem] tab:leading-[3rem] tab:tracking-[-0.04rem] pc:text-5xl pc:tracking-[-0.06rem]'>
             맞춤법/문법 오류가 없습니다.
           </h2>
