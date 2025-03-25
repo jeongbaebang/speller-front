@@ -10,10 +10,9 @@ declare global {
 }
 
 interface GoogleAdSenseProps {
-  slot?: string
   className?: string
 }
-const GoogleAdSense = ({ slot, className }: GoogleAdSenseProps) => {
+const GoogleAdSense = ({ className, ...props }: GoogleAdSenseProps) => {
   const adRef = useRef<HTMLModElement>(null)
 
   useEffect(() => {
@@ -35,9 +34,7 @@ const GoogleAdSense = ({ slot, className }: GoogleAdSenseProps) => {
       ref={adRef}
       className={cn('adsbygoogle', 'block', className)}
       data-ad-client={process.env.NEXT_PUBLIC_AD_CLIENT}
-      data-ad-slot={slot}
-      data-ad-format='auto'
-      data-full-width-responsive='true'
+      {...props}
     />
   )
 }

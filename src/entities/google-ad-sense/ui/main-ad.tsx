@@ -5,8 +5,10 @@ const MainAd = () => {
   return (
     <div className='my-24 hidden rounded-md bg-slate-300 pc:block'>
       <GoogleAdSense
-        slot='9725653724'
         className='h-[37.5rem] w-40 place-content-center'
+        data-ad-slot='9725653724'
+        data-ad-format='auto'
+        data-full-width-responsive='true'
       />
     </div>
   )
