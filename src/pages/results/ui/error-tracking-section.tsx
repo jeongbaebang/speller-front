@@ -13,7 +13,7 @@ import { ErrorInfoSection } from './error-info-section'
 import { BulletBadge } from '../ui/bullet-badge'
 
 const ErrorTrackingSection = () => {
-  const { errorRefs } = useSpellerRefs()
+  const { errorRefs, scrollSection } = useSpellerRefs()
   const { response } = useSpeller()
   const { errInfo } = response ?? {}
 
@@ -37,7 +37,11 @@ const ErrorTrackingSection = () => {
           {errInfo.map((info, idx) => (
             <Fragment key={info.errorIdx}>
               <hr className={cn('border-slate-200', idx === 0 && 'hidden')} />
-              <ErrorInfoSection errorInfo={info} ref={errorRefs?.[idx]} />
+              <ErrorInfoSection
+                errorInfo={info}
+                ref={errorRefs?.[idx]}
+                onMouseOver={() => scrollSection('correct', idx)}
+              />
             </Fragment>
           ))}
         </div>

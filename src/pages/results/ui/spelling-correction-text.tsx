@@ -47,7 +47,7 @@ const SpellingCorrectionText = () => {
           isResolved && 'pt-0',
         )}
         ref={correctRefs?.[idx]}
-        onMouseOver={() => scrollSection('error')(idx)}
+        onMouseOver={() => scrollSection('error', idx)}
       >
         <button
           className={cn(
