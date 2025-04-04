@@ -7,7 +7,7 @@ import { useSpeller } from './use-speller'
 interface SpellerRefsContextType {
   correctRefs: React.RefObject<HTMLDivElement>[] | null
   errorRefs: React.RefObject<HTMLDivElement>[] | null
-  scrollSection: (target: 'correct' | 'error') => (index: number) => void
+  scrollSection: (target: 'correct' | 'error', index: number) => void
 }
 
 const SpellerRefsContext = createContext<SpellerRefsContextType | null>(null)
@@ -34,7 +34,7 @@ export const SpellerRefsProvider = ({
     : null
 
   const scrollSection = useCallback(
-    (target: 'correct' | 'error') => (index: number) => {
+    (target: 'correct' | 'error', index: number) => {
       const refs = target === 'correct' ? correctRefs : errorRefs
       refs?.[index].current?.scrollIntoView({ behavior: 'smooth' })
     },
