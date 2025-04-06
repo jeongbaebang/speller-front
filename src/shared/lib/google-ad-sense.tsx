@@ -1,6 +1,6 @@
 'use client'
 
-import { useDeviceUtils } from '@/shared/lib/device-utils'
+import { useDeviceUtils } from '@/shared/lib/use-device-utils'
 import { cn } from '@/shared/lib/tailwind-merge'
 import React, { useEffect, useRef, useState } from 'react'
 
