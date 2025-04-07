@@ -30,7 +30,7 @@ const SpellerSetting = memo(() => {
   const handleCheckedChange = (checked: boolean) => {
     const newParams = updateStrictCheckQueryParams(checked)
 
-    if (!newParams) {
+    if (newParams !== undefined) {
       replace(`${pathname}?${newParams}`, { scroll: false })
     }
   }
