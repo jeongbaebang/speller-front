@@ -1,12 +1,7 @@
 'use client'
 
-import React, { memo, useEffect, useState } from 'react'
-import {
-  ReadonlyURLSearchParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation'
+import React, { memo } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import { Label } from '@/shared/ui/label'
 import { Switch } from '@/shared/ui/switch'
@@ -17,14 +12,11 @@ const SpellerSetting = memo(() => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const { replace } = useRouter()
-  const [isChecked, setStrictCheck] = useState(() =>
-    isStrictCheckEnabled(searchParams),
-  )
 
-  const handleChange = (checked: boolean) => {
+  const updateStrictCheckQueryParams = (checked: boolean) => {
     if (!searchParams) return
 
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams.toString())
 
     if (checked) {
       params.set(QUERY, 'true')
@@ -32,14 +24,22 @@ const SpellerSetting = memo(() => {
       params.delete(QUERY)
     }
 
-    replace(`${pathname}?${params.toString()}`)
+    return params.toString()
   }
 
-  useEffect(() => {
-    if (!searchParams) return
+  const handleCheckedChange = (checked: boolean) => {
+    const newParams = updateStrictCheckQueryParams(checked)
 
-    setStrictCheck(isStrictCheckEnabled(searchParams))
-  }, [searchParams])
+    if (!newParams) {
+      replace(`${pathname}?${newParams}`, { scroll: false })
+    }
+  }
+
+  const isStrictCheckEnabled = () => {
+    if (!searchParams) return false
+
+    return searchParams.get(QUERY) === 'true'
+  }
 
   return (
     <div className='flex items-center justify-end gap-2 pc:gap-4'>
@@ -54,19 +54,13 @@ const SpellerSetting = memo(() => {
         aria-label='강한 검사 모드 켜기/끄기'
         id='airplane-mode'
         name='isStrictCheck'
-        onCheckedChange={handleChange}
-        checked={isChecked}
+        onCheckedChange={handleCheckedChange}
+        checked={isStrictCheckEnabled()}
       />
     </div>
   )
 })
 
 SpellerSetting.displayName = 'SpellerSetting'
-
-const isStrictCheckEnabled = (searchParams: ReadonlyURLSearchParams | null) => {
-  if (!searchParams) return false
-
-  return searchParams.get(QUERY) === 'true'
-}
 
 export { SpellerSetting }
