@@ -15,7 +15,6 @@ const BaseLayout: FC<PropsWithChildren> = ({ children }) => {
           <GoogleAdSense
             className='h-[37.5rem] w-40 place-content-center'
             data-ad-slot='9725653724'
-            data-ad-format='auto'
             data-full-width-responsive='true'
           />
         </div>
