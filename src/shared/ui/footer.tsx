@@ -45,15 +45,15 @@ const Footer = () => {
             <div className='text-center text-[0.625rem] font-normal leading-[0.86875rem] tracking-[-0.0125rem] text-slate-500 tab:leading-[0.875rem] pc:text-start pc:text-[0.75rem] pc:leading-[1.035rem] pc:tracking-[-0.015rem]'>
               {/* 모바일 버전 */}
               <p className='pc:hidden'>
-                한국어 맞춤법/문법 검사기는 부산대학교 인공지능연구실과
+                바른 한글은 부산대학교 인공지능연구실과
               </p>
               <p className='pc:hidden'>
                 (주)나라인포테크가 함께 만들고 있습니다.
               </p>
               {/* PC 버전 */}
               <p className='hidden pc:block'>
-                한국어 맞춤법/문법 검사기는 부산대학교 인공지능연구실과
-                (주)나라인포테크가 함께 만들고 있습니다.
+                바른 한글은 부산대학교 인공지능연구실과 (주)나라인포테크가 함께
+                만들고 있습니다.
               </p>
               {/* 공통 텍스트 */}
               <p>이 검사기는 개인이나 학생만 무료로 사용할 수 있습니다.</p>

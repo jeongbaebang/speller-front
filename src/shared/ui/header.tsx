@@ -10,12 +10,12 @@ const Header = () => {
         <div className='flex items-center gap-5'>
           <Link href='/'>
             <h1 className='text-xl font-bold tab:text-2xl'>
-              <div className='relative h-[1.375rem] w-[11.625rem] tab:h-[1.75rem] tab:w-[14rem] pc:h-[1.75rem] pc:w-[14.25rem]'>
+              <div className='relative h-[1.375rem] w-[5.625rem] tab:h-[1.6875rem] tab:w-[7.1875rem] pc:h-[1.6875rem] pc:w-[7.5rem]'>
                 <Image
                   src='/logo.svg'
-                  alt='한국어 맞춤법 검사기'
-                  aria-label='한국어 맞춤법 검사기'
+                  alt='바른 한글 로고'
                   fill
+                  className='object-contain'
                 />
               </div>
             </h1>
@@ -23,7 +23,7 @@ const Header = () => {
         </div>
         <div className='hidden items-center gap-4 pc:flex'>
           <Link href='/guide' className={classes.linkButton}>
-            검사기 사용법
+            사용법
           </Link>
           <Link href='/feedback' className={classes.linkButton}>
             문의하기
