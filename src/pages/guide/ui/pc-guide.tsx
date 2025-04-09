@@ -6,14 +6,14 @@ export const PcGuide = () => {
     <div className='hidden pc:block'>
       <Image
         className='mx-auto'
-        src='/guide/pc/header.png'
+        src='/guide/pc/top.png'
         width={1920}
         height={1200}
         alt='누구나 제한 없이 전문적인 맞춤법을 사용해요.'
       />
       <div className='px-4 pc:container pc:mx-auto pc:px-[4.5rem]'>
         <h2 className='pb-[1.875rem] pt-[4.375rem] text-center text-3xl font-bold text-slate-400'>
-          한국어 맞춤법 검사기 사용법
+          바른 한글 사용법
         </h2>
         <div className='space-y-5'>
           <Image
