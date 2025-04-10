@@ -1,7 +1,7 @@
 'use client'
 
 import React, { memo } from 'react'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 
 import { Label } from '@/shared/ui/label'
 import { Switch } from '@/shared/ui/switch'
@@ -11,7 +11,7 @@ const QUERY = 'isStrictCheck'
 const SpellerSetting = memo(() => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
-  const { replace } = useRouter()
+  // const { replace } = useRouter()
 
   const updateStrictCheckQueryParams = (checked: boolean) => {
     if (!searchParams) return
