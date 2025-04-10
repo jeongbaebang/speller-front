@@ -13,10 +13,10 @@ const SpellerSetting = memo(() => {
   const pathname = usePathname()
   const { replace } = useRouter()
 
-  const handleChange = (checked: boolean) => {
+  const updateStrictCheckQueryParams = (checked: boolean) => {
     if (!searchParams) return
 
-    const params = new URLSearchParams(searchParams)
+    const params = new URLSearchParams(searchParams.toString())
 
     if (checked) {
       params.set(QUERY, 'true')
@@ -24,7 +24,21 @@ const SpellerSetting = memo(() => {
       params.delete(QUERY)
     }
 
-    replace(`${pathname}?${params.toString()}`)
+    return params.toString()
+  }
+
+  const handleCheckedChange = (checked: boolean) => {
+    const newParams = updateStrictCheckQueryParams(checked)
+
+    if (newParams !== undefined) {
+      replace(`${pathname}?${newParams}`, { scroll: false })
+    }
+  }
+
+  const isStrictCheckEnabled = () => {
+    if (!searchParams) return false
+
+    return searchParams.get(QUERY) === 'true'
   }
 
   return (
@@ -40,10 +54,8 @@ const SpellerSetting = memo(() => {
         aria-label='강한 검사 모드 켜기/끄기'
         id='airplane-mode'
         name='isStrictCheck'
-        onCheckedChange={handleChange}
-        defaultChecked={Boolean(
-          searchParams?.get(QUERY)?.toString() === 'true',
-        )}
+        onCheckedChange={handleCheckedChange}
+        checked={isStrictCheckEnabled()}
       />
     </div>
   )
