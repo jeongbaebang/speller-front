@@ -31,7 +31,8 @@ const SpellerSetting = memo(() => {
     const newParams = updateStrictCheckQueryParams(checked)
 
     if (newParams !== undefined) {
-      replace(`${pathname}?${newParams}`, { scroll: false })
+      // replace(`${pathname}?${newParams}`, { scroll: false })
+      window.history.pushState(null, '', `${pathname}?${newParams}`)
     }
   }
 
